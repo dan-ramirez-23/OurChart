@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="464.0" prefWidth="648.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <tabs>
+    <Tab text="Home">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <SplitPane dividerPositions="0.47151898734177217" layoutX="38.0" layoutY="105.0" prefHeight="160.0" prefWidth="318.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="194.0" prefWidth="201.0">
+                           <children>
+                              <ScrollBar layoutX="147.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="162.0" prefWidth="17.0" />
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+                  <Label layoutX="18.0" layoutY="275.0" text="Send a message to your physician" />
+                  <TextArea layoutX="25.0" layoutY="306.0" prefHeight="107.0" prefWidth="420.0" />
+                  <Button layoutX="495.0" layoutY="382.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="89.0" text="Send" />
+                  <Label layoutX="105.0" layoutY="63.0" text="Messages from Physician">
+                     <font>
+                        <Font name="Times New Roman" size="18.0" />
+                     </font>
+                  </Label>
+                  <ScrollBar layoutX="427.0" layoutY="309.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="17.0" />
+                  <Label layoutX="251.0" layoutY="88.0" text="Subject" />
+                  <Label layoutX="73.0" layoutY="85.0" text="Nurse/Doctor" />
+                  <TextArea layoutX="400.0" layoutY="67.0" prefHeight="200.0" prefWidth="200.0" />
+                  <Label layoutX="473.0" layoutY="41.0" text="Message" />
+                  <ScrollBar layoutX="582.0" layoutY="69.0" orientation="VERTICAL" prefHeight="196.0" prefWidth="17.0" />
+                  <Label layoutX="37.0" layoutY="18.0" text="Welcome (Patient's Name)">
+                     <font>
+                        <Font name="Times New Roman" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="519.0" layoutY="280.0" text="Subject" />
+                  <TextField layoutX="460.0" layoutY="306.0" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Patient Information">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="67.0" layoutY="200.0" text="Phone Number" />
+                  <Label layoutX="466.0" layoutY="23.0" text="Preferred Pharmacy" />
+                  <Label layoutX="467.0" layoutY="95.0" text="Insurance Company" />
+                  <Label layoutX="67.0" layoutY="147.0" text="Date of Birth" />
+                  <Label layoutX="465.0" layoutY="277.0" text="Medications you've had" />
+                  <Label layoutX="84.0" layoutY="259.0" prefHeight="17.0" prefWidth="48.0" text="Email" />
+                  <TextField layoutX="183.0" layoutY="142.0" />
+                  <TextField layoutX="183.0" layoutY="196.0" />
+                  <TextField layoutX="441.0" layoutY="50.0" />
+                  <TextField layoutX="441.0" layoutY="131.0" />
+                  <Label layoutX="451.0" layoutY="169.0" text="Immunizations you've had" />
+                  <TextField layoutX="185.0" layoutY="254.0" />
+                  <Label layoutX="58.0" layoutY="47.0" text="Patient First Name" />
+                  <Label layoutX="58.0" layoutY="95.0" text="Patient Last Name" />
+                  <TextField layoutX="183.0" layoutY="42.0" />
+                  <TextField layoutX="183.0" layoutY="90.0" />
+                  <TextArea layoutX="446.0" layoutY="298.0" prefHeight="117.0" prefWidth="161.0" />
+                  <TextArea layoutX="442.0" layoutY="191.0" prefHeight="82.0" prefWidth="168.0" />
+                  <ScrollBar layoutX="589.0" layoutY="296.0" orientation="VERTICAL" prefHeight="115.0" prefWidth="17.0" />
+                  <ScrollBar layoutX="593.0" layoutY="191.0" orientation="VERTICAL" prefHeight="82.0" prefWidth="17.0" />
+                  <Label layoutX="223.0" layoutY="298.0" text="Health History" />
+                  <TextArea layoutX="179.0" layoutY="315.0" prefHeight="101.0" prefWidth="166.0" />
+                  <ScrollBar layoutX="328.0" layoutY="316.0" orientation="VERTICAL" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+      <Tab text="Patient Summaries">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ListView layoutX="23.0" layoutY="52.0" prefHeight="263.0" prefWidth="200.0" />
+                  <Label layoutX="81.0" layoutY="26.0" text="Date of Visit" />
+                  <ScrollBar layoutX="209.0" layoutY="52.0" orientation="VERTICAL" prefHeight="261.0" prefWidth="17.0" />
+                  <Label layoutX="364.0" layoutY="26.0" text="Patient Summary" />
+                  <TextArea layoutX="288.0" layoutY="52.0" prefHeight="200.0" prefWidth="245.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>
