@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
@@ -27,6 +28,14 @@ public class LoginPage {
 	private TextField username;
 	@FXML
 	private PasswordField password;
+	@FXML
+	private ComboBox userType;
+	
+	@FXML
+	public void initialize() {
+		userType.getItems().addAll("Doctor","Nurse","Patient");
+		userType.getSelectionModel().select("Doctor");
+	}
 	
 	
 	public void logIn(ActionEvent event) throws IOException {
@@ -38,23 +47,23 @@ public class LoginPage {
 		TermProj window = new TermProj();
 		String userInput = username.getText();
 		String passInput = password.getText();
+		String uTypeInput = userType.getValue().toString();
 		
 		try {
-			String authFile = "C:\\Users\\danra\\git\\CSE360Team7\\CSE360Team7\\src\\termproj\\userLogins.txt";
+			String authFile = "src\\termproj\\" + uTypeInput + "Logins.txt";
 			boolean loginFound = false;
 			BufferedReader br = new BufferedReader(new FileReader(authFile));
-			String line, user, pass, userType, personnelFile;
+			String line, user, pass, uType;
 			String[] lineArray;
 			
 			while((line = br.readLine()) != null) {
 				lineArray = line.split(",");
 				user = lineArray[0];
 				pass = lineArray[1];
-				userType = lineArray[2];
-				personnelFile = lineArray[3];
+				uType = lineArray[2];
 				
-				if(userInput.equals(user) && passInput.equals(pass)) {
-					String fxml = userType + "Pane.fxml";
+				if(userInput.equals(user) && passInput.equals(pass) && uTypeInput.equals(uType)) {
+					String fxml = uType + "Pane.fxml";
 					window.changeScene(fxml);					
 				}
 				else {
