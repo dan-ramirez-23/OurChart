@@ -1,4 +1,5 @@
 package termproj;
+
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,13 +14,12 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
-	
+
 
 public class LoginPage {
 	public LoginPage() {
 		
 	}
-	
 	
 	
 	@FXML

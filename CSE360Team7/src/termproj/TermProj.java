@@ -20,7 +20,7 @@ public class TermProj extends Application {
 		  primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
 	      primaryStage.show(); // Display the stage
 	   }
-	   
+	   // Dan is the best
 	   
 	   public void changeScene(String fxml) throws IOException {
 		   Parent pane = FXMLLoader.load(getClass().getResource(fxml));
