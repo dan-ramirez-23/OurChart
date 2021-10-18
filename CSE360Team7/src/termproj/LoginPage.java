@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.File;
 
 
 public class LoginPage {
@@ -30,19 +31,20 @@ public class LoginPage {
 	private PasswordField password;
 	@FXML
 	private ComboBox userType;
+	@FXML
+	private Label wrongLogIn;
+	
 	
 	@FXML
 	public void initialize() {
 		userType.getItems().addAll("Doctor","Nurse","Patient");
-		userType.getSelectionModel().select("Doctor");
+		userType.getSelectionModel().select("Patient");
 	}
 	
 	
 	public void logIn(ActionEvent event) throws IOException {
 		auth();
 	}
-	
-	
 	
 	
 	//test comment
@@ -53,9 +55,11 @@ public class LoginPage {
 		String uTypeInput = userType.getValue().toString();
 		
 		try {
-			String authFile = "src\\termproj\\" + uTypeInput + "Logins.txt";
+			String authFile = "src//termproj//" + uTypeInput + "Logins.txt";
+			File authorFile = new File(authFile);
 			boolean loginFound = false;
-			BufferedReader br = new BufferedReader(new FileReader(authFile));
+			FileReader fr = new FileReader(authorFile);
+			BufferedReader br = new BufferedReader(fr);
 			String line, user, pass, uType;
 			String[] lineArray;
 			
@@ -69,19 +73,22 @@ public class LoginPage {
 					String fxml = uType + "Pane.fxml";
 					window.changeScene(fxml);					
 				}
+				
+				else if(username.getText().isEmpty() && password.getText().isEmpty()) {
+					wrongLogIn.setText("Please enter your username or password.");
+				}
+				
 				else {
-					// add a prompt for incorrect login input?
+					
+					wrongLogIn.setText("Wrong username or password");
 				}
 			}
 			br.close();
+			fr.close();
 			
-			
-		} catch (Exception e) {
+		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		
-		
-		
+		}	
 		
 	}
 	
