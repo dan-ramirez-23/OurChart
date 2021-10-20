@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.event.ActionEvent;
 import java.io.IOException;
+import java.net.URL;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.File;
@@ -55,8 +56,8 @@ public class LoginPage {
 		String uTypeInput = userType.getValue().toString();
 		
 		try {
-			String authFile = "src//termproj//" + uTypeInput + "Logins.txt";
-			File authorFile = new File(authFile);
+			URL url = getClass().getResource(uTypeInput + "Logins.txt");
+			File authorFile = new File(url.getPath());
 			boolean loginFound = false;
 			FileReader fr = new FileReader(authorFile);
 			BufferedReader br = new BufferedReader(fr);
