@@ -55,6 +55,7 @@ public class LoginPage {
 		String passInput = password.getText();
 		String uTypeInput = userType.getValue().toString();
 		
+		
 		try {
 			URL url = getClass().getResource(uTypeInput + "Logins.txt");
 			File authorFile = new File(url.getPath());
