@@ -21,15 +21,15 @@ public class PersonnelFileWriter {
 	}
 	
 	
-	public void writeEmployee(Employee emp) {
+	public void writeUser(User usr) {
 		try {
-			fName = emp.getUsername() + ".txt";
+			fName = usr.getUsername() + ".txt";
 			URL url = getClass().getResource(fName);
 			File empFile = new File(url.getPath());
 			FileOutputStream f = new FileOutputStream(empFile);
 			ObjectOutputStream o = new ObjectOutputStream(f);
 
-			o.writeObject(emp);
+			o.writeObject(usr);
 
 			o.close();
 			f.close();

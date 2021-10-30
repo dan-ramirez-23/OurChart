@@ -16,22 +16,22 @@ public class PersonnelFileReader {
 	}
 	
 	
-	public Employee readEmployee() {
+	public User readUser() {
 
 		try {
 			URL url = getClass().getResource(fName);
-			File empFile = new File(url.getPath());
-			FileInputStream fi = new FileInputStream(empFile);
+			File userFile = new File(url.getPath());
+			FileInputStream fi = new FileInputStream(userFile);
 			ObjectInputStream oi = new ObjectInputStream(fi);
 
-			Employee emp = (Employee) oi.readObject();
+			User usr = (User) oi.readObject();
 
-			System.out.println(emp.toString());
+			System.out.println(usr.toString());
 			
 			oi.close();
 			fi.close();
 			
-			return emp;
+			return usr;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

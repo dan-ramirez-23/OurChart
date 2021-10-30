@@ -2,10 +2,9 @@ package termproj;
 
 import java.io.Serializable;
 
-public class Employee implements Serializable {
-	private String firstName, lastName, username;
+public class Employee extends User {
+	
 	private int empID;
-	private PatientMessage[] inbox;
 	private int[] patients;
 	
 	public Employee() {
@@ -25,15 +24,6 @@ public class Employee implements Serializable {
 	
 	
 	
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String un) {
-		username = un;
-	}
-	
-	public void addMessage(PatientMessage msg) {
-		
-	}
+
 	
 }
