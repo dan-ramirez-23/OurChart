@@ -16,6 +16,12 @@ public class PatientPage {
 	}
 	
 	
+	public PatientPage(String un) {
+		username = un;
+	}
+	
+	private String username;
+	
 	@FXML
 	private Button sendMsgButton;
 	@FXML
@@ -26,6 +32,7 @@ public class PatientPage {
 	
 	@FXML
 	public void initialize() {
+		
 
 	}
 	
@@ -35,7 +42,11 @@ public class PatientPage {
 	}
 	
 	public void sendMsg() {
-	//	PatientMessage msg = new PatientMessage("","",3,[1,2,3]);
+		String subj = subject.getText();
+		String body = messageBody.getText();
+		String senderUN = username;
+		//PersonnelFileReader reader = new PersonnelFileReader(username).readPatient();
+		//	PatientMessage msg = new PatientMessage("","",3,[1,2,3]);
 	}
 
 }
