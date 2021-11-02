@@ -153,7 +153,7 @@ public class Patient extends User {
 		return pharmacy;
 	}
 
-	public String insurer() {
+	public String getInsurer() {
 		return insurer;
 	}
 
