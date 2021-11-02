@@ -46,7 +46,7 @@ public class DoctorPage {
 		String body = messageBody.getText();
 		String senderUN = username;
 		PersonnelFileReader reader = new PersonnelFileReader(username);
-		Doctor sender = (Doctor)reader.readEmployee();
+		Doctor sender = (Doctor)reader.readUser();//changed readEmployee to readUser
 		String[] recipient = {patientSelected};
 		//PatientMessage msg = new PatientMessage(subj,body,senderUN,recipient);
 		MessageHandler msgHandler = new MessageHandler(subj,body,senderUN,recipient);
