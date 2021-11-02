@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<SplitPane dividerPositions="0.2760989010989011" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.2760989010989011" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="termproj.NursePage">
    <items>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="278.0">
          <children>
@@ -58,21 +58,21 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="466.0" prefWidth="461.0">
                            <children>
-                              <TextField layoutX="181.0" layoutY="263.0" prefHeight="86.0" prefWidth="209.0" />
+                              <TextArea fx:id="knownAllergyTA" layoutX="182.0" layoutY="263.0" prefHeight="86.0" prefWidth="209.0" />
                               <Label layoutX="19.0" layoutY="273.0" prefHeight="67.0" prefWidth="141.0" text="Patient's known allergies:" />
                               <Label layoutX="18.0" layoutY="404.0" text="Patient's health concerns:" />
-                              <TextArea layoutX="182.0" layoutY="366.0" prefHeight="93.0" prefWidth="209.0" />
+                              <TextArea fx:id="hcTA" layoutX="182.0" layoutY="366.0" prefHeight="93.0" prefWidth="209.0" />
                               <Label layoutX="121.0" layoutY="77.0" text="Weight" />
                               <Label layoutX="122.0" layoutY="117.0" text="Height" />
                               <Label layoutX="89.0" layoutY="158.0" text="Body Temperature" />
-                              <TextField layoutX="206.0" layoutY="72.0" />
-                              <TextField layoutX="206.0" layoutY="112.0" />
-                              <TextField layoutX="206.0" layoutY="153.0" />
+                              <TextField fx:id="weightTF" layoutX="206.0" layoutY="72.0" />
+                              <TextField fx:id="heightTF" layoutX="206.0" layoutY="112.0" />
+                              <TextField fx:id="bTempTF" layoutX="206.0" layoutY="153.0" />
                               <Label layoutX="28.0" layoutY="40.0" text="If patient is over 12 years old enter:" />
-                              <TextField layoutX="206.0" layoutY="195.0" />
+                              <TextField fx:id="bPressTF" layoutX="206.0" layoutY="195.0" />
                               <Label layoutX="99.0" layoutY="200.0" text="Blood Pressure" />
-                              <Button layoutX="65.0" layoutY="327.0" mnemonicParsing="false" text="Enter" />
-                              <Button layoutX="67.0" layoutY="432.0" mnemonicParsing="false" text="Enter" />
+                              <Button fx:id="allergyButton" layoutX="65.0" layoutY="327.0" mnemonicParsing="false" text="Enter" onAction="#allergyButtonClicked"/>
+                              <Button fx:id="hcButton" layoutX="67.0" layoutY="432.0" mnemonicParsing="false" text="Enter" />
                            </children>
                         </AnchorPane>
                      </content>

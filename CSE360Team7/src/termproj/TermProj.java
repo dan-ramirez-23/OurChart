@@ -23,7 +23,20 @@ public class TermProj extends Application {
 	   // Dan is the best
 	   
 	   public void changeScene(String fxml) throws IOException {
-		   Parent pane = FXMLLoader.load(getClass().getResource(fxml));
+		   FXMLLoader loader = new FXMLLoader();
+		   Pages pageController = null;
+		   if(fxml.equals("NursePane.fxml")) {
+			   pageController = new NursePage();//needs to change depending on the page required
+		   }
+		   else if (fxml.equals("DoctorPane.fxml")) {
+			   pageController = new DoctorPage();
+		   }
+		   else if (fxml.equals("PatientPane.fxml")) {
+			   pageController = new PatientPage();
+		   }
+		   
+		   loader.setController(pageController);
+		   Parent pane = loader.load(getClass().getResource(fxml));
 		   stage.getScene().setRoot(pane);
 	   }
 	   
