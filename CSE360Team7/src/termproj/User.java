@@ -22,4 +22,12 @@ public class User implements Serializable {
 	public void addMessage(PatientMessage msg) {
 		
 	}
+	public User() {
+		
+	}
+	public User(String fName, String lName, PatientMessage[] ib) {
+		firstName = fName;
+		lastName = lName;
+		inbox = ib;
+	}
 }
