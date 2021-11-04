@@ -85,7 +85,7 @@
                               <TextField fx:id="bPressTF" layoutX="206.0" layoutY="195.0" />
                               <Label layoutX="99.0" layoutY="200.0" text="Blood Pressure" />
                               <Button fx:id="allergyButton" layoutX="65.0" layoutY="327.0" mnemonicParsing="false" text="Enter" onAction="#allergyButtonClicked"/>
-                              <Button fx:id="hcButton" layoutX="67.0" layoutY="432.0" mnemonicParsing="false" text="Enter" />
+                              <Button fx:id="hcButton" layoutX="67.0" layoutY="432.0" mnemonicParsing="false" text="Enter" onAction="#hcButtonClicked"/>
                            </children>
                         </AnchorPane>
                      </content>

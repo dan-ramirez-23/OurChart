@@ -64,7 +64,12 @@ public class NursePage extends Pages{
 	
 	@FXML
 	public void allergyButtonClicked(Event e) {
-		knownAllergyTA.setText("Button Click");
+		
+	}
+	
+	@FXML
+	public void hcButtonClicked(Event e) {
+		
 	}
 	
 	public void create(ActionEvent event) throws IOException {
