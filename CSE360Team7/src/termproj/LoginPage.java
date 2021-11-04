@@ -22,7 +22,6 @@ public class LoginPage {
 		
 	}
 	
-	
 	@FXML
 	private Button button;
 	@FXML

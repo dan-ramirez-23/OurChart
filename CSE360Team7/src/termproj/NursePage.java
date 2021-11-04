@@ -35,7 +35,7 @@ public class NursePage extends Pages{
 	private Button allergyButton = null;
 	@FXML
 	private Button hcButton = null;
-	
+
 	@FXML
 	private Button createPatientButton;
 	@FXML

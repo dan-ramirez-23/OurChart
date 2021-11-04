@@ -1,5 +1,7 @@
 package termproj;
 
+import java.io.IOException;
+
 public class CreatePatientHandler {
 
 	//Jackson makes method that takes in the data & then create a Patient object with all the data
