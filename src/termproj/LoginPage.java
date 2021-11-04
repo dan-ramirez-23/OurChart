@@ -30,7 +30,7 @@ public class LoginPage {
 	@FXML
 	private PasswordField password;
 	@FXML
-	private ComboBox userType;
+	private ComboBox<String> userType;
 	@FXML
 	private Label wrongLogIn;
 	

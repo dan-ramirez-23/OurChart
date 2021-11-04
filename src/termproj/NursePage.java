@@ -16,6 +16,9 @@ import java.util.ResourceBundle;
 
 public class NursePage extends Pages{
 	private Scene scene;
+	private Patient pat;
+	private int cnt = 0;
+	
 	public NursePage() {
 		
 	}
@@ -68,11 +71,11 @@ public class NursePage extends Pages{
 		
 	}
 	
-	public void create(ActionEvent event) throws IOException {
-		createPatient();
-	}
-	
-	public void createPatient() {
+//	public void create(ActionEvent event) throws IOException {
+//		createPatient();
+//	}
+//	
+//	public void createPatient() {
 		String fName = fNameTF.getText();
 		String lName = lNameTF.getText();
 		String dob = dobTF.getText();
@@ -80,8 +83,31 @@ public class NursePage extends Pages{
 		String phoneNum = phoneNumTF.getText();
 		String pharmacy = pharmacyTF.getText();
 		String insurCompany = insurCompanyTF.getText();
-		String immunization = immunizationTF.getText();
-		String medication = medicationTF.getText();
+
+	
+	public void createPatient(ActionEvent event) throws IOException 
+	{
+		cnt++;
+		pat = new Patient(fName, lName, cnt, dob, email, phoneNum, pharmacy, insurCompany);
+		newiD(pat);
+		setLoginInfo(pat);
+		assignPatient(pat);
+	}
+	
+	public void newiD(Patient pat) {
+		cnt++;
+		pat.setiD(cnt);
+	}
+	public void setLoginInfo(Patient pat) {
+		String un = "" + pat.getfName() + pat.getPatientID();
+		String pw = "" + pat.getlName() + pat.getPatientID();
+		
+		pat.setUsername(un);
+		pat.setPassword(pw);
+	}
+	
+	public void assignPatient(Patient pat) {
+		System.out.println("Mr." + pat.lastName + " is in the system. His iD is: " + pat.getPatientID());
 	}
 	/*@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
