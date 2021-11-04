@@ -31,10 +31,10 @@ public class NursePage extends Pages{
 	private TextArea knownAllergyTA = null;
 	@FXML
 	private TextArea hcTA = null;
+	//@FXML
+	//private Button allergyButton = null;
 	@FXML
-	private Button allergyButton = null;
-	@FXML
-	private Button hcButton = null;
+	private Button enterButton = null;
 	
 	@FXML
 	private Button createPatientButton = null;
@@ -62,13 +62,9 @@ public class NursePage extends Pages{
 
 	}
 	
-	@FXML
-	public void allergyButtonClicked(Event e) {
-		
-	}
 	
 	@FXML
-	public void hcButtonClicked(Event e) {
+	public void enterButtonClicked(Event e) {
 		
 	}
 	
