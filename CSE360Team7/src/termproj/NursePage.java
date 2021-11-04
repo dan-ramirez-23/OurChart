@@ -37,25 +37,25 @@ public class NursePage extends Pages{
 	private Button hcButton = null;
 	
 	@FXML
-	private Button createPatientButton;
+	private Button createPatientButton = null;
 	@FXML
-	private TextField fNameTF;
+	private TextField fNameTF = null;
 	@FXML 
-	private TextField lNameTF;
+	private TextField lNameTF = null;
 	@FXML
-	private TextField dobTF;
+	private TextField dobTF = null;
 	@FXML
-	private TextField emailTF;
+	private TextField emailTF = null;
 	@FXML
-	private TextField phoneNumTF;
+	private TextField phoneNumTF = null;
 	@FXML
-	private TextField pharmacyTF;
+	private TextField pharmacyTF = null;
 	@FXML
-	private TextField insurCompanyTF;
+	private TextField insurCompanyTF = null;
 	@FXML 
-	private TextField immunizationTF;
+	private TextField immunizationTF = null;
 	@FXML
-	private TextField medicationTF;
+	private TextField medicationTF = null;
 	
 	@FXML
 	public void initialize() {
