@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<SplitPane dividerPositions="0.2760989010989011" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="termproj.NursePane">
+<SplitPane dividerPositions="0.2760989010989011" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="termproj.NursePage">
 
    <items>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="278.0">
@@ -71,10 +71,10 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="466.0" prefWidth="461.0">
                            <children>
-                              <TextArea fx:id="knownAllergyTA" layoutX="182.0" layoutY="263.0" prefHeight="86.0" prefWidth="209.0" />
-                              <Label layoutX="19.0" layoutY="273.0" prefHeight="67.0" prefWidth="141.0" text="Patient's known allergies:" />
-                              <Label layoutX="18.0" layoutY="404.0" text="Patient's health concerns:" />
-                              <TextArea fx:id="hcTA" layoutX="182.0" layoutY="366.0" prefHeight="93.0" prefWidth="209.0" />
+                              <TextArea fx:id="knownAllergyTA" layoutX="182.0" layoutY="250.0" prefHeight="86.0" prefWidth="209.0" />
+                              <Label layoutX="19.0" layoutY="260.0" prefHeight="67.0" prefWidth="141.0" text="Patient's known allergies:" />
+                              <Label layoutX="18.0" layoutY="390.0" text="Patient's health concerns:" />
+                              <TextArea fx:id="hcTA" layoutX="182.0" layoutY="353.0" prefHeight="93.0" prefWidth="209.0" />
                               <Label layoutX="121.0" layoutY="77.0" text="Weight" />
                               <Label layoutX="122.0" layoutY="117.0" text="Height" />
                               <Label layoutX="89.0" layoutY="158.0" text="Body Temperature" />
@@ -84,8 +84,8 @@
                               <Label layoutX="28.0" layoutY="40.0" text="If patient is over 12 years old enter:" />
                               <TextField fx:id="bPressTF" layoutX="206.0" layoutY="195.0" />
                               <Label layoutX="99.0" layoutY="200.0" text="Blood Pressure" />
-                              <Button fx:id="allergyButton" layoutX="65.0" layoutY="327.0" mnemonicParsing="false" text="Enter" onAction="#allergyButtonClicked"/>
-                              <Button fx:id="hcButton" layoutX="67.0" layoutY="432.0" mnemonicParsing="false" text="Enter" />
+                              <!--<Button fx:id="allergyButton" layoutX="65.0" layoutY="327.0" mnemonicParsing="false" text="Enter" onAction="#allergyButtonClicked"/>-->
+                              <Button fx:id="enterButton" layoutX="206.0" layoutY="450.0" mnemonicParsing="false" text="Enter" onAction="#enterButtonClicked"/>
                            </children>
                         </AnchorPane>
                      </content>
@@ -114,7 +114,7 @@
                               <TextField fx:id="medicationTF" layoutX="173.0" layoutY="380.0" />
                               <Button layoutX="368.0" layoutY="337.0" mnemonicParsing="false" text="Add New" />
                               <Button layoutX="367.0" layoutY="380.0" mnemonicParsing="false" text="Add New" />
-                              <Button fx:id = "createPatientButton" layoutX="37.0" layoutY="429.0" mnemonicParsing="false" onAction = "#create" prefHeight="27.0" prefWidth="342.0" text="Add New Patient" />
+                              <Button fx:id="createPatientButton" layoutX="37.0" layoutY="429.0" mnemonicParsing="false" onAction = "#create" prefHeight="27.0" prefWidth="342.0" text="Add New Patient" />
                               <Label layoutX="391.0" layoutY="22.0" text="Patient Username" />
                               <Label layoutX="390.0" layoutY="114.0" text="Patient Password" />
                               <Label layoutX="378.0" layoutY="65.0" text="___________________" />
