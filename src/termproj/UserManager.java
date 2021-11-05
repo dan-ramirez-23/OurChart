@@ -22,7 +22,10 @@ public class UserManager {
 	
 	// get list of all Users from file
 	public void readAllUsers() {//modified from PersonalFileReader
-
+		File directory = new File("userData");//experimental
+		if (!directory.exists()) {//checks to see if the directory exists
+			directory.mkdir();//if not make the folder
+		}
 		try {
 			File userFile = new File("userdata//users.txt");
 			FileInputStream fi = new FileInputStream(userFile);
