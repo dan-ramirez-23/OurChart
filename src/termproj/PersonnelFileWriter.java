@@ -23,9 +23,11 @@ public class PersonnelFileWriter {
 	
 	public void writeUser(User usr) {
 		try {
-			fName = usr.getUsername() + ".txt";
-			URL url = getClass().getResource(fName);
-			File empFile = new File(url.getPath());
+			fName = "userdata//" + usr.getUsername() + ".txt";
+			System.out.print(fName);
+			//URL url = getClass().getResource(fName);
+			//System.out.print(url);
+			File empFile = new File(fName);
 			FileOutputStream f = new FileOutputStream(empFile);
 			ObjectOutputStream o = new ObjectOutputStream(f);
 

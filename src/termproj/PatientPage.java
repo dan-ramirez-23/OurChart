@@ -18,12 +18,10 @@ import javafx.scene.control.TextField;
 
 
 public class PatientPage extends Pages{
-	public PatientPage() {
-		
-	}
-	
+
 	
 	public PatientPage(String un) {
+		System.out.println("On patient page creation, un = " + un);
 		username = un;
 	}
 	
@@ -49,11 +47,21 @@ public class PatientPage extends Pages{
 	}
 	
 	public void sendMsg() {
+		
+		Patient pat = new Patient("bill", "hicks", 27, "August 13, 1974", "bhicks.xyz", 508888888, "todd","Blue Cross"); 
+		pat.setUserName("bhicks");
+		pat.setPassword("apple");
+		PersonnelFileWriter pfw = new PersonnelFileWriter();
+		pfw.writeUser(pat);
+		
 		String subj = subject.getText();
+		System.out.println("in the sendMsg function - subj is: "+ subj);
 		String body = messageBody.getText();
 		String senderUN = username;
-		//PersonnelFileReader reader = new PersonnelFileReader(username).readPatient();
-		//	PatientMessage msg = new PatientMessage("","",3,[1,2,3]);
+
+		System.out.println("In PatientPage sending message from " + senderUN);
+		MessageHandler msg = new MessageHandler(subj, body, senderUN);
+		msg.sendMessage();
 	}
 
 	

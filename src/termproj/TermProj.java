@@ -22,21 +22,25 @@ public class TermProj extends Application {
 	   }
 
 	   
-	   public void changeScene(String fxml) throws IOException {
+	   public void changeScene(String fxml, String username) throws IOException {
 		   FXMLLoader loader = new FXMLLoader();
 		   Pages pageController = null;
 		   if(fxml.equals("NursePane.fxml")) {
 			   pageController = new NursePage();//needs to change depending on the page required
 		   }
 		   else if (fxml.equals("DoctorPane.fxml")) {
-			   pageController = new DoctorPage();
+			   pageController = new DoctorPage(username);
 		   }
-		   else if (fxml.equals("PatientPane.fxml")) {
-			   pageController = new PatientPage();
+		   else if (fxml.equals("PatientPane.fxml")) { 
+			   pageController = new PatientPage(username);
 		   }
 		   
+		   
+		   loader.setLocation(getClass().getResource(fxml));
 		   loader.setController(pageController);
-		   Parent pane = loader.load(getClass().getResource(fxml));
+		   Parent pane = loader.load();
+		   
+		   //Parent pane = loader.load(getClass().getResource(fxml));
 		   stage.getScene().setRoot(pane);
 	   }
 	   

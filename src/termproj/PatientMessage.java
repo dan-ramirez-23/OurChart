@@ -1,17 +1,17 @@
 package termproj;
 
-public class PatientMessage {
+import java.io.Serializable;
+
+public class PatientMessage implements Serializable {
 	
 	private String subject;
 	private String messageBody;
 	private String senderID;
-	private String[] recipients;
 	
-	public PatientMessage(String subj, String body, String sender, String[] recipients) {
+	public PatientMessage(String subj, String body, String sender) {
 		subject = subj;
 		messageBody = body;
 		senderID = sender;
-		this.recipients = recipients;
 	}
 	
 	
@@ -21,10 +21,7 @@ public class PatientMessage {
 	public String getSenderUN() {
 		return senderID;
 	}
-	
-	public String[] getRecipients() {
-		return recipients;
-	}
+
 	
 	/*
 	public void setSubject(String subj) {

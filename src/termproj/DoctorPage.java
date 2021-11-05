@@ -49,7 +49,7 @@ public class DoctorPage extends Pages{
 		Doctor sender = (Doctor)reader.readUser();//changed readEmployee to readUser
 		String[] recipient = {patientSelected};
 		//PatientMessage msg = new PatientMessage(subj,body,senderUN,recipient);
-		MessageHandler msgHandler = new MessageHandler(subj,body,senderUN,recipient);
+		MessageHandler msgHandler = new MessageHandler(subj,body,senderUN);
 		msgHandler.sendMessage();
 	}
 

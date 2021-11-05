@@ -42,11 +42,11 @@ public class Patient extends User {
 
 	public Patient(String fName, String lName, int id, int doc, String date,
 			int pNum, String em, String pharm, String ins, String[] imm,
-			String[] pres, String[] meds, PatientMessage[] ib, String[] hi,
+			String[] pres, String[] meds, String[] hi,
 			String[] ef, String rec, double w, double h, double bt, double bp,
 			String[] aller, String[] hc) {
 
-		super(fName, lName, ib);
+		super(fName, lName);
 		patientID = id;
 		Doctor = doc;
 		dob = date;

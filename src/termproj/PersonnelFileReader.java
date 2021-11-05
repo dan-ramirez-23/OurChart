@@ -12,15 +12,14 @@ public class PersonnelFileReader {
 	
 
 	public PersonnelFileReader(String username) {
-		fName = username + ".txt";
+		fName = "userdata//" + username + ".txt";
 	}
 	
 	
 	public User readUser() {
 
 		try {
-			URL url = getClass().getResource(fName);
-			File userFile = new File(url.getPath());
+			File userFile = new File(fName);
 			FileInputStream fi = new FileInputStream(userFile);
 			ObjectInputStream oi = new ObjectInputStream(fi);
 

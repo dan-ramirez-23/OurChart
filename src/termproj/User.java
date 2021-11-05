@@ -1,12 +1,13 @@
 package termproj;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class User implements Serializable {
 	protected String firstName, lastName, dateofbirth, username, password;
-	protected PatientMessage[] inbox;
-	
-	
+	protected List<PatientMessage> inbox = new ArrayList<PatientMessage>();
+
 	public User() {
 		
 	}
@@ -24,15 +25,11 @@ public class User implements Serializable {
 //	}
 //	
 	public void addMessage(PatientMessage msg) {
-		
+		inbox.add(msg);
 	}
 	public User(String fName, String lName) {
 		firstName = fName;
 		lastName = lName;
 	}
-	public User(String fName, String lName, PatientMessage[] ib) {
-		firstName = fName;
-		lastName = lName;
-		inbox = ib;
-	}
+
 }

@@ -71,7 +71,7 @@ public class LoginPage {
 				
 				if(userInput.equals(user) && passInput.equals(pass) && uTypeInput.equals(uType)) {
 					String fxml = uType + "Pane.fxml";
-					window.changeScene(fxml);					
+					window.changeScene(fxml, user);					
 				}
 				
 				else if(username.getText().isEmpty() && password.getText().isEmpty()) {
