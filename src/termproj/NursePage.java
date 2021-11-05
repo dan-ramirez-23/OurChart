@@ -18,9 +18,13 @@ public class NursePage extends Pages{
 	private Scene scene;
 	private Patient pat;
 	private int cnt = 0;
+	private String username;
 	
 	public NursePage() {
 		
+	}
+	public NursePage(String un) {
+		username = un;
 	}
 	@FXML
 	private TextField weightTF;
@@ -109,7 +113,7 @@ public class NursePage extends Pages{
 	}
 	
 	public void assignPatient(Patient pat) {
-		System.out.println("Mr." + pat.lastName + " is in the system. His iD is: " + pat.getPatientID());
+		System.out.println("Mr. " + pat.lastName + " is in the system. His iD is: " + pat.getPatientID());
 	}
 	/*@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

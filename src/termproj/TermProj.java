@@ -26,7 +26,7 @@ public class TermProj extends Application {
 		   FXMLLoader loader = new FXMLLoader();
 		   Pages pageController = null;
 		   if(fxml.equals("NursePane.fxml")) {
-			   pageController = new NursePage();//needs to change depending on the page required
+			   pageController = new NursePage(username);//needs to change depending on the page required
 		   }
 		   else if (fxml.equals("DoctorPane.fxml")) {
 			   pageController = new DoctorPage(username);
