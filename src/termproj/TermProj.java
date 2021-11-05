@@ -41,7 +41,8 @@ public class TermProj extends Application {
 		   Parent pane = loader.load();
 		   
 		   //Parent pane = loader.load(getClass().getResource(fxml));
-		   stage.getScene().setRoot(pane);
+		   stage.setScene(new Scene(pane, WIDTH + 300, HEIGHT + 150));
+		   //stage.getScene().setRoot(pane);
 	   }
 	   
 	   public static void main(String[] args)
