@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class NursePage extends Pages{
@@ -19,12 +20,11 @@ public class NursePage extends Pages{
 	private Patient pat;
 	private int cnt = 0;
 	private String username;
+	private ArrayList<User> userList;
 	
-	public NursePage() {
-		
-	}
-	public NursePage(String un) {
-		username = un;
+	
+	public NursePage(String un, ArrayList<User> uL) {
+		super(un, uL);
 	}
 	@FXML
 	private TextField weightTF;
