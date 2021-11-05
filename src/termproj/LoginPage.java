@@ -39,6 +39,7 @@ public class LoginPage {
 	public void initialize() {
 		userType.getItems().addAll("Doctor","Nurse","Patient");
 		userType.getSelectionModel().select("Patient");
+		button.defaultButtonProperty().bind(button.focusedProperty());
 	}
 	
 	
