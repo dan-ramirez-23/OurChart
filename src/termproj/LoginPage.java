@@ -19,7 +19,6 @@ import java.io.File;
 
 public class LoginPage {
 	public LoginPage() {
-		
 	}
 	
 	

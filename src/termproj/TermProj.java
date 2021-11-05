@@ -15,6 +15,11 @@ public class TermProj extends Application {
 	   public void start(Stage primaryStage) throws Exception
 	   {
 	      stage = primaryStage;
+		  /*FXMLLoader loader = new FXMLLoader();
+		  loader.setLocation(getClass().getResource("LoginPane.fxml"));
+		  LoginPage startPage = new LoginPage();
+		  loader.setController(startPage);
+		  Parent root = loader.load();*/
 		  Parent root = FXMLLoader.load(getClass().getResource("LoginPane.fxml"));
 		  primaryStage.setTitle("Pediatric Office System");
 		  primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));

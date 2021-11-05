@@ -11,7 +11,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 
-public class Nurse extends User {
+public class Nurse extends Employee {
 	
 	public Nurse () {
 		

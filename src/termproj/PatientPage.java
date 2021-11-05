@@ -23,6 +23,8 @@ public class PatientPage extends Pages{
 	public PatientPage(String un) {
 		System.out.println("On patient page creation, un = " + un);
 		username = un;
+		
+		
 	}
 	
 	private String username;
