@@ -23,42 +23,42 @@ public class NursePage extends Pages{
 		
 	}
 	@FXML
-	private TextField weightTF = null;
+	private TextField weightTF;
 	@FXML
-	private TextField heightTF = null;
+	private TextField heightTF;
 	@FXML
-	private TextField bTempTF = null;
+	private TextField bTempTF;
 	@FXML
-	private TextField bPressTF = null;
+	private TextField bPressTF;
 	@FXML
-	private TextArea knownAllergyTA = null;
+	private TextArea knownAllergyTA;
 	@FXML
-	private TextArea hcTA = null;
+	private TextArea hcTA;
 	//@FXML
-	//private Button allergyButton = null;
+	//private Button allergyButton;
 	@FXML
-	private Button enterButton = null;
+	private Button enterButton;
 	
 	@FXML
-	private Button createPatientButton = null;
+	private Button createPatientButton;
 	@FXML
-	private TextField fNameTF = null;
+	private TextField fNameTF;
 	@FXML 
-	private TextField lNameTF = null;
+	private TextField lNameTF;
 	@FXML
-	private TextField dobTF = null;
+	private TextField dobTF;
 	@FXML
-	private TextField emailTF = null;
+	private TextField emailTF;
 	@FXML
-	private TextField phoneNumTF = null;
+	private TextField phoneNumTF;
 	@FXML
-	private TextField pharmacyTF = null;
+	private TextField pharmacyTF;
 	@FXML
-	private TextField insurCompanyTF = null;
+	private TextField insurCompanyTF;
 	@FXML 
-	private TextField immunizationTF = null;
+	private TextField immunizationTF;
 	@FXML
-	private TextField medicationTF = null;
+	private TextField medicationTF;
 	
 	@FXML
 	public void initialize() {
@@ -75,7 +75,13 @@ public class NursePage extends Pages{
 //		createPatient();
 //	}
 //	
-//	public void createPatient() {
+	/*public void createPatient() {
+		
+	}*/
+
+	
+	public void createPatient(ActionEvent event) throws IOException 
+	{
 		String fName = fNameTF.getText();
 		String lName = lNameTF.getText();
 		String dob = dobTF.getText();
@@ -83,10 +89,6 @@ public class NursePage extends Pages{
 		String phoneNum = phoneNumTF.getText();
 		String pharmacy = pharmacyTF.getText();
 		String insurCompany = insurCompanyTF.getText();
-
-	
-	public void createPatient(ActionEvent event) throws IOException 
-	{
 		cnt++;
 		pat = new Patient(fName, lName, cnt, dob, email, phoneNum, pharmacy, insurCompany);
 		newiD(pat);
