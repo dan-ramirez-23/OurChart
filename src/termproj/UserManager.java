@@ -15,6 +15,9 @@ public class UserManager {
 	public UserManager( ) {
 		
 	}
+	public UserManager(ArrayList<User> uL) {
+		userList = uL;
+	}
 	
 	
 	// get list of all Users from file
