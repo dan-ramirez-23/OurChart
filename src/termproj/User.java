@@ -7,6 +7,10 @@ public class User implements Serializable {
 	protected PatientMessage[] inbox;
 	
 	
+	public User() {
+		
+	}
+	
 	public String getUsername() {
 		return username;
 	}
