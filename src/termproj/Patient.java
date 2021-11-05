@@ -28,10 +28,16 @@ public class Patient extends User {
 
 	}
 
-	public Patient(String fName, String lName, int id, String dob, String email, String phoneNum,
-		    String pharmacy,String insurCompany) 
+	public Patient(String fName, String lName, int id, String dob, String email, int phoneNum,
+		    String pharm,String insurCompany) 
 	{
-		
+		super(fName, lName);
+		patientID = id;
+		this.dob = dob;
+		this.email = email;
+		phoneNumber = phoneNum;
+		pharmacy = pharm;
+		insurer = insurCompany;
 	}
 
 	public Patient(String fName, String lName, int id, int doc, String date,
