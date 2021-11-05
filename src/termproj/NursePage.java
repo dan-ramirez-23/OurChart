@@ -110,6 +110,8 @@ public class NursePage extends Pages{
 		
 		pat.setUserName(un);
 		pat.setPassword(pw);
+		
+		
 	}
 	
 	public void assignPatient(Patient pat) {
