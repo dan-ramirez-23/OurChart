@@ -11,7 +11,6 @@ public class TermProj extends Application {
 
 	   private final int WIDTH = 550;
 	   private final int HEIGHT = 400;
-	   private ArrayList<User> userList = new ArrayList<User>();
 	   private static Stage stage;
 	   private ArrayList<User> userList = new ArrayList<>();//created to make sure there are no null pointer exceptions
 
