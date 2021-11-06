@@ -26,6 +26,7 @@ public class NursePage extends Pages{
 	
 	public NursePage(String un, ArrayList<User> uL) {
 		super(un, uL);
+		userList=uL;
 	}
 	@FXML
 	private TextField weightTF;
@@ -114,12 +115,10 @@ public class NursePage extends Pages{
 		pat.setUserName(un);
 		pat.setPassword(pw);
 		
-		
 	}
 	
 	public void assignPatient(Patient pat) {
-		
-		System.out.println("Mr. " + pat.lastName + " is in the system. His iD is: " + pat.getPatientID());
+		userList.add(pat);
 	}
 	/*@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
