@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -90,7 +91,8 @@ public class NursePage extends Pages{
 		String lName = lNameTF.getText();
 		String dob = dobTF.getText();
 		String email = emailTF.getText();
-		int phoneNum = Integer.parseInt(phoneNumTF.getText());
+		String phoneNum = phoneNumTF.getText();
+		//int phoneNum = Integer.parseInt(phoneNumTF.getText());
 		String pharmacy = pharmacyTF.getText();
 		String insurCompany = insurCompanyTF.getText();
 		cnt++;
@@ -98,6 +100,7 @@ public class NursePage extends Pages{
 		newiD(pat);
 		setLoginInfo(pat);
 		assignPatient(pat);
+		
 	}
 	
 	public void newiD(Patient pat) {
@@ -115,6 +118,7 @@ public class NursePage extends Pages{
 	}
 	
 	public void assignPatient(Patient pat) {
+		
 		System.out.println("Mr. " + pat.lastName + " is in the system. His iD is: " + pat.getPatientID());
 	}
 	/*@Override

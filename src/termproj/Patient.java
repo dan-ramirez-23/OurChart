@@ -6,7 +6,7 @@ public class Patient extends User {
 	private int patientID;
 	private int Doctor;
 	private String dob;
-	private int phoneNumber;
+	private String phoneNumber;
 	private String email;
 	private String pharmacy;
 	private String insurer;
@@ -24,12 +24,8 @@ public class Patient extends User {
 	private String[] medications;
 	// private PatientMessage[] inbox;
 
-	public Patient() {
-
-	}
-
-	public Patient(String fName, String lName, int id, String dob, String email, int phoneNum,
-		    String pharm,String insurCompany) 
+	
+	public Patient(String fName, String lName, int id, String dob, String email, String phoneNum, String pharm,String insurCompany) 
 	{
 		super(fName, lName);
 		patientID = id;
@@ -41,10 +37,9 @@ public class Patient extends User {
 	}
 
 	public Patient(String fName, String lName, int id, int doc, String date,
-			int pNum, String em, String pharm, String ins, String[] imm,
-			String[] pres, String[] meds, String[] hi,
-			String[] ef, String rec, double w, double h, double bt, double bp,
-			String[] aller, String[] hc) {
+			String pNum, String em, String pharm, String ins, String[] imm, String[] pres, 
+			String[] meds, String[] hi, String[] ef, String rec, double w, double h, 
+			double bt, double bp, String[] aller, String[] hc) {
 
 		super(fName, lName);
 		patientID = id;
@@ -78,7 +73,7 @@ public class Patient extends User {
 		Doctor = Doc;
 	}
 
-	public void setPhoneNum(int phoneNum) {
+	public void setPhoneNum(String phoneNum) {
 		phoneNumber = phoneNum;
 	}
 
@@ -171,7 +166,7 @@ public class Patient extends User {
 		return dob;
 	}
 
-	public int getPhoneNum() {
+	public String getPhoneNum() {
 		return phoneNumber;
 	}
 
