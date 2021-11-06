@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -98,6 +99,7 @@ public class NursePage extends Pages{
 		newiD(pat);
 		setLoginInfo(pat);
 		assignPatient(pat);
+		
 	}
 	
 	public void newiD(Patient pat) {
@@ -115,6 +117,7 @@ public class NursePage extends Pages{
 	}
 	
 	public void assignPatient(Patient pat) {
+		
 		System.out.println("Mr. " + pat.lastName + " is in the system. His iD is: " + pat.getPatientID());
 	}
 	/*@Override
