@@ -91,7 +91,8 @@ public class NursePage extends Pages{
 		String lName = lNameTF.getText();
 		String dob = dobTF.getText();
 		String email = emailTF.getText();
-		int phoneNum = Integer.parseInt(phoneNumTF.getText());
+		String phoneNum = phoneNumTF.getText();
+		//int phoneNum = Integer.parseInt(phoneNumTF.getText());
 		String pharmacy = pharmacyTF.getText();
 		String insurCompany = insurCompanyTF.getText();
 		cnt++;

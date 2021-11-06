@@ -48,7 +48,7 @@ public class PatientPage extends Pages{
 	
 	public void sendMsg() {
 		
-		Patient pat = new Patient("bill", "hicks", 27, "August 13, 1974", "bhicks.xyz", 508888888, "todd","Blue Cross"); 
+		Patient pat = new Patient("bill", "hicks", 27, "August 13, 1974", "bhicks.xyz", "508888888", "todd","Blue Cross"); 
 		pat.setUserName("bhicks");
 		pat.setPassword("apple");
 		PersonnelFileWriter pfw = new PersonnelFileWriter();
