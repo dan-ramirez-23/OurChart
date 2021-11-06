@@ -75,6 +75,7 @@ public class TermProj extends Application {
 		   userList.add(doc2);
 		   userList.add(nur2);
 		   userList.add(pat2);
+		   
 	   }
 
 }
