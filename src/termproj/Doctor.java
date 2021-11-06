@@ -11,4 +11,9 @@ public class Doctor extends Employee {
 	public Doctor() {
 		
 	}
+
+	public Doctor(String fName, String lName, String un, String pass, int empID, int[] patients) {
+		super(fName, lName, un, pass, empID, patients);
+		
+	}
 }
