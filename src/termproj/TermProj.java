@@ -16,6 +16,7 @@ public class TermProj extends Application {
 
 	   public void start(Stage primaryStage) throws Exception
 	   {
+		   hardcode();
 	      stage = primaryStage;
 		  /*FXMLLoader loader = new FXMLLoader();
 		  loader.setLocation(getClass().getResource("LoginPane.fxml"));
@@ -30,6 +31,7 @@ public class TermProj extends Application {
 
 	   
 	   public void changeScene(String fxml, String username) throws IOException {
+		   hardcode();
 		   FXMLLoader loader = new FXMLLoader();
 		   Pages pageController = null;
 		   if(fxml.equals("NursePane.fxml")) {

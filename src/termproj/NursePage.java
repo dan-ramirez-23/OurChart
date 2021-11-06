@@ -1,5 +1,7 @@
 package termproj;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -7,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -21,15 +24,20 @@ public class NursePage extends Pages{
 	private Patient pat;
 	private int cnt = 0;
 	private String username;
-	private ArrayList<User> userList;
-	
+	private ArrayList<User> userList = new ArrayList<User>();
 	
 	public NursePage(String un, ArrayList<User> uL) {
 		super(un, uL);
 		userList=uL;
+		setListView();
 	}
+	
 	@FXML
 	private TextField weightTF;
+	@FXML
+	private ObservableList<User> obs = FXCollections.observableArrayList(userList);
+	@FXML
+	private ListView<User> lstView = new ListView<User>(obs);
 	@FXML
 	private TextField heightTF;
 	@FXML
@@ -71,6 +79,11 @@ public class NursePage extends Pages{
 
 	}
 	
+	public void setListView() {
+		obs.setAll(userList);
+		lstView.setItems(obs);
+		
+	}
 	
 	@FXML
 	public void enterButtonClicked(Event e) {
