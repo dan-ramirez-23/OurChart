@@ -22,6 +22,7 @@ public class LoginPage {
 		
 	}
 	
+	
 	@FXML
 	private Button button;
 	@FXML
@@ -29,7 +30,7 @@ public class LoginPage {
 	@FXML
 	private PasswordField password;
 	@FXML
-	private ComboBox userType;
+	private ComboBox<String> userType;
 	@FXML
 	private Label wrongLogIn;
 	
@@ -38,6 +39,7 @@ public class LoginPage {
 	public void initialize() {
 		userType.getItems().addAll("Doctor","Nurse","Patient");
 		userType.getSelectionModel().select("Patient");
+		button.defaultButtonProperty().bind(button.focusedProperty());
 	}
 	
 	
@@ -70,7 +72,7 @@ public class LoginPage {
 				
 				if(userInput.equals(user) && passInput.equals(pass) && uTypeInput.equals(uType)) {
 					String fxml = uType + "Pane.fxml";
-					window.changeScene(fxml);					
+					window.changeScene(fxml, user);					
 				}
 				
 				else if(username.getText().isEmpty() && password.getText().isEmpty()) {

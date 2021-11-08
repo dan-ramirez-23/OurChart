@@ -14,10 +14,11 @@ public class Employee extends User {
 	
 
 	
-	public Employee(String fName, String lName, String un, int empID, int[] patients) {
+	public Employee(String fName, String lName, String un, String pass, int empID, int[] patients) {
 		firstName = fName;
 		lastName = lName;
 		username = un;
+		password = pass;
 		this.empID = empID;
 		this.patients = patients;
 	}

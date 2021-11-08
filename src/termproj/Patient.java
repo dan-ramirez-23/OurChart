@@ -28,13 +28,25 @@ public class Patient extends User {
 
 	}
 
+	public Patient(String fName, String lName, int id, String dob, String email, int phoneNum,
+		    String pharm,String insurCompany) 
+	{
+		super(fName, lName);
+		patientID = id;
+		this.dob = dob;
+		this.email = email;
+		phoneNumber = phoneNum;
+		pharmacy = pharm;
+		insurer = insurCompany;
+	}
+
 	public Patient(String fName, String lName, int id, int doc, String date,
 			int pNum, String em, String pharm, String ins, String[] imm,
-			String[] pres, String[] meds, PatientMessage[] ib, String[] hi,
+			String[] pres, String[] meds, String[] hi,
 			String[] ef, String rec, double w, double h, double bt, double bp,
 			String[] aller, String[] hc) {
 
-		super(fName, lName, ib);
+		super(fName, lName);
 		patientID = id;
 		Doctor = doc;
 		dob = date;
@@ -59,6 +71,9 @@ public class Patient extends User {
 
 	// setters
 
+	public void setiD(int iD) {
+		patientID = iD;
+	}
 	public void setDoctor(int Doc) {
 		Doctor = Doc;
 	}
@@ -127,7 +142,22 @@ public class Patient extends User {
 		healthConcerns = hc;
 	}
 
+	public void setUserName(String un) {
+		super.username=un;
+	}
+	
+	public void setPassword(String pw) {
+		super.password=pw;
+	}
 	// getters
+	
+	public String getfName() {
+		return super.firstName;
+	}
+	
+	public String getlName() {
+		return super.lastName;
+	}
 
 	public int getPatientID() {
 		return patientID;
@@ -204,4 +234,5 @@ public class Patient extends User {
 	public String[] getHealthConcerns() {
 		return healthConcerns;
 	}
+
 }
