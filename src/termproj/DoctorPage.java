@@ -1,6 +1,7 @@
 package termproj;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,8 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class DoctorPage extends Pages{
-	private String username;
+	//private String username;
 	private String patientSelected;
+	//private ArrayList<User> userList;
 	
 	@FXML
 	private Button sendMsgButton;
@@ -19,13 +21,10 @@ public class DoctorPage extends Pages{
 	private TextField subject;
 	
 	
-	public DoctorPage() {
-		
-	}
 	
 	
-	public DoctorPage(String un) {
-		username = un;
+	public DoctorPage(String un, ArrayList<User> uL) {
+		super(un, uL);
 	}
 	
 

@@ -1,4 +1,5 @@
 package termproj;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,10 +13,17 @@ public class TermProj extends Application {
 	   private final int WIDTH = 550;
 	   private final int HEIGHT = 400;
 	   private static Stage stage;
+	   private ArrayList<User> userList = new ArrayList<>();//created to make sure there are no null pointer exceptions
 
 	   public void start(Stage primaryStage) throws Exception
 	   {
+		   hardcode();
 	      stage = primaryStage;
+		  /*FXMLLoader loader = new FXMLLoader();
+		  loader.setLocation(getClass().getResource("LoginPane.fxml"));
+		  LoginPage startPage = new LoginPage();
+		  loader.setController(startPage);
+		  Parent root = loader.load();*/
 		  Parent root = FXMLLoader.load(getClass().getResource("LoginPane.fxml"));
 		  primaryStage.setTitle("Pediatric Office System");
 		  primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
@@ -24,16 +32,17 @@ public class TermProj extends Application {
 
 	   
 	   public void changeScene(String fxml, String username) throws IOException {
+		   hardcode();
 		   FXMLLoader loader = new FXMLLoader();
 		   Pages pageController = null;
 		   if(fxml.equals("NursePane.fxml")) {
-			   pageController = new NursePage(username);//needs to change depending on the page required
+			   pageController = new NursePage(username, userList);//needs to change depending on the page required
 		   }
 		   else if (fxml.equals("DoctorPane.fxml")) {
-			   pageController = new DoctorPage(username);
+			   pageController = new DoctorPage(username, userList);
 		   }
 		   else if (fxml.equals("PatientPane.fxml")) { 
-			   pageController = new PatientPage(username);
+			   pageController = new PatientPage(username, userList);
 		   }
 		   
 		   
@@ -42,7 +51,8 @@ public class TermProj extends Application {
 		   Parent pane = loader.load();
 		   
 		   //Parent pane = loader.load(getClass().getResource(fxml));
-		   stage.getScene().setRoot(pane);
+		   stage.setScene(new Scene(pane, WIDTH + 300, HEIGHT + 150));
+		   //stage.getScene().setRoot(pane);
 	   }
 	   
 	   public static void main(String[] args)
@@ -51,15 +61,30 @@ public class TermProj extends Application {
 	   }
 	   
 	   public void hardcode() {
-		   ArrayList <User> doctorList, userList;
-		   doctorList = new ArrayList <User> ();
-		   userList = new ArrayList <User> ();
-		//   Doctor doc = new Doctor("Hannah", "Kaufman", "hjkaufma", "password", 102, int[] patients);
-		//   Doctor doc = new Doctor("Jackson", "Carrion", "jtcarrio", "password", 900, int[] patients);
-		//   Doctor doc = new Doctor("Dan", "Ramirez", "darami14", "password", 032, int[] patients);
-		//   Nurse nur = new Nurse("Audrey", "Wong", "awong24", "password", 293, int[] patients);
-		//   Nurse nur = new Nurse("Sebastian", "Aguilar", "sdiazagu", "password", 289, int[] patients);
-		  
+
+		   ArrayList <Patient> allPats = new ArrayList <Patient>();
+		   ArrayList <Patient> docPats = new ArrayList <Patient>();
+		   Doctor doc1 = new Doctor("Hannah", "Kaufman", "hjkaufma", "password", 102, docPats);
+		   Doctor doc2 = new Doctor("Audrey", "Wong", "awong24", "password", 293, docPats);
+		   Nurse nur1 = new Nurse("Jackson", "Carrion", "jtcarrio", "password", 900, allPats);
+		   Nurse nur2 = new Nurse("Dan", "Ramirez", "darami14", "password", 032, allPats);
+		   String[] im={"Chicken Pox", "COVID-19"};
+		   String[] per={"Marijuana"};
+		   String[] med={"N/A"};
+		   String[] hi={"Just a boss ass bitch"};
+		   String[] ef={"N/A"};
+		   String[] alrg={"Cats", "Broke Bitches", "Anything that isnt money"};
+		   String[] hc = {"He is to real"};
+		   
+		   Patient pat2 = new Patient("Sebastian", "Aguilar", 001, 1, "031621", "6023915618", 
+				   "ass@gmail.com" , "CVS", "sdiazagu",im, per, med,
+				   hi, ef, "Stay up cuzzo", 289.2, 6.7, 98.2, 170.3, alrg, hc );  
+		   userList.add(doc1);
+		   userList.add(nur1);
+		   userList.add(doc2);
+		   userList.add(nur2);
+		   userList.add(pat2);
+		   
 	   }
 
 }

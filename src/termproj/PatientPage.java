@@ -4,6 +4,8 @@ package termproj;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javafx.scene.control.Button;
 
 import java.io.IOException;
@@ -18,11 +20,11 @@ import javafx.scene.control.TextField;
 
 
 public class PatientPage extends Pages{
-
+	private ArrayList<User> userList;
 	
-	public PatientPage(String un) {
+	public PatientPage(String un, ArrayList<User> uL) {
+		super(un, uL);
 		System.out.println("On patient page creation, un = " + un);
-		username = un;
 	}
 	
 	private String username;
@@ -48,7 +50,7 @@ public class PatientPage extends Pages{
 	
 	public void sendMsg() {
 		
-		Patient pat = new Patient("bill", "hicks", 27, "August 13, 1974", "bhicks.xyz", 508888888, "todd","Blue Cross"); 
+		Patient pat = new Patient("bill", "hicks", 27, "August 13, 1974", "bhicks.xyz", "508888888", "todd","Blue Cross"); 
 		pat.setUserName("bhicks");
 		pat.setPassword("apple");
 		PersonnelFileWriter pfw = new PersonnelFileWriter();

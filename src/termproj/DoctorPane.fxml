@@ -5,13 +5,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="0.23447401774397972" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.23447401774397972" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="487.0" prefWidth="181.0">
          <children>
             <ListView layoutX="5.0" layoutY="62.0" prefHeight="449.0" prefWidth="160.0" style="-fx-border-color: #0a0a0a;" />
             <Label layoutX="53.0" layoutY="42.0" text="Patient Name" />
-            <ScrollBar layoutX="147.0" layoutY="61.0" orientation="VERTICAL" prefHeight="449.0" prefWidth="17.0" />
+            <!--<ScrollBar layoutX="147.0" layoutY="61.0" orientation="VERTICAL" prefHeight="449.0" prefWidth="17.0" />-->
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="540.0" prefWidth="569.0">
          <children>
@@ -63,21 +63,18 @@
                            <children>
                               <Label layoutX="20.0" layoutY="39.0" text="Date of Birth" />
                               <Label layoutX="9.0" layoutY="66.0" prefHeight="47.0" prefWidth="189.0" text="Previously Prescribed Medications" />
-                              <Label layoutX="223.0" layoutY="81.0" text="Patient's Health Issues">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font></Label>
+                              <Label layoutX="223.0" layoutY="81.0" text="Patient's Health Issues"/>
                               <Label layoutX="409.0" layoutY="83.0" text="History of Immunization" />
                               <Button layoutX="199.0" layoutY="445.0" mnemonicParsing="false" text="Assign patient to another doctor" />
                               <Label layoutX="112.0" layoutY="39.0" text="_________________" underline="true" />
                               <ListView layoutX="15.0" layoutY="100.0" prefHeight="311.0" prefWidth="167.0" style="-fx-border-color: #0a0a0a;" />
                               <ListView layoutX="206.0" layoutY="99.0" prefHeight="313.0" prefWidth="167.0" style="-fx-border-color: #0a0a0a;" />
                               <ListView layoutX="397.0" layoutY="101.0" prefHeight="314.0" prefWidth="167.0" style="-fx-border-color: #0a0a0a;" />
-                              <ScrollBar layoutX="164.0" layoutY="101.0" orientation="VERTICAL" prefHeight="308.0" prefWidth="17.0" />
+                              <!--<ScrollBar layoutX="164.0" layoutY="101.0" orientation="VERTICAL" prefHeight="308.0" prefWidth="17.0" />
                               <ScrollBar layoutX="354.0" layoutY="101.0" orientation="VERTICAL" prefHeight="311.0" prefWidth="17.0" />
                               <ScrollBar layoutX="546.0" layoutY="100.0" orientation="VERTICAL" prefHeight="313.0" prefWidth="17.0" />
                               <CheckBox layoutX="400.0" layoutY="104.0" mnemonicParsing="false" text="Chickenpox" />
-                              <CheckBox layoutX="400.0" layoutY="132.0" mnemonicParsing="false" text="COVID-19" />
+                              <CheckBox layoutX="400.0" layoutY="132.0" mnemonicParsing="false" text="COVID-19" />-->
                            </children>
                         </AnchorPane>
                   </content>

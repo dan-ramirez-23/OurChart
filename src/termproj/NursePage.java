@@ -1,5 +1,7 @@
 package termproj;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -7,12 +9,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class NursePage extends Pages{
@@ -20,15 +24,20 @@ public class NursePage extends Pages{
 	private Patient pat;
 	private int cnt = 0;
 	private String username;
+	private ArrayList<User> userList = new ArrayList<User>();
 	
-	public NursePage() {
-		
+	public NursePage(String un, ArrayList<User> uL) {
+		super(un, uL);
+		userList=uL;
+		setListView();
 	}
-	public NursePage(String un) {
-		username = un;
-	}
+	
 	@FXML
 	private TextField weightTF;
+	@FXML
+	private ObservableList<User> obs = FXCollections.observableArrayList(userList);
+	@FXML
+	private ListView<User> lstView = new ListView<User>(obs);
 	@FXML
 	private TextField heightTF;
 	@FXML
@@ -70,6 +79,11 @@ public class NursePage extends Pages{
 
 	}
 	
+	public void setListView() {
+		obs.setAll(userList);
+		lstView.setItems(obs);
+		
+	}
 	
 	@FXML
 	public void enterButtonClicked(Event e) {
@@ -91,7 +105,8 @@ public class NursePage extends Pages{
 		String lName = lNameTF.getText();
 		String dob = dobTF.getText();
 		String email = emailTF.getText();
-		int phoneNum = Integer.parseInt(phoneNumTF.getText());
+		String phoneNum = phoneNumTF.getText();
+		//int phoneNum = Integer.parseInt(phoneNumTF.getText());
 		String pharmacy = pharmacyTF.getText();
 		String insurCompany = insurCompanyTF.getText();
 		cnt++;
@@ -113,12 +128,10 @@ public class NursePage extends Pages{
 		pat.setUserName(un);
 		pat.setPassword(pw);
 		
-		
 	}
 	
 	public void assignPatient(Patient pat) {
-		
-		System.out.println("Mr. " + pat.lastName + " is in the system. His iD is: " + pat.getPatientID());
+		userList.add(pat);
 	}
 	/*@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
