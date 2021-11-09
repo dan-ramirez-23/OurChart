@@ -85,6 +85,13 @@ public class TermProj extends Application {
 		   userList.add(nur2);
 		   userList.add(pat2);
 		   
+		   PatientMessage msg1 = new PatientMessage("test message body","test message subject","jtcarrio");
+		   PatientMessage msg2 = new PatientMessage("test message 2 body","test message 2 subject","hjkaufma");
+		   PatientMessage msg3 = new PatientMessage("test message 3 body","test message 3 subject","awong24");
+		   nur2.addMessage(msg1);
+		   nur2.addMessage(msg2);
+		   nur2.addMessage(msg3);
+		   
 	   }
 
 }

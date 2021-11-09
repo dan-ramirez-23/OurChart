@@ -42,9 +42,9 @@ public class UserManager {
 	}
 	
 	// get User by username (additional methods by user type?)
-	public User readUserFromList(User u) {//modified from PersonalFileReader
+	public User readUserFromList(String un) {//modified from PersonalFileReader
 		for(int i = 0; i < userList.size(); i++) {
-			if(u.equals(userList.get(i).username)) {
+			if(un.equals(userList.get(i).username)) {
 				User usr = userList.get(i);
 				System.out.println(usr.toString());
 				return usr;

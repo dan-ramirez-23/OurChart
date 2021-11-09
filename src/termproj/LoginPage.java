@@ -88,7 +88,11 @@ public class LoginPage {
 			
 		} catch (IOException e) {
 			e.printStackTrace();
-		}	
+		}
+		
+		UserManager umgr = new UserManager();
+		
+		
 		
 	}
 	

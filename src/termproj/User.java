@@ -24,10 +24,20 @@ public class User implements Serializable {
 //		pw = lastName + firstName + dateofbirth.substring(6, 8);
 //		password = pw;
 //	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
 //	
 	public void addMessage(PatientMessage msg) {
 		inbox.add(msg);
 	}
+	
+	public List<PatientMessage> getInbox() {
+		return inbox;
+	}
+	
+	
 	public User(String fName, String lName, String uType) {
 		firstName = fName;
 		lastName = lName;
