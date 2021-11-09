@@ -24,7 +24,7 @@ public class NursePage extends Pages{
 	private Patient pat;
 	private int cnt = 0;
 	private String username;
-	private ArrayList<User> userList = new ArrayList<User>();
+	//private ArrayList<User> userList = new ArrayList<User>();
 	
 	public NursePage(String un, ArrayList<User> uL) {
 		super(un, uL);
