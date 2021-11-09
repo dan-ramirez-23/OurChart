@@ -26,8 +26,7 @@ public class PatientPage extends Pages{
 		super(un, uL);
 		System.out.println("On patient page creation, un = " + un);
 	}
-	
-	private String username;
+	Patient currentUser;
 	
 	@FXML
 	private Button sendMsgButton;

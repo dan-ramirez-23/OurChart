@@ -26,7 +26,6 @@ public class NursePage extends Pages{
 	private Scene scene;
 	private Patient pat;
 	private int cnt = 0;
-	private String username;
 	private ArrayList<Patient> patientList = new ArrayList<>();
 	//private ArrayList<User> userList = new ArrayList<User>();
 	
