@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,6 +13,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Label;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,20 +27,25 @@ public class NursePage extends Pages{
 	private Patient pat;
 	private int cnt = 0;
 	private String username;
+	private ArrayList<Patient> patientList = new ArrayList<>();
 	//private ArrayList<User> userList = new ArrayList<User>();
 	
 	public NursePage(String un, ArrayList<User> uL) {
 		super(un, uL);
-		userList=uL;
-		setListView();
+		String typeString = "Patient";//know we are looking to only display type patient
+		for(int i = 0; i < userList.size(); i++) {
+			if(typeString.equals(userList.get(i).userType)) {
+				patientList.add((Patient)userList.get(i));
+			}
+		}
 	}
 	
 	@FXML
 	private TextField weightTF;
 	@FXML
-	private ObservableList<User> obs = FXCollections.observableArrayList(userList);
+	private ObservableList<Patient> obs = FXCollections.observableArrayList(patientList);
 	@FXML
-	private ListView<User> lstView = new ListView<User>(obs);
+	private ListView<Patient> lstView = new ListView<Patient>(obs);
 	@FXML
 	private TextField heightTF;
 	@FXML
@@ -73,21 +81,106 @@ public class NursePage extends Pages{
 	private TextField immunizationTF;
 	@FXML
 	private TextField medicationTF;
+	@FXML 
+	private Label usernameLabel;
+	@FXML
+	private Label passwordLabel;
+	
+	
+	@FXML
+	private Label dobLabel;
+	@FXML
+	private ListView<String> MedsView;
+	@FXML
+	private ListView<String> HealthView;
+	@FXML
+	private ListView<String> ImmunView;
 	
 	@FXML
 	public void initialize() {
-
+		lstView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				userSelected(event);
+			}
+		});
+		setListView();
+	}
+	
+	@FXML
+	public void userSelected(MouseEvent arg0) {
+		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		dobLabel.setText(selectedPatient.getDOB());
+		
+		ArrayList<String> tempList = new ArrayList<>();
+		for (int i = 0; i < selectedPatient.getMedications().length; i++) {
+			tempList.add(selectedPatient.getMedications()[i]);
+		}
+		ObservableList<String> stringList = FXCollections.observableArrayList(tempList);
+		stringList.setAll(tempList);
+		MedsView.setItems(stringList);
+		
+		tempList = new ArrayList<>();
+		for (int i = 0; i < selectedPatient.getHealthIssues().length; i++) {
+			tempList.add(selectedPatient.getHealthIssues()[i]);
+		}
+		stringList = FXCollections.observableArrayList(tempList);
+		stringList.setAll(tempList);
+		HealthView.setItems(stringList);
+		
+		tempList = new ArrayList<>();
+		for (int i = 0; i < selectedPatient.getImmunizations().length; i++) {
+			tempList.add(selectedPatient.getImmunizations()[i]);
+		}
+		stringList = FXCollections.observableArrayList(tempList);
+		stringList.setAll(tempList);
+		ImmunView.setItems(stringList);
+		
+		
+		weightTF.setText("" + selectedPatient.getWeight());
+		heightTF.setText("" + selectedPatient.getHeight());
+		bTempTF.setText("" + selectedPatient.getBodyTemp());
+		bPressTF.setText("" + selectedPatient.getBloodPress());
+		String tempString = "";
+		for(int i = 0; i < selectedPatient.getAllergies().length; i++) {
+			tempString += "" + selectedPatient.getAllergies()[i] + "\n";
+		}
+		knownAllergyTA.setText(tempString);
+		tempString = "";
+		for(int i = 0; i < selectedPatient.getHealthConcerns().length; i++) {
+			tempString += "" + selectedPatient.getHealthConcerns()[i] + "\n";
+		}
+		hcTA.setText(tempString);
 	}
 	
 	public void setListView() {
-		obs.setAll(userList);
+		obs.setAll(patientList);
 		lstView.setItems(obs);
 		
 	}
 	
 	@FXML
 	public void enterButtonClicked(Event e) {
+		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		selectedPatient.setWeight(Double.parseDouble(weightTF.getText()));
+		selectedPatient.setHeight(Double.parseDouble(heightTF.getText()));
+		selectedPatient.setBodyTemp(Double.parseDouble(bTempTF.getText()));
+		selectedPatient.setBloodPress(Double.parseDouble(bPressTF.getText()));
 		
+		String textFromAllergies = knownAllergyTA.getText();
+		String lines[] = textFromAllergies.split("\\r?\\n");
+		selectedPatient.setAllergies(lines);
+		
+		String textFromConcerns = hcTA.getText();
+		String hcLines[] = textFromConcerns.split("\\r?\\n");
+		selectedPatient.setAllergies(hcLines);
+		
+		weightTF.setText("");
+		heightTF.setText("");
+		bTempTF.setText("");
+		bPressTF.setText("");
+		knownAllergyTA.setText("");
+		hcTA.setText("");
 	}
 	
 //	public void create(ActionEvent event) throws IOException {
@@ -128,10 +221,15 @@ public class NursePage extends Pages{
 		pat.setUserName(un);
 		pat.setPassword(pw);
 		
+		usernameLabel.setText(un);
+		passwordLabel.setText(pw);
 	}
 	
 	public void assignPatient(Patient pat) {
 		userList.add(pat);
+		patientList.add(pat);
+		obs.setAll(patientList);
+		lstView.setItems(obs);
 	}
 	/*@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

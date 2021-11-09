@@ -76,7 +76,7 @@ public class TermProj extends Application {
 		   String[] alrg={"Cats", "Broke Bitches", "Anything that isnt money"};
 		   String[] hc = {"He is to real"};
 		   
-		   Patient pat2 = new Patient("Sebastian", "Aguilar", 001, 1, "031621", "6023915618", 
+		   Patient pat2 = new Patient("Sebastian", "Diaz", 001, 1, "031621", "6023915618", 
 				   "ass@gmail.com" , "CVS", "sdiazagu",im, per, med,
 				   hi, ef, "Stay up cuzzo", 289.2, 6.7, 98.2, 170.3, alrg, hc );  
 		   userList.add(doc1);
