@@ -15,6 +15,7 @@ public class TermProj extends Application {
 	   private static Stage stage;
 	   private ArrayList<User> userList = new ArrayList<>();//created to make sure there are no null pointer exceptions
 
+	   
 	   public void start(Stage primaryStage) throws Exception
 	   {
 		   hardcode();
@@ -85,6 +86,7 @@ public class TermProj extends Application {
 		   userList.add(nur2);
 		   userList.add(pat2);
 		   
+		  
 	   }
 
 }

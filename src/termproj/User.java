@@ -12,18 +12,13 @@ public class User implements Serializable {
 		
 	}
 	
+	public String toString() {
+		return ("" + firstName + " " + lastName);
+	}
+	
 	public String getUsername() {
 		return username;
 	}
-//	public void setUsername(String un) {
-//		un = firstName.charAt(0) + lastName + dateofbirth.substring(6, 8);
-//		username = un;
-//	}
-//	public void setPassword(String pw) {
-//		pw = lastName + firstName + dateofbirth.substring(6, 8);
-//		password = pw;
-//	}
-//	
 	public void addMessage(PatientMessage msg) {
 		inbox.add(msg);
 	}

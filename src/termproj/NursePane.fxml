@@ -81,6 +81,7 @@
                               <Label layoutX="370.0" layoutY="119.0" text="History of Immunization" />
                               <ListView layoutX="360.0" layoutY="140.0" prefHeight="300.0" prefWidth="150.0" style="-fx-border-color: #0a0a0a;" />
                               <!--<ScrollBar layoutX="570.0" layoutY="140.0" orientation="VERTICAL" prefHeight="434.0" prefWidth="17.0" />-->
+                              <Button fx:id="changeDoctor" layoutX="37.0" layoutY="450.0" mnemonicParsing="false" onAction="#changeDoc" prefHeight="27.0" prefWidth="342.0" text="Assign Patient to another Doctor" />
                            </children>
                         </AnchorPane>
                      </content>
