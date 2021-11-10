@@ -38,10 +38,16 @@ public class User implements Serializable {
 	}
 	
 	
-	public User(String fName, String lName, String uType) {
+	public User(String fName, String lName, String uType, String un, String pass) {//use this constructor
 		firstName = fName;
 		lastName = lName;
 		userType = uType;
+		username = un;
+		password = pass;
+	}
+	
+	public String getUserType() {
+		return userType;
 	}
 	
 	public String toString() {

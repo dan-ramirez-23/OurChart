@@ -1,1 +1,2 @@
 testPatient,test123,Patient
+sdiazagu,password,Doctor

@@ -30,21 +30,21 @@ import java.util.ResourceBundle;
 public class NursePage extends Pages{
 	private Scene scene;
 	private Patient pat;
-	private Nurse user;
+	private Nurse user = new Nurse();//temporary nurse
 	private int cnt = 0;
 	private ArrayList<Patient> patientList = new ArrayList<>();
 	private List<PatientMessage> inboxList = new ArrayList<>();
 	//private ArrayList<User> userList = new ArrayList<User>();
 	
-	public NursePage(String un, ArrayList<User> uL) {
-		super(un, uL);
-		UserManager umgr = new UserManager(uL);
+	public NursePage(String un, ArrayList<User> uL, UserManager um) {
+		super(un, uL, um);
+		//UserManager umgr = new UserManager(uL); umgr moved to pages class, will be created in termproj
 		user = (Nurse) umgr.readUserFromList(un);
 		inboxList = user.getInbox();
 		
 		String typeString = "Patient";//know we are looking to only display type patient
 		for(int i = 0; i < userList.size(); i++) {
-			if(typeString.equals(userList.get(i).userType)) {
+			if(typeString.equals(userList.get(i).getUserType())) {
 				patientList.add((Patient)userList.get(i));
 			}
 		}

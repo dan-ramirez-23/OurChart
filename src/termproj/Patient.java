@@ -34,7 +34,7 @@ public class Patient extends User {
 		phoneNumber = pNum;
 		pharmacy = pharm;
 		insurer = ins;*/
-		super(fName, lName, "Patient");
+		super(fName, lName, "Patient", "", "");
 		patientID = id;
 		Doctor = -1;
 		dob = date;
@@ -68,7 +68,7 @@ public class Patient extends User {
 			String[] meds, String[] hi, String[] ef, String rec, double w, double h, 
 			double bt, double bp, String[] aller, String[] hc) {
 
-		super(fName, lName, "Patient");
+		super(fName, lName, "Patient", "", "");
 		patientID = id;
 		Doctor = doc;
 		dob = date;

@@ -22,8 +22,8 @@ import javafx.scene.control.TextField;
 public class PatientPage extends Pages{
 	//private ArrayList<User> userList;
 	
-	public PatientPage(String un, ArrayList<User> uL) {
-		super(un, uL);
+	public PatientPage(String un, ArrayList<User> uL, UserManager um) {
+		super(un, uL, um);
 		System.out.println("On patient page creation, un = " + un);
 	}
 	Patient currentUser;
