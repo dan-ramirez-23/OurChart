@@ -10,9 +10,9 @@ public class User implements Serializable {
 	protected List<PatientMessage> inbox = new ArrayList<PatientMessage>();
 
 	public User() {
-		
+
 	}
-	
+
 	public String getUsername() {
 		return username;
 	}
@@ -24,33 +24,35 @@ public class User implements Serializable {
 //		pw = lastName + firstName + dateofbirth.substring(6, 8);
 //		password = pw;
 //	}
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 //	
 	public void addMessage(PatientMessage msg) {
 		inbox.add(msg);
 	}
-	
+
 	public List<PatientMessage> getInbox() {
 		return inbox;
 	}
-	
-	
-	public User(String fName, String lName, String uType, String un, String pass) {//use this constructor
+
+	public User(String fName, String lName, String uType, String un,
+			String pass) {// use this constructor
 		firstName = fName;
 		lastName = lName;
 		userType = uType;
 		username = un;
 		password = pass;
 	}
-	
+
 	public String getUserType() {
 		return userType;
 	}
-	
+
 	public String toString() {
 		return firstName + " " + lastName;
 	}
+
 }
