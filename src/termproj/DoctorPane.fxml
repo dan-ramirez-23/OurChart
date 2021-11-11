@@ -83,9 +83,9 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TextField layoutX="147.0" layoutY="20.0" prefHeight="193.0" prefWidth="394.0" />
+                              <TextArea layoutX="147.0" layoutY="20.0" prefHeight="193.0" prefWidth="394.0" />
                               <Label layoutX="9.0" layoutY="74.0" prefHeight="67.0" prefWidth="141.0" text="Physical Exam Findings:" />
-                              <TextField layoutX="154.0" layoutY="405.0" prefHeight="27.0" prefWidth="391.0" />
+                              <TextArea layoutX="154.0" layoutY="405.0" prefHeight="27.0" prefWidth="391.0" />
                               <Label layoutX="23.0" layoutY="410.0" text="Prescriptions to send" />
                               <Button layoutX="326.0" layoutY="441.0" mnemonicParsing="false" text="Send" />
                               <Label layoutX="23.0" layoutY="277.0" text="Recommendations:" />
