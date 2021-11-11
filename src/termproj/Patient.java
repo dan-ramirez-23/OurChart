@@ -25,15 +25,43 @@ public class Patient extends User {
 	// private PatientMessage[] inbox;
 
 	
-	public Patient(String fName, String lName, int id, String dob, String email, String phoneNum, String pharm,String insurCompany) 
+	public Patient(String fName, String lName, int id, String date, String em, String pNum, String pharm, String ins, String uType) 
 	{
-		super(fName, lName);
+		/*super(fName, lName, "Patient");
 		patientID = id;
-		this.dob = dob;
-		this.email = email;
-		phoneNumber = phoneNum;
+		dob = date;
+		email = em;
+		phoneNumber = pNum;
 		pharmacy = pharm;
-		insurer = insurCompany;
+		insurer = ins;*/
+		super(fName, lName, "Patient");
+		patientID = id;
+		Doctor = -1;
+		dob = date;
+		phoneNumber = pNum;
+		email = em;
+		pharmacy = pharm;
+		insurer = ins;
+		immunizations = new String[1];
+		immunizations[0] = "";
+		prescriptions = new String[1];
+		immunizations[0] = "";
+		medications = new String[1];
+		medications[0] = "";
+		healthIssues = new String[1];
+		healthIssues[0] = "";
+		examFindings = new String[1];
+		examFindings[0] = "";
+		recommendations = "";
+		weight = -1;
+		height = -1;
+		bodyTemp = -1;
+		bloodPressure = -1;
+		allergies = new String[1];
+		allergies[0] = "";
+		healthConcerns = new String[1];
+		healthConcerns[0] = "";
+		uType = "Patient";
 	}
 
 	public Patient(String fName, String lName, int id, int doc, String date,
@@ -41,7 +69,7 @@ public class Patient extends User {
 			String[] meds, String[] hi, String[] ef, String rec, double w, double h, 
 			double bt, double bp, String[] aller, String[] hc) {
 
-		super(fName, lName);
+		super(fName, lName, "Patient");
 		patientID = id;
 		Doctor = doc;
 		dob = date;

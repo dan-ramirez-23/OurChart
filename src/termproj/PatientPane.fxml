@@ -75,11 +75,8 @@
                   <TextField layoutX="183.0" layoutY="90.0" />
                   <TextArea layoutX="446.0" layoutY="298.0" prefHeight="117.0" prefWidth="161.0" />
                   <TextArea layoutX="442.0" layoutY="191.0" prefHeight="82.0" prefWidth="168.0" />
-                  <ScrollBar layoutX="589.0" layoutY="296.0" orientation="VERTICAL" prefHeight="115.0" prefWidth="17.0" />
-                  <ScrollBar layoutX="593.0" layoutY="191.0" orientation="VERTICAL" prefHeight="82.0" prefWidth="17.0" />
                   <Label layoutX="223.0" layoutY="298.0" text="Health History" />
                   <TextArea layoutX="179.0" layoutY="315.0" prefHeight="101.0" prefWidth="166.0" />
-                  <ScrollBar layoutX="328.0" layoutY="316.0" orientation="VERTICAL" />
                </children>
             </AnchorPane>
         </content>

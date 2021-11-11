@@ -14,7 +14,7 @@ public class TermProj extends Application {
 	   private final int HEIGHT = 400;
 	   private static Stage stage;
 	   private ArrayList<User> userList = new ArrayList<>();//created to make sure there are no null pointer exceptions
-
+	   private ArrayList<Doctor> doctorList = new ArrayList<>();
 	   
 	   public void start(Stage primaryStage) throws Exception
 	   {
@@ -65,10 +65,10 @@ public class TermProj extends Application {
 
 		   ArrayList <Patient> allPats = new ArrayList <Patient>();
 		   ArrayList <Patient> docPats = new ArrayList <Patient>();
-		   Doctor doc1 = new Doctor("Hannah", "Kaufman", "hjkaufma", "password", 102, docPats);
-		   Doctor doc2 = new Doctor("Audrey", "Wong", "awong24", "password", 293, docPats);
-		   Nurse nur1 = new Nurse("Jackson", "Carrion", "jtcarrio", "password", 900, allPats);
-		   Nurse nur2 = new Nurse("Dan", "Ramirez", "darami14", "password", 032, allPats);
+		   Doctor doc1 = new Doctor("Hannah", "Kaufman", "hjkaufma", "password", 102, docPats, "Doctor");
+		   Doctor doc2 = new Doctor("Audrey", "Wong", "awong24", "password", 293, docPats,"Doctor");
+		   Nurse nur1 = new Nurse("Jackson", "Carrion", "jtcarrio", "password", 900, allPats, "Nurse");
+		   Nurse nur2 = new Nurse("Dan", "Ramirez", "darami14", "password", 032, allPats, "Nurse");
 		   String[] im={"Chicken Pox", "COVID-19"};
 		   String[] per={"Marijuana"};
 		   String[] med={"N/A"};
@@ -77,15 +77,17 @@ public class TermProj extends Application {
 		   String[] alrg={"Cats", "Broke Bitches", "Anything that isnt money"};
 		   String[] hc = {"He is to real"};
 		   
-		   Patient pat2 = new Patient("Sebastian", "Aguilar", 001, 1, "031621", "6023915618", 
+		   Patient pat2 = new Patient("Sebastian", "Diaz", 001, 1, "03/16/2021", "6a023915618", 
 				   "ass@gmail.com" , "CVS", "sdiazagu",im, per, med,
-				   hi, ef, "Stay up cuzzo", 289.2, 6.7, 98.2, 170.3, alrg, hc );  
+				   hi, ef, "Stay up cuzzo", 289.2, 6.7, 98.2, 170.3, alrg, hc);  
 		   userList.add(doc1);
-		   userList.add(nur1);
 		   userList.add(doc2);
+		   userList.add(nur1);
 		   userList.add(nur2);
 		   userList.add(pat2);
-		   
+		   doctorList.add(doc2);
+		   doctorList.add(doc1);
+		  int numOfDoctors = doctorList.size();
 		  
 	   }
 

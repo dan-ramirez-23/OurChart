@@ -1,56 +1,65 @@
 package termproj;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.util.Callback;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.scene.control.Label;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 public class NursePage extends Pages{
 	private Scene scene;
 	private Patient pat;
 	private int cnt = 0;
-	private String username;
-	private ArrayList<User> userList = new ArrayList<User>();
-	private ArrayList<String> userListName = new ArrayList<String>();
-	private ArrayList<Patient> patientList = new ArrayList<Patient>();
-	private ArrayList<User> docList = new ArrayList<User>();
+	ArrayList<Patient> patientList = new ArrayList<>();
+	ArrayList<Doctor> doctorList = new ArrayList<>();
+	FileChooser fileChooser = new FileChooser();
+
+	//private ArrayList<User> userList = new ArrayList<User>();
 	
 	public NursePage(String un, ArrayList<User> uL) {
 		super(un, uL);
-		userList=uL;
-		setListView();
+		String typeString = "Patient";//know we are looking to only display type patient
+		for(int i = 0; i < userList.size(); i++) {
+			if(typeString.equals(userList.get(i).userType)) {
+				patientList.add((Patient)userList.get(i));
+				
+				for(int q = 0; q < userList.size(); q++) {
+			        if("Doctor".equals(userList.get(q).userType)) {
+			        	doctorList.add((Doctor)userList.get(q));
+			        }
+			    }
+			}
+		}
 	}
-	
 	
 	@FXML
 	private TextField weightTF;
 	@FXML
-	private ObservableList<User> obs = FXCollections.observableArrayList(userList);
+	private ObservableList<Patient> obs = FXCollections.observableArrayList(patientList);
 	@FXML
-	private ListView<User> lstView = new ListView<User>(obs);
+	private ListView<Patient> lstView = new ListView<Patient>(obs);
 	@FXML
 	private TextField heightTF;
 	@FXML
@@ -69,8 +78,6 @@ public class NursePage extends Pages{
 	@FXML
 	private Button createPatientButton;
 	@FXML
-	private Button changeDoctor;
-	@FXML
 	private TextField fNameTF;
 	@FXML 
 	private TextField lNameTF;
@@ -88,25 +95,104 @@ public class NursePage extends Pages{
 	private TextField immunizationTF;
 	@FXML
 	private TextField medicationTF;
-	
+	@FXML 
+	private Label usernameLabel;
+	@FXML
+	private Label passwordLabel;
+	@FXML
+	private Label dobLabel;
+	@FXML
+	private ListView<String> MedsView;
+	@FXML
+	private ListView<String> HealthView;
+	@FXML
+	private ListView<String> ImmunView;
 	
 	@FXML
 	public void initialize() {
+		lstView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				userSelected(event);
+			}
+		});
+		setListView();
+	}
 	
-		lstView.getItems().addAll(userList);
+	@FXML
+	public void userSelected(MouseEvent arg0) {
+		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		dobLabel.setText(selectedPatient.getDOB());
 		
-	
+		ArrayList<String> tempList = new ArrayList<>();
+		for (int i = 0; i < selectedPatient.getMedications().length; i++) {
+			tempList.add(selectedPatient.getMedications()[i]);
+		}
+		ObservableList<String> stringList = FXCollections.observableArrayList(tempList);
+		stringList.setAll(tempList);
+		MedsView.setItems(stringList);
+		
+		tempList = new ArrayList<>();
+		for (int i = 0; i < selectedPatient.getHealthIssues().length; i++) {
+			tempList.add(selectedPatient.getHealthIssues()[i]);
+		}
+		stringList = FXCollections.observableArrayList(tempList);
+		stringList.setAll(tempList);
+		HealthView.setItems(stringList);
+		
+		tempList = new ArrayList<>();
+		for (int i = 0; i < selectedPatient.getImmunizations().length; i++) {
+			tempList.add(selectedPatient.getImmunizations()[i]);
+		}
+		stringList = FXCollections.observableArrayList(tempList);
+		stringList.setAll(tempList);
+		ImmunView.setItems(stringList);
+		
+		
+		weightTF.setText("" + selectedPatient.getWeight());
+		heightTF.setText("" + selectedPatient.getHeight());
+		bTempTF.setText("" + selectedPatient.getBodyTemp());
+		bPressTF.setText("" + selectedPatient.getBloodPress());
+		String tempString = "";
+		for(int i = 0; i < selectedPatient.getAllergies().length; i++) {
+			tempString += "" + selectedPatient.getAllergies()[i] + "\n";
+		}
+		knownAllergyTA.setText(tempString);
+		tempString = "";
+		for(int i = 0; i < selectedPatient.getHealthConcerns().length; i++) {
+			tempString += "" + selectedPatient.getHealthConcerns()[i] + "\n";
+		}
+		hcTA.setText(tempString);
 	}
 	
 	public void setListView() {
-		obs.setAll(userList);
+		obs.setAll(patientList);
 		lstView.setItems(obs);
 		
 	}
 	
 	@FXML
 	public void enterButtonClicked(Event e) {
+		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		selectedPatient.setWeight(Double.parseDouble(weightTF.getText()));
+		selectedPatient.setHeight(Double.parseDouble(heightTF.getText()));
+		selectedPatient.setBodyTemp(Double.parseDouble(bTempTF.getText()));
+		selectedPatient.setBloodPress(Double.parseDouble(bPressTF.getText()));
 		
+		String textFromAllergies = knownAllergyTA.getText();
+		String lines[] = textFromAllergies.split("\\r?\\n");
+		selectedPatient.setAllergies(lines);
+		
+		String textFromConcerns = hcTA.getText();
+		String hcLines[] = textFromConcerns.split("\\r?\\n");
+		selectedPatient.setAllergies(hcLines);
+		
+		weightTF.setText("");
+		heightTF.setText("");
+		bTempTF.setText("");
+		bPressTF.setText("");
+		knownAllergyTA.setText("");
+		hcTA.setText("");
 	}
 	
 //	public void create(ActionEvent event) throws IOException {
@@ -122,17 +208,19 @@ public class NursePage extends Pages{
 	{
 		String fName = fNameTF.getText();
 		String lName = lNameTF.getText();
-		String dob = dobTF.getText();
+		String date = dobTF.getText();
+		String dob = (date.substring(0,2) + "/" + date.substring(2,4) + "/" + date.substring(4,8));
 		String email = emailTF.getText();
 		String phoneNum = phoneNumTF.getText();
 		//int phoneNum = Integer.parseInt(phoneNumTF.getText());
 		String pharmacy = pharmacyTF.getText();
 		String insurCompany = insurCompanyTF.getText();
 		cnt++;
-		pat = new Patient(fName, lName, cnt, dob, email, phoneNum, pharmacy, insurCompany);
+		pat = new Patient(fName, lName, cnt, dob, email, phoneNum, pharmacy, insurCompany, "Patient");
 		newiD(pat);
 		setLoginInfo(pat);
 		assignPatient(pat);
+		
 		
 	}
 	
@@ -147,22 +235,41 @@ public class NursePage extends Pages{
 		pat.setUserName(un);
 		pat.setPassword(pw);
 		
+		usernameLabel.setText(un);
+		passwordLabel.setText(pw);
 	}
 	
 	public void assignPatient(Patient pat) {
 		userList.add(pat);
 		patientList.add(pat);
-		docList.add(pat);
+	//	doctorList.add(pat);
+		obs.setAll(patientList);
+		lstView.setItems(obs);
+		
+		Doctor assignedDoc = doctorList.get((int) Math.random() * doctorList.size());
+		assignedDoc.addPatientsToDoctor(pat);
+	    
+	    	System.out.println("" + pat.getDoctor() + assignedDoc.getDoctorPatientList());
+	            
+	    
+		
 	}
 	
 	public void changeDoc(ActionEvent event) throws IOException {
-			if (pat.getClass() == Patient.class) {
-				pat.getDoctor();
-				if(userList.contains(pat)) {
-					userList.remove(pat);
-					docList.add(pat);
-				}
+	       for(int i = 0;i<patientList.size();i++){
+	    	   Patient currentPatient = patientList.get(i);
+	    	   for(int r = 0; r<doctorList.size(); i++) {
+	    		   Doctor currentDoctor = doctorList.get(r);
+	    		   Doctor nextDoctor = doctorList.get((r+1) % doctorList.size());
+	    		   if(currentDoctor.getDoctorPatientList().contains(i)) {
+	    			   currentDoctor.removePatient(currentPatient);
+	    			   nextDoctor.addPatientsToDoctor(currentPatient);
+	    			   
+	    	   }
+				
+				//	docList.add(ArrayList<Patient> pat);
 			}
+	       }		
 	}
 	/*@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

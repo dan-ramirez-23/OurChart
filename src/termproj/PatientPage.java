@@ -20,14 +20,13 @@ import javafx.scene.control.TextField;
 
 
 public class PatientPage extends Pages{
-	private ArrayList<User> userList;
+	//private ArrayList<User> userList;
 	
 	public PatientPage(String un, ArrayList<User> uL) {
 		super(un, uL);
 		System.out.println("On patient page creation, un = " + un);
 	}
-	
-	private String username;
+	Patient currentUser;
 	
 	@FXML
 	private Button sendMsgButton;
@@ -50,7 +49,7 @@ public class PatientPage extends Pages{
 	
 	public void sendMsg() {
 		
-		Patient pat = new Patient("bill", "hicks", 27, "August 13, 1974", "bhicks.xyz", "508888888", "todd","Blue Cross"); 
+		Patient pat = new Patient("bill", "hicks", 27, "August 13, 1974", "bhicks.xyz", "508888888", "todd","Blue Cross", "Patient"); 
 		pat.setUserName("bhicks");
 		pat.setPassword("apple");
 		PersonnelFileWriter pfw = new PersonnelFileWriter();
