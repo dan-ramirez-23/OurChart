@@ -98,6 +98,7 @@ public class TermProj extends Application {
 		   nur2.addMessage(msg2);
 		   nur2.addMessage(msg3);
 		   
+		   
 	   }
 
 }

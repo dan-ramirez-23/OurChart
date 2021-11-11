@@ -56,7 +56,18 @@ public class UserManager {
 	
 	// add new User to global list
 	public void addUserToList(User u) {
-		userList.add(u);
+		int flag = 0;
+		for(int i = 0; i < userList.size(); i++) {
+			if(u.getUsername().equals(userList.get(i).getUsername())) {
+				flag = 1;
+			}
+		}
+		if(flag == 0) {
+			userList.add(u);
+		}
+		else {
+			System.out.println("User with same username already in list");
+		}
 	}
 	
 	// return userList
