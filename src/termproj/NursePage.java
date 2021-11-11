@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class NursePage extends Pages{
@@ -299,7 +300,7 @@ public class NursePage extends Pages{
 	}
 	public void setLoginInfo(Patient pat) {
 		String un = "" + pat.getFirstName() + pat.getLastName() + pat.getPatientID();
-		String pw = "" + pat.getPatientID();//change Password generation
+		String pw = "" + randomPassword();//change Password generation
 		
 		pat.setUserName(un);
 		pat.setPassword(pw);
@@ -313,6 +314,22 @@ public class NursePage extends Pages{
 		patientList.add(pat);
 		obs.setAll(patientList);
 		lstView.setItems(obs);
+	}
+	
+	private String randomPassword() {
+		String passwordString = "";
+		Random rand = new Random();
+		int tempInt = -1;
+		for(int i = 0; i < 10; i++) {
+			tempInt = rand.nextInt(123);//adds random characters to create a random password
+			if(tempInt < 48) {
+				i--;//if too small add another repetition in the loop
+			}
+			else {
+				passwordString += (char) tempInt;
+			}
+		}
+		return passwordString;
 	}
 	/*@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
