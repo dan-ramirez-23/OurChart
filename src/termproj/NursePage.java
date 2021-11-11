@@ -1,5 +1,6 @@
 package termproj;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,30 +12,39 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Label;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class NursePage extends Pages{
 	private Scene scene;
 	private Patient pat;
+	private Nurse user = new Nurse();//temporary nurse
 	private int cnt = 0;
-	private String username;
 	private ArrayList<Patient> patientList = new ArrayList<>();
+	private List<PatientMessage> inboxList = new ArrayList<>();
 	//private ArrayList<User> userList = new ArrayList<User>();
 	
-	public NursePage(String un, ArrayList<User> uL) {
-		super(un, uL);
+	public NursePage(String un, ArrayList<User> uL, UserManager um) {
+		super(un, uL, um);
+		//UserManager umgr = new UserManager(uL); umgr moved to pages class, will be created in termproj
+		user = (Nurse) umgr.readUserFromList(un);
+		inboxList = user.getInbox();
+		
 		String typeString = "Patient";//know we are looking to only display type patient
 		for(int i = 0; i < userList.size(); i++) {
-			if(typeString.equals(userList.get(i).userType)) {
+			if(typeString.equals(userList.get(i).getUserType())) {
 				patientList.add((Patient)userList.get(i));
 			}
 		}
@@ -61,6 +71,12 @@ public class NursePage extends Pages{
 	@FXML
 	private Button enterButton;
 	
+	
+	@FXML
+	private ObservableList<PatientMessage> inbox = FXCollections.observableArrayList(inboxList);
+	@FXML
+	private TableView<PatientMessage> inboxTblView = new TableView<PatientMessage>(inbox);
+	
 	@FXML
 	private Button createPatientButton;
 	@FXML
@@ -85,6 +101,8 @@ public class NursePage extends Pages{
 	private Label usernameLabel;
 	@FXML
 	private Label passwordLabel;
+	@FXML
+	private Label welcomeLabel;
 	
 	
 	@FXML
@@ -98,6 +116,9 @@ public class NursePage extends Pages{
 	
 	@FXML
 	public void initialize() {
+		
+		welcomeLabel.setText("Welcome " + user.getFirstName());
+		
 		lstView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -105,7 +126,40 @@ public class NursePage extends Pages{
 			}
 		});
 		setListView();
+		
+		
+		inboxTblView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				messageSelected(event);
+			}
+		});
+		setInboxView();
 	}
+	
+	
+	@FXML
+	public void messageSelected(MouseEvent arg0) {
+		PatientMessage selectedMsg = inboxTblView.getSelectionModel().getSelectedItem();
+		
+	}
+	
+	public void setInboxView() {
+		inbox.setAll(inboxList);
+		inboxTblView.getItems().addAll(inbox);
+		
+
+		TableColumn<PatientMessage, String> senderCol = new TableColumn<>();
+		senderCol.setCellValueFactory(c-> new SimpleStringProperty(c.getValue().getSenderUN()));
+		
+		TableColumn<PatientMessage, String> subjectCol = new TableColumn<>();
+		subjectCol.setCellValueFactory(c-> new SimpleStringProperty(c.getValue().getSubject()));
+		
+
+		
+		inboxTblView.getColumns().addAll(senderCol, subjectCol);
+	}
+	
 	
 	@FXML
 	public void userSelected(MouseEvent arg0) {

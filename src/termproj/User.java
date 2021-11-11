@@ -24,14 +24,30 @@ public class User implements Serializable {
 //		pw = lastName + firstName + dateofbirth.substring(6, 8);
 //		password = pw;
 //	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
 //	
 	public void addMessage(PatientMessage msg) {
 		inbox.add(msg);
 	}
-	public User(String fName, String lName, String uType) {
+	
+	public List<PatientMessage> getInbox() {
+		return inbox;
+	}
+	
+	
+	public User(String fName, String lName, String uType, String un, String pass) {//use this constructor
 		firstName = fName;
 		lastName = lName;
 		userType = uType;
+		username = un;
+		password = pass;
+	}
+	
+	public String getUserType() {
+		return userType;
 	}
 	
 	public String toString() {

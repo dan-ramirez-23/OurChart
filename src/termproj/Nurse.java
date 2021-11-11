@@ -13,6 +13,10 @@ import javafx.scene.control.PasswordField;
 
 public class Nurse extends Employee {
 	
+	public Nurse() {
+		super("", "", "", "", -1, new ArrayList<>(), "Nurse");
+	}
+	
 	public Nurse(String fName, String lName, String un, String pass, int empID, ArrayList<Patient> patients) {
 		super(fName, lName, un, pass, empID, patients, "Nurse");
 	}
