@@ -190,11 +190,33 @@ public class NursePage extends Pages{
 		stringList.setAll(tempList);
 		ImmunView.setItems(stringList);
 		
+		String [] patientDOB = selectedPatient.getDOB().split("/");
+		int patientBirthYear = Integer.parseInt(patientDOB[2]);
+		int patientAge = 0;
+		if(patientDOB[2].length() == 2) {
+			
+			patientAge = 21 - patientBirthYear;
+		}
+		else if(patientDOB[2].length() == 4){
+			patientAge = 21 - patientBirthYear;
+		}
+		if(patientAge > 12) {
+			weightTF.setText("" + selectedPatient.getWeight());
+			heightTF.setText("" + selectedPatient.getHeight());
+			bTempTF.setText("" + selectedPatient.getBodyTemp());
+			bPressTF.setText("" + selectedPatient.getBloodPress());
+		}
+		else {
+			weightTF.setEditable(false);
+			weightTF.setStyle("-fx-background-color: Gainsboro;");
+			heightTF.setEditable(false);
+			heightTF.setStyle("-fx-background-color: Gainsboro;");
+			bTempTF.setEditable(false);
+			bTempTF.setStyle("-fx-background-color: Gainsboro;");
+			bPressTF.setEditable(false);
+			bPressTF.setStyle("-fx-background-color: Gainsboro;");
+		}
 		
-		weightTF.setText("" + selectedPatient.getWeight());
-		heightTF.setText("" + selectedPatient.getHeight());
-		bTempTF.setText("" + selectedPatient.getBodyTemp());
-		bPressTF.setText("" + selectedPatient.getBloodPress());
 		String tempString = "";
 		for(int i = 0; i < selectedPatient.getAllergies().length; i++) {
 			tempString += "" + selectedPatient.getAllergies()[i] + "\n";
