@@ -57,20 +57,20 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Label layoutX="67.0" layoutY="200.0" text="Phone Number" />
-                  <Label layoutX="466.0" layoutY="23.0" text="Preferred Pharmacy" />
-                  <Label layoutX="467.0" layoutY="95.0" text="Insurance Company" />
-                  <Label layoutX="67.0" layoutY="147.0" text="Date of Birth" />
-                  <Label layoutX="465.0" layoutY="277.0" text="Medications you've had" />
-                  <Label layoutX="84.0" layoutY="259.0" prefHeight="17.0" prefWidth="48.0" text="Email" />
+                  <Label fx:id = "PhoneNumView" layoutX="67.0" layoutY="200.0" text="Phone Number" />
+                  <Label fx:id = "PharmView" layoutX="466.0" layoutY="23.0" text="Preferred Pharmacy" />
+                  <Label fx:id = "InsurView" layoutX="467.0" layoutY="95.0" text="Insurance Company" />
+                  <Label fx:id = "dobView" layoutX="67.0" layoutY="147.0" text="Date of Birth" />
+                  <Label fx:id = "MedView" layoutX="465.0" layoutY="277.0" text="Medications you've had" />
+                  <Label fx:id = "EmailView" layoutX="84.0" layoutY="259.0" prefHeight="17.0" prefWidth="48.0" text="Email" />
                   <TextField layoutX="183.0" layoutY="142.0" />
                   <TextField layoutX="183.0" layoutY="196.0" />
                   <TextField layoutX="441.0" layoutY="50.0" />
                   <TextField layoutX="441.0" layoutY="131.0" />
-                  <Label layoutX="451.0" layoutY="169.0" text="Immunizations you've had" />
+                  <Label fx:id = "ImmuniView" layoutX="451.0" layoutY="169.0" text="Immunizations you've had" />
                   <TextField layoutX="185.0" layoutY="254.0" />
-                  <Label layoutX="58.0" layoutY="47.0" text="Patient First Name" />
-                  <Label layoutX="58.0" layoutY="95.0" text="Patient Last Name" />
+                  <Label fx:id = "FirstNameView" layoutX="58.0" layoutY="47.0" text="Patient First Name" />
+                  <Label fx:id = "LastNameView" layoutX="58.0" layoutY="95.0" text="Patient Last Name" />
                   <TextField layoutX="183.0" layoutY="42.0" />
                   <TextField layoutX="183.0" layoutY="90.0" />
                   <TextArea layoutX="446.0" layoutY="298.0" prefHeight="117.0" prefWidth="161.0" />
