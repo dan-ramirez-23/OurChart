@@ -75,15 +75,17 @@ public class PatientPage extends Pages {
 		for (int i = 0; i < currentUser.getHealthConcerns().length; i++) {
 			temp += "" + currentUser.getHealthConcerns()[i] + "\n";
 		}
-
+		
 		healthHistory.setText(temp);
 
+		temp = "";
 		for (int i = 0; i < currentUser.getImmunizations().length; i++) {
 			temp += "" + currentUser.getImmunizations()[i] + "\n";
 		}
 
 		ImmuniView.setText(temp);
 
+		temp = "";
 		for (int i = 0; i < currentUser.getMedications().length; i++) {
 			temp += "" + currentUser.getMedications()[i] + "\n";
 		}
