@@ -77,6 +77,7 @@
                   <TextArea fx:id = "ImmuniView" layoutX="442.0" layoutY="191.0" prefHeight="82.0" prefWidth="168.0" />
                   <Label layoutX="223.0" layoutY="298.0" text="Health History" />
                   <TextArea fx:id = "healthHistory" layoutX="179.0" layoutY="315.0" prefHeight="101.0" prefWidth="166.0" />
+                  <Button fx:id= "pInfoEnterButton" layoutX="370.0" layoutY="400.0" text="Enter" onAction="#enterInfo"/>
                </children>
             </AnchorPane>
         </content>

@@ -18,12 +18,8 @@ public class PatientPage extends Pages {
 		super(un, uL, um);
 		System.out.println("On patient page creation, un = " + un);
 
-		String typeString = "Patient";// know we are looking to only display
-										// type patient
-		System.out.println(userList.size());
-
+		String typeString = "Patient";// know we are looking to only display type patient
 		for (int i = 0; i < userList.size(); i++) {
-			System.out.println(userList.get(i).getUsername());
 			if (typeString.equals(userList.get(i).getUserType()) && (userList.get(i).getUsername().equals(username))) {
 				currentUser = (Patient) userList.get(i);
 			}
@@ -58,6 +54,8 @@ public class PatientPage extends Pages {
 	private TextArea ImmuniView;
 	@FXML
 	private TextArea MedView;
+	@FXML
+	private Button pInfoEnterButton;
 
 	@FXML
 	public void initialize() {
@@ -91,6 +89,20 @@ public class PatientPage extends Pages {
 		}
 
 		MedView.setText(temp);
+		
+		FirstNameView.setEditable(false);
+		FirstNameView.setStyle("-fx-background-color: Gainsboro;");
+		dobView.setEditable(false);
+		dobView.setStyle("-fx-background-color: Gainsboro;");
+		LastNameView.setEditable(false);
+		LastNameView.setStyle("-fx-background-color: Gainsboro;");
+		healthHistory.setEditable(false);
+		healthHistory.setStyle("-fx-control-inner-background: Gainsboro;");
+		ImmuniView.setEditable(false);
+		ImmuniView.setStyle("-fx-control-inner-background: Gainsboro;");
+		MedView.setEditable(false);
+		MedView.setStyle("-fx-control-inner-background: Gainsboro;");
+		
 	}
 
 	public void send(ActionEvent event) throws IOException {
@@ -115,5 +127,10 @@ public class PatientPage extends Pages {
 		MessageHandler msg = new MessageHandler(subj, body, senderUN);
 		msg.sendMessage();
 	}
-
+	public void enterInfo(ActionEvent event) {
+		currentUser.setPhoneNum(PhoneNumView.getText());
+		currentUser.setEmail(EmailView.getText());
+		currentUser.setPharm(PharmView.getText());
+		currentUser.setInsurer(InsurView.getText());
+	}
 }
