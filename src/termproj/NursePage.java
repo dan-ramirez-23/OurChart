@@ -296,7 +296,7 @@ public class NursePage extends Pages{
 	
 	public void newiD(Patient pat) {
 		cnt++;
-		pat.setiD(cnt);
+		pat.setPatientID(cnt);
 	}
 	public void setLoginInfo(Patient pat) {
 		String un = "" + pat.getFirstName() + pat.getLastName() + pat.getPatientID();

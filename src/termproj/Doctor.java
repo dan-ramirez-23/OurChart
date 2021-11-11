@@ -14,6 +14,10 @@ public class Doctor extends Employee {
 		super("", "", "", "", -1, new ArrayList<>(), "Doctor");
 	}
 
+	public Doctor(String fName, String lName, String un, String pass, int empID) {
+		super(fName, lName, un, pass, empID, "Doctor");
+		
+	}
 	public Doctor(String fName, String lName, String un, String pass, int empID, ArrayList<Patient> patients) {
 		super(fName, lName, un, pass, empID, patients, "Doctor");
 		

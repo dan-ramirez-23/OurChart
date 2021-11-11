@@ -7,6 +7,7 @@ import java.util.List;
 public class User implements Serializable {
 	protected String userType;
 	protected String firstName, lastName, dateofbirth, username, password;
+	protected int id;
 	protected List<PatientMessage> inbox = new ArrayList<PatientMessage>();
 
 	public User() {
@@ -41,12 +42,13 @@ public class User implements Serializable {
 		return inbox;
 	}
 
-	public User(String fName, String lName, String uType, String un, String pass) {// use this constructor
+	public User(String fName, String lName, String uType, String un, String pass, int identifictationNumber) {// use this constructor
 		firstName = fName;
 		lastName = lName;
 		userType = uType;
 		username = un;
 		password = pass;
+		id = identifictationNumber;
 	}
 
 	public String getUserType() {
@@ -57,7 +59,9 @@ public class User implements Serializable {
 	}
 
 	public String toString() {
-		return firstName + " " + lastName;
+		return firstName + " " + lastName + " ID: " + id;
 	}
-
+	public int getID() {//general method for getting id
+		return id;
+	}
 }

@@ -63,9 +63,6 @@ public class TermProj extends Application {
 	   }
 	   
 	   public void hardcode() {//commented out because file already exists
-
-		   ArrayList <Patient> allPats = new ArrayList <Patient>();
-		   ArrayList <Patient> docPats = new ArrayList <Patient>();
 		   String[] im={"Chicken Pox", "COVID-19"};
 		   String[] per={"Marijuana"};
 		   String[] med={"N/A"};
@@ -74,23 +71,37 @@ public class TermProj extends Application {
 		   String[] alrg={"Cats", "Broke Bitches", "Anything that isnt money"};
 		   String[] hc = {"He is to real"};
 		   
-		   Patient pat2 = new Patient("Sebastian", "Diaz", 001, 1, "03/16/00", "6023915618", 
+		   Patient pat1 = new Patient("Another", "Patient", 002, 102, "06/21/99", "9726584598", 
+				   "booty@gmail.com" , "Walgreens", "anotherPat", "password", "Insure",im, per, med,
+				   hi, ef, "blaze it", 69, 192, 420, 200, alrg, hc );
+		   
+		   Patient pat2 = new Patient("Sebastian", "Diaz", 001, 293, "03/16/00", "6023915618", 
 				   "ass@gmail.com" , "CVS", "sdiazagu", "password", "insurance company",im, per, med,
 				   hi, ef, "Stay up cuzzo", 289.2, 6.7, 98.2, 170.3, alrg, hc );
 		   
-		   allPats.add(pat2);
-		   docPats.add(pat2);
+		   um.addUserToList(pat2);
+		   um.addUserToList(pat1);
 		   
-		   Doctor doc1 = new Doctor("Hannah", "Kaufman", "hjkaufma", "password", 102, docPats);
-		   Doctor doc2 = new Doctor("Audrey", "Wong", "awong24", "password", 293, docPats);
-		   Nurse nur1 = new Nurse("Jackson", "Carrion", "jtcarrio", "password", 900, allPats);
-		   Nurse nur2 = new Nurse("Dan", "Ramirez", "darami14", "password", 032, allPats);
+		   Doctor doc1 = new Doctor("Hannah", "Kaufman", "hjkaufma", "password", 102);
+		   Doctor doc2 = new Doctor("Audrey", "Wong", "awong24", "password", 293);
+		   Nurse nur1 = new Nurse("Jackson", "Carrion", "jtcarrio", "password", 900);
+		   Nurse nur2 = new Nurse("Dan", "Ramirez", "darami14", "password", 032);
+		   
+		   doc1.addPatient(pat2);
+		   doc2.addPatient(pat1);
+		   
+		   for(int i = 0; i < um.getUserList().size(); i++) {//add all patients to all nurses
+			   if(um.getUserList().get(i).getUserType().equals("Patient")) {
+				   nur1.addPatient((Patient)um.getUserList().get(i));
+				   nur2.addPatient((Patient)um.getUserList().get(i));
+			   }
+		   }
 		   
 		   um.addUserToList(doc1);
 		   um.addUserToList(nur1);
 		   um.addUserToList(doc2);
 		   um.addUserToList(nur2);
-		   um.addUserToList(pat2);
+		   
 		   
 		   PatientMessage msg1 = new PatientMessage("test message body","test message subject","jtcarrio");
 		   PatientMessage msg2 = new PatientMessage("test message 2 body","test message 2 subject","hjkaufma");

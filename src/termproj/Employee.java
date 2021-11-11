@@ -12,20 +12,30 @@ public class Employee extends User {
 		
 	}
 	
+	public Employee(String fName, String lName, String un, String pass, int empID, String uType) {//does not need a patient list
+		super(fName, lName, uType, un, pass, empID);
+		//username = un;
+		//password = pass;
+		this.empID = empID;
+		patients = new ArrayList<>();
+	}
+	
 	public Employee(String fName, String lName, String un, String pass, int empID, ArrayList<Patient> patients, String uType) {
-		super(fName, lName, uType, un, pass);
+		super(fName, lName, uType, un, pass, empID);
 		//username = un;
 		//password = pass;
 		this.empID = empID;
 		this.patients = patients;
 	}
 	
-	public int getID() {
+	public int getEmpID() {
 		return empID;
 	}
 	public ArrayList<Patient> getPatients(){
 		return patients;
 	}
-
+	public void addPatient(Patient p) {
+		patients.add(p);
+	}
 	
 }

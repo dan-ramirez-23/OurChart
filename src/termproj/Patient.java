@@ -4,7 +4,7 @@ public class Patient extends User {
 	// private String firstName; contained in User class
 	// private String lastName;
 	private int patientID;
-	private int Doctor;
+	private int doctor;
 	private String dob;
 	private String phoneNumber;
 	private String email;
@@ -34,9 +34,9 @@ public class Patient extends User {
 		phoneNumber = pNum;
 		pharmacy = pharm;
 		insurer = ins;*/
-		super(fName, lName, "Patient", "", "");
+		super(fName, lName, "Patient", "", "", -1);
 		patientID = id;
-		Doctor = -1;
+		doctor = -1;
 		dob = date;
 		phoneNumber = pNum;
 		email = em;
@@ -68,9 +68,9 @@ public class Patient extends User {
 			String[] meds, String[] hi, String[] ef, String rec, double w, double h, 
 			double bt, double bp, String[] aller, String[] hc) {
 
-		super(fName, lName, "Patient", un, pass);
+		super(fName, lName, "Patient", un, pass, id);
 		patientID = id;
-		Doctor = doc;
+		doctor = doc;
 		dob = date;
 		phoneNumber = pNum;
 		email = em;
@@ -93,11 +93,12 @@ public class Patient extends User {
 
 	// setters
 
-	public void setiD(int iD) {
-		patientID = iD;
+	public void setPatientID(int ID) {
+		super.id = ID;
+		patientID = ID;
 	}
 	public void setDoctor(int Doc) {
-		Doctor = Doc;
+		doctor = Doc;
 	}
 
 	public void setPhoneNum(String phoneNum) {
@@ -186,7 +187,7 @@ public class Patient extends User {
 	}
 
 	public int getDoctor() {
-		return Doctor;
+		return doctor;
 	}
 
 	public String getDOB() {
