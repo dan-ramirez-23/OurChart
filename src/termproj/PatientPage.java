@@ -66,7 +66,7 @@ public class PatientPage extends Pages {
 		dobView.setText(currentUser.getDOB());
 		FirstNameView.setText(currentUser.getFirstName());
 		EmailView.setText(currentUser.getEmail());
-		LastNameView.setText(currentUser.getlName());
+		LastNameView.setText(currentUser.getLastName());
 
 		String temp = "";
 
@@ -132,5 +132,6 @@ public class PatientPage extends Pages {
 		currentUser.setEmail(EmailView.getText());
 		currentUser.setPharm(PharmView.getText());
 		currentUser.setInsurer(InsurView.getText());
+		umgr.writeAllUsers();//write after changing anything
 	}
 }

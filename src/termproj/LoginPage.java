@@ -33,17 +33,20 @@ public class LoginPage {
 	@FXML
 	private Label wrongLogIn;
 	
+	UserManager signInManager = new UserManager();
+	
 	
 	@FXML
 	public void initialize() {
 		userType.getItems().addAll("Doctor","Nurse","Patient");
 		userType.getSelectionModel().select("Patient");
 		button.defaultButtonProperty().bind(button.focusedProperty());
+		signInManager.readAllUsers();
 	}
 	
 	
 	public void logIn(ActionEvent event) throws IOException {
-		auth();
+		authOneFile();
 	}
 	
 	
@@ -90,10 +93,36 @@ public class LoginPage {
 			e.printStackTrace();
 		}
 		
-		UserManager umgr = new UserManager();
+		//UserManager umgr = new UserManager();
 		
 		
 		
 	}
-	
+	private void authOneFile() throws IOException {//alternate version of method uses data in file of all users
+		TermProj window = new TermProj();
+		String userInput = username.getText();
+		String passInput = password.getText();
+		String uTypeInput = userType.getValue().toString();
+		
+		String uTypeInList = "";
+		boolean userFound = false;
+		for(int i = 0; i < signInManager.getUserList().size(); i++) {
+			if((userInput.equals(signInManager.getUserList().get(i).getUsername()))
+					&& (passInput.equals(signInManager.getUserList().get(i).getPassword()))
+							&& (uTypeInput.equals(signInManager.getUserList().get(i).getUserType()))) {
+				userFound = true;//a user was found with the same username password and type as entered
+				uTypeInList = signInManager.getUserList().get(i).getUserType();
+			}
+		}
+		if(userFound) {
+			String fxml = uTypeInList + "Pane.fxml";
+			window.changeScene(fxml, userInput);
+		}
+		else if(username.getText().isEmpty() && password.getText().isEmpty()) {
+			wrongLogIn.setText("Please enter your username or password.");
+		}
+		else {
+			wrongLogIn.setText("Wrong username or password");
+		}
+	}
 }

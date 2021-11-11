@@ -28,6 +28,9 @@ public class User implements Serializable {
 	public String getFirstName() {
 		return firstName;
 	}
+	public String getLastName() {
+		return lastName;
+	}
 
 //	
 	public void addMessage(PatientMessage msg) {
@@ -48,6 +51,9 @@ public class User implements Serializable {
 
 	public String getUserType() {
 		return userType;
+	}
+	public String getPassword() {
+		return password;
 	}
 
 	public String toString() {

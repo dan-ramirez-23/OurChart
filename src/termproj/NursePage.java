@@ -190,12 +190,16 @@ public class NursePage extends Pages{
 		stringList.setAll(tempList);
 		ImmunView.setItems(stringList);
 		
-		String [] patientDOB = selectedPatient.getDOB().split("/");
+		String [] patientDOB = selectedPatient.getDOB().split("-|/");
 		int patientBirthYear = Integer.parseInt(patientDOB[2]);
-		int patientAge = 0;
+		double patientAge = 0;
 		if(patientDOB[2].length() == 2) {
-			
-			patientAge = 21 - patientBirthYear;
+			if(patientBirthYear <= 21) {
+				patientAge = 21 - patientBirthYear;
+			}
+			else {
+				patientAge = 100 - patientBirthYear + 21;
+			}
 		}
 		else if(patientDOB[2].length() == 4){
 			patientAge = 21 - patientBirthYear;
@@ -257,6 +261,7 @@ public class NursePage extends Pages{
 		bPressTF.setText("");
 		knownAllergyTA.setText("");
 		hcTA.setText("");
+		umgr.writeAllUsers();//write after any changes to a patient
 	}
 	
 //	public void create(ActionEvent event) throws IOException {
@@ -283,7 +288,9 @@ public class NursePage extends Pages{
 		newiD(pat);
 		setLoginInfo(pat);
 		assignPatient(pat);
-		
+		umgr.addUserToList(pat);//saves user to global arraylist
+		umgr.writeAllUsers();//writes the file
+		umgr.readAllUsers();//reads all users to list once done
 	}
 	
 	public void newiD(Patient pat) {
@@ -291,8 +298,8 @@ public class NursePage extends Pages{
 		pat.setiD(cnt);
 	}
 	public void setLoginInfo(Patient pat) {
-		String un = "" + pat.getfName() + pat.getPatientID();
-		String pw = "" + pat.getlName() + pat.getPatientID();
+		String un = "" + pat.getFirstName() + pat.getLastName() + pat.getPatientID();
+		String pw = "" + pat.getPatientID();//change Password generation
 		
 		pat.setUserName(un);
 		pat.setPassword(pw);

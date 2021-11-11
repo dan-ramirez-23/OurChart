@@ -55,7 +55,9 @@ public class UserManager {
 			FileOutputStream f = new FileOutputStream(empFile);
 			ObjectOutputStream o = new ObjectOutputStream(f);
 			o.writeObject(userList);
-
+			
+			System.out.println("All Users Written");
+			
 			o.close();
 			f.close();
 
@@ -99,7 +101,7 @@ public class UserManager {
 	}
 	
 	// write global list to file 
-	public void writeUserToSingleFile(User usr) {//same function from PersonalFileWriter
+	/*public void writeUserToSingleFile(User usr) {//use writeAllUsers()
 		try {
 			// fName = "userdata//" + usr.getUsername() + ".txt";
 			// System.out.print(fName);
@@ -122,5 +124,5 @@ public class UserManager {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 }

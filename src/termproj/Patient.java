@@ -64,11 +64,11 @@ public class Patient extends User {
 	}
 
 	public Patient(String fName, String lName, int id, int doc, String date,
-			String pNum, String em, String pharm, String un, String ins, String[] imm, String[] pres, 
+			String pNum, String em, String pharm, String un, String pass, String ins, String[] imm, String[] pres, 
 			String[] meds, String[] hi, String[] ef, String rec, double w, double h, 
 			double bt, double bp, String[] aller, String[] hc) {
 
-		super(fName, lName, "Patient", un, "");
+		super(fName, lName, "Patient", un, pass);
 		patientID = id;
 		Doctor = doc;
 		dob = date;
@@ -173,13 +173,13 @@ public class Patient extends User {
 	}
 	// getters
 	
-	public String getfName() {
+	/*public String getfName() {//use User versions
 		return super.firstName;
 	}
 	
 	public String getlName() {
 		return super.lastName;
-	}
+	}*/
 
 	public int getPatientID() {
 		return patientID;

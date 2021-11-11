@@ -17,8 +17,8 @@ public class TermProj extends Application {
 	   private UserManager um = new UserManager(userList);
 
 	   public void start(Stage primaryStage) throws Exception {
-		   hardcode();//eventually get rid of this
-		   um.readAllUsers();//read users for sign in
+		   hardcode();//comment out after running once
+		   //um.readAllUsers();//read users for sign in
 		   stage = primaryStage;
 		   /*FXMLLoader loader = new FXMLLoader();
 		   loader.setLocation(getClass().getResource("LoginPane.fxml"));
@@ -75,7 +75,7 @@ public class TermProj extends Application {
 		   String[] hc = {"He is to real"};
 		   
 		   Patient pat2 = new Patient("Sebastian", "Diaz", 001, 1, "03/16/00", "6023915618", 
-				   "ass@gmail.com" , "CVS", "sdiazagu", "insurance company",im, per, med,
+				   "ass@gmail.com" , "CVS", "sdiazagu", "password", "insurance company",im, per, med,
 				   hi, ef, "Stay up cuzzo", 289.2, 6.7, 98.2, 170.3, alrg, hc );
 		   
 		   allPats.add(pat2);
