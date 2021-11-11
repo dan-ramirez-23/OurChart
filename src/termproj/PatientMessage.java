@@ -21,6 +21,10 @@ public class PatientMessage implements Serializable {
 	public String getSenderUN() {
 		return senderID;
 	}
+	
+	public String getSubject() {
+		return subject;
+	}
 
 	
 	/*

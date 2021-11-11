@@ -1,5 +1,6 @@
 package termproj;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,11 +12,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.scene.control.Label;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,30 +30,31 @@ import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class NursePage extends Pages{
 	private Scene scene;
-	private Patient pat;
+	private Nurse user = new Nurse();//temporary nurse
 	private int cnt = 0;
-	ArrayList<Patient> patientList = new ArrayList<>();
 	ArrayList<Doctor> doctorList = new ArrayList<>();
 	FileChooser fileChooser = new FileChooser();
-
+	private ArrayList<Patient> patientList = new ArrayList<>();
+	private List<PatientMessage> inboxList = new ArrayList<>();
 	//private ArrayList<User> userList = new ArrayList<User>();
 	
-	public NursePage(String un, ArrayList<User> uL) {
-		super(un, uL);
+	public NursePage(String un, ArrayList<User> uL, UserManager um) {
+		super(un, uL, um);
+		//UserManager umgr = new UserManager(uL); umgr moved to pages class, will be created in termproj
+		user = (Nurse) umgr.readUserFromList(un);
+		inboxList = user.getInbox();
+		
 		String typeString = "Patient";//know we are looking to only display type patient
 		for(int i = 0; i < userList.size(); i++) {
-			if(typeString.equals(userList.get(i).userType)) {
+			if(typeString.equals(userList.get(i).getUserType())) {
 				patientList.add((Patient)userList.get(i));
 				
-				for(int q = 0; q < userList.size(); q++) {
-			        if("Doctor".equals(userList.get(q).userType)) {
-			        	doctorList.add((Doctor)userList.get(q));
-			        }
-			    }
 			}
 		}
 	}
@@ -74,6 +79,12 @@ public class NursePage extends Pages{
 	//private Button allergyButton;
 	@FXML
 	private Button enterButton;
+	
+	
+	@FXML
+	private ObservableList<PatientMessage> inbox = FXCollections.observableArrayList(inboxList);
+	@FXML
+	private TableView<PatientMessage> inboxTblView = new TableView<PatientMessage>(inbox);
 	
 	@FXML
 	private Button createPatientButton;
@@ -100,6 +111,8 @@ public class NursePage extends Pages{
 	@FXML
 	private Label passwordLabel;
 	@FXML
+	private Label welcomeLabel;
+	@FXML
 	private Label dobLabel;
 	@FXML
 	private ListView<String> MedsView;
@@ -110,6 +123,9 @@ public class NursePage extends Pages{
 	
 	@FXML
 	public void initialize() {
+		
+		welcomeLabel.setText("Welcome " + user.getFirstName());
+		
 		lstView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -117,7 +133,40 @@ public class NursePage extends Pages{
 			}
 		});
 		setListView();
+		
+		
+		inboxTblView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				messageSelected(event);
+			}
+		});
+		setInboxView();
 	}
+	
+	
+	@FXML
+	public void messageSelected(MouseEvent arg0) {
+		PatientMessage selectedMsg = inboxTblView.getSelectionModel().getSelectedItem();
+		
+	}
+	
+	public void setInboxView() {
+		inbox.setAll(inboxList);
+		inboxTblView.getItems().addAll(inbox);
+		
+
+		TableColumn<PatientMessage, String> senderCol = new TableColumn<>();
+		senderCol.setCellValueFactory(c-> new SimpleStringProperty(c.getValue().getSenderUN()));
+		
+		TableColumn<PatientMessage, String> subjectCol = new TableColumn<>();
+		subjectCol.setCellValueFactory(c-> new SimpleStringProperty(c.getValue().getSubject()));
+		
+
+		
+		inboxTblView.getColumns().addAll(senderCol, subjectCol);
+	}
+	
 	
 	@FXML
 	public void userSelected(MouseEvent arg0) {
@@ -148,11 +197,37 @@ public class NursePage extends Pages{
 		stringList.setAll(tempList);
 		ImmunView.setItems(stringList);
 		
+		String [] patientDOB = selectedPatient.getDOB().split("-|/");
+		int patientBirthYear = Integer.parseInt(patientDOB[2]);
+		double patientAge = 0;
+		if(patientDOB[2].length() == 2) {
+			if(patientBirthYear <= 21) {
+				patientAge = 21 - patientBirthYear;
+			}
+			else {
+				patientAge = 100 - patientBirthYear + 21;
+			}
+		}
+		else if(patientDOB[2].length() == 4){
+			patientAge = 2021 - patientBirthYear;
+		}
+		if(patientAge > 12) {
+			weightTF.setText("" + selectedPatient.getWeight());
+			heightTF.setText("" + selectedPatient.getHeight());
+			bTempTF.setText("" + selectedPatient.getBodyTemp());
+			bPressTF.setText("" + selectedPatient.getBloodPress());
+		}
+		else {
+			weightTF.setEditable(false);
+			weightTF.setStyle("-fx-background-color: Gainsboro;");
+			heightTF.setEditable(false);
+			heightTF.setStyle("-fx-background-color: Gainsboro;");
+			bTempTF.setEditable(false);
+			bTempTF.setStyle("-fx-background-color: Gainsboro;");
+			bPressTF.setEditable(false);
+			bPressTF.setStyle("-fx-background-color: Gainsboro;");
+		}
 		
-		weightTF.setText("" + selectedPatient.getWeight());
-		heightTF.setText("" + selectedPatient.getHeight());
-		bTempTF.setText("" + selectedPatient.getBodyTemp());
-		bPressTF.setText("" + selectedPatient.getBloodPress());
 		String tempString = "";
 		for(int i = 0; i < selectedPatient.getAllergies().length; i++) {
 			tempString += "" + selectedPatient.getAllergies()[i] + "\n";
@@ -185,14 +260,16 @@ public class NursePage extends Pages{
 		
 		String textFromConcerns = hcTA.getText();
 		String hcLines[] = textFromConcerns.split("\\r?\\n");
-		selectedPatient.setAllergies(hcLines);
+		selectedPatient.setHealthConcerns(hcLines);
 		
-		weightTF.setText("");
+		/*weightTF.setText("");
 		heightTF.setText("");
 		bTempTF.setText("");
 		bPressTF.setText("");
 		knownAllergyTA.setText("");
 		hcTA.setText("");
+		*/
+		umgr.writeAllUsers();//write after any changes to a patient
 	}
 	
 //	public void create(ActionEvent event) throws IOException {
@@ -216,24 +293,26 @@ public class NursePage extends Pages{
 		String pharmacy = pharmacyTF.getText();
 		String insurCompany = insurCompanyTF.getText();
 		cnt++;
-		pat = new Patient(fName, lName, cnt, dob, email, phoneNum, pharmacy, insurCompany, "Patient");
+		Patient pat = new Patient(fName, lName, cnt, dob, email, phoneNum, pharmacy, insurCompany);//moved from the top
 		newiD(pat);
 		setLoginInfo(pat);
+		addDoctor(pat);
 		assignPatient(pat);
-		
-		
+		umgr.addUserToList(pat);//saves user to global arraylist
+		umgr.writeAllUsers();//writes the file
+		umgr.readAllUsers();//reads all users to list once done
 	}
 	
-	public void newiD(Patient pat) {
+	public void newiD(Patient p) {
 		cnt++;
-		pat.setiD(cnt);
+		p.setPatientID(cnt);
 	}
-	public void setLoginInfo(Patient pat) {
-		String un = "" + pat.getfName() + pat.getPatientID();
-		String pw = "" + pat.getlName() + pat.getPatientID();
+	public void setLoginInfo(Patient p) {
+		String un = "" + p.getFirstName() + p.getLastName() + p.getPatientID();
+		String pw = "" + randomPassword();//change Password generation
 		
-		pat.setUserName(un);
-		pat.setPassword(pw);
+		p.setUserName(un);
+		p.setPassword(pw);
 		
 		usernameLabel.setText(un);
 		passwordLabel.setText(pw);
@@ -242,18 +321,31 @@ public class NursePage extends Pages{
 	public void assignPatient(Patient pat) {
 		userList.add(pat);
 		patientList.add(pat);
-	//	doctorList.add(pat);
 		obs.setAll(patientList);
 		lstView.setItems(obs);
-		
-		Doctor assignedDoc = doctorList.get((int) Math.random() * doctorList.size());
-		assignedDoc.addPatientsToDoctor(pat);
-	    
-	    	System.out.println("" + pat.getDoctor() + assignedDoc.getDoctorPatientList());
-	            
-	    
-		
 	}
+	//	doctorList.add(pat);
+	private void addDoctor(Patient p ) {
+		Random rand = new Random();
+		ArrayList<Doctor> dList= new ArrayList<>();
+		
+		for(int i = 0; i < umgr.getUserList().size(); i++) {
+			if(umgr.getUserList().get(i).getUserType().equals("Doctor")) {
+				dList.add((Doctor)umgr.getUserList().get(i));
+			}
+		}
+		int randDocInt = rand.nextInt(dList.size());// random number between 0 and (amount of doctors - 1) inclusive
+		
+		dList.get(randDocInt).addPatient(p);
+	}
+	
+
+	//	Doctor assignedDoc = doctorList.get((int) Math.random() * doctorList.size());
+	//	assignedDoc.addPatientsToDoctor(pat);
+	    
+	    
+	    
+		
 	
 	public void changeDoc(ActionEvent event) throws IOException {
 	       for(int i = 0;i<patientList.size();i++){
@@ -270,6 +362,22 @@ public class NursePage extends Pages{
 				//	docList.add(ArrayList<Patient> pat);
 			}
 	       }		
+	}
+	
+	private String randomPassword() {
+		String passwordString = "";
+		Random rand = new Random();
+		int tempInt = -1;
+		for(int i = 0; i < 10; i++) {
+			tempInt = rand.nextInt(123);//adds random characters to create a random password
+			if(tempInt < 48) {
+				i--;//if too small add another repetition in the loop
+			}
+			else {
+				passwordString += (char) tempInt;
+			}
+		}
+		return passwordString;
 	}
 	/*@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

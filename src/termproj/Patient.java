@@ -4,7 +4,7 @@ public class Patient extends User {
 	// private String firstName; contained in User class
 	// private String lastName;
 	private int patientID;
-	private int Doctor;
+	private int doctor;
 	private String dob;
 	private String phoneNumber;
 	private String email;
@@ -25,7 +25,7 @@ public class Patient extends User {
 	// private PatientMessage[] inbox;
 
 	
-	public Patient(String fName, String lName, int id, String date, String em, String pNum, String pharm, String ins, String uType) 
+	public Patient(String fName, String lName, int id, String date, String em, String pNum, String pharm, String ins) 
 	{
 		/*super(fName, lName, "Patient");
 		patientID = id;
@@ -34,9 +34,9 @@ public class Patient extends User {
 		phoneNumber = pNum;
 		pharmacy = pharm;
 		insurer = ins;*/
-		super(fName, lName, "Patient");
+		super(fName, lName, "Patient", "", "", -1);
 		patientID = id;
-		Doctor = -1;
+		doctor = -1;
 		dob = date;
 		phoneNumber = pNum;
 		email = em;
@@ -61,17 +61,17 @@ public class Patient extends User {
 		allergies[0] = "";
 		healthConcerns = new String[1];
 		healthConcerns[0] = "";
-		uType = "Patient";
+	
 	}
 
 	public Patient(String fName, String lName, int id, int doc, String date,
-			String pNum, String em, String pharm, String ins, String[] imm, String[] pres, 
+			String pNum, String em, String pharm, String un, String pass, String ins, String[] imm, String[] pres, 
 			String[] meds, String[] hi, String[] ef, String rec, double w, double h, 
 			double bt, double bp, String[] aller, String[] hc) {
 
-		super(fName, lName, "Patient");
+		super(fName, lName, "Patient", un, pass, id);
 		patientID = id;
-		Doctor = doc;
+		doctor = doc;
 		dob = date;
 		phoneNumber = pNum;
 		email = em;
@@ -94,11 +94,12 @@ public class Patient extends User {
 
 	// setters
 
-	public void setiD(int iD) {
-		patientID = iD;
+	public void setPatientID(int ID) {
+		super.id = ID;
+		patientID = ID;
 	}
 	public void setDoctor(int Doc) {
-		Doctor = Doc;
+		doctor = Doc;
 	}
 
 	public void setPhoneNum(String phoneNum) {
@@ -174,20 +175,20 @@ public class Patient extends User {
 	}
 	// getters
 	
-	public String getfName() {
+	/*public String getfName() {//use User versions
 		return super.firstName;
 	}
 	
 	public String getlName() {
 		return super.lastName;
-	}
+	}*/
 
 	public int getPatientID() {
 		return patientID;
 	}
 
 	public int getDoctor() {
-		return Doctor;
+		return doctor;
 	}
 
 	public String getDOB() {

@@ -7,17 +7,19 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.2760989010989011" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.2760989010989011" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
 
    <items>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="278.0">
          <children>
-            <ListView fx:id="lstView" layoutX="5.0" layoutY="62.0" prefHeight="442.0" prefWidth="188.0" style="-fx-border-color: #0a0a0a;" onMouseClicked="#userSelected"/>
+            <ListView fx:id="lstView" layoutX="5.0" layoutY="62.0" onMouseClicked="#userSelected" prefHeight="442.0" prefWidth="188.0" style="-fx-border-color: #0a0a0a;" />
             <Label layoutX="53.0" layoutY="42.0" text="Patient Name" />
             <!--<ScrollBar layoutX="175.0" layoutY="62.0" orientation="VERTICAL" prefHeight="434.0" prefWidth="17.0" />-->
          </children>
@@ -48,20 +50,16 @@
                               <Button layoutX="458.0" layoutY="454.0" mnemonicParsing="false" text="Send via email" />
                               <ScrollBar layoutX="555.0" layoutY="91.0" orientation="VERTICAL" prefHeight="147.0" prefWidth="17.0" />
                               <ScrollBar layoutX="558.0" layoutY="298.0" orientation="VERTICAL" prefHeight="144.0" prefWidth="17.0" />
-                              <SplitPane dividerPositions="0.5" layoutX="33.0" layoutY="109.0" prefHeight="306.0" prefWidth="204.0">
-                                <items>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                       <children>
-                                          <ScrollBar layoutX="83.0" orientation="VERTICAL" prefHeight="307.0" prefWidth="17.0" />
-                                       </children>
-                                    </AnchorPane>
-                                </items>
-                              </SplitPane>
                               <Label layoutX="50.0" layoutY="88.0" text="Patient Name" />
                               <Label layoutX="374.0" layoutY="69.0" text="Patient's Message:" />
                               <Label layoutX="315.0" layoutY="275.0" text="Subject:" />
                               <TextField layoutX="368.0" layoutY="267.0" />
+                              <TableView fx:id="inboxTblView" layoutX="33.0" layoutY="105.0" onMouseClicked="#messageSelected" prefHeight="315.0" prefWidth="200.0">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="C1" />
+                                  <TableColumn prefWidth="75.0" text="C2" />
+                                </columns>
+                              </TableView>
                            </children>
                         </AnchorPane>
                     </content>

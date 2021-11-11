@@ -16,8 +16,7 @@ public class TermProj extends Application {
 	   private ArrayList<User> userList = new ArrayList<>();//created to make sure there are no null pointer exceptions
 	   private ArrayList<Doctor> doctorList = new ArrayList<>();
 	   
-	   public void start(Stage primaryStage) throws Exception
-	   {
+	   public void start(Stage primaryStage) throws Exception {
 		   hardcode();
 	      stage = primaryStage;
 		  /*FXMLLoader loader = new FXMLLoader();
@@ -30,20 +29,20 @@ public class TermProj extends Application {
 		  primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
 	      primaryStage.show(); // Display the stage
 	   }
-
-	   
+	      private UserManager um = new UserManager(userList);
 	   public void changeScene(String fxml, String username) throws IOException {
-		   hardcode();
+		   //hardcode();
+		   um.readAllUsers();//idk why we need to read them twice, but we do
 		   FXMLLoader loader = new FXMLLoader();
 		   Pages pageController = null;
 		   if(fxml.equals("NursePane.fxml")) {
-			   pageController = new NursePage(username, userList);//needs to change depending on the page required
+			   pageController = new NursePage(username, um.getUserList(), um);//needs to change depending on the page required
 		   }
 		   else if (fxml.equals("DoctorPane.fxml")) {
-			   pageController = new DoctorPage(username, userList);
+			   pageController = new DoctorPage(username, um.getUserList(), um);
 		   }
 		   else if (fxml.equals("PatientPane.fxml")) { 
-			   pageController = new PatientPage(username, userList);
+			   pageController = new PatientPage(username, um.getUserList(), um);
 		   }
 		   
 		   
@@ -61,34 +60,62 @@ public class TermProj extends Application {
 	      Application.launch(args);
 	   }
 	   
+
 	   public void hardcode() {
 
 		   ArrayList <Patient> allPats = new ArrayList <Patient>();
 		   ArrayList <Patient> docPats = new ArrayList <Patient>();
-		   Doctor doc1 = new Doctor("Hannah", "Kaufman", "hjkaufma", "password", 102, docPats, "Doctor");
-		   Doctor doc2 = new Doctor("Audrey", "Wong", "awong24", "password", 293, docPats,"Doctor");
-		   Nurse nur1 = new Nurse("Jackson", "Carrion", "jtcarrio", "password", 900, allPats, "Nurse");
-		   Nurse nur2 = new Nurse("Dan", "Ramirez", "darami14", "password", 032, allPats, "Nurse");
+
 		   String[] im={"Chicken Pox", "COVID-19"};
 		   String[] per={"Marijuana"};
 		   String[] med={"N/A"};
 		   String[] hi={"Just a boss ass bitch"};
 		   String[] ef={"N/A"};
 		   String[] alrg={"Cats", "Broke Bitches", "Anything that isnt money"};
-		   String[] hc = {"He is to real"};
-		   
-		   Patient pat2 = new Patient("Sebastian", "Diaz", 001, 1, "03/16/2021", "6a023915618", 
-				   "ass@gmail.com" , "CVS", "sdiazagu",im, per, med,
-				   hi, ef, "Stay up cuzzo", 289.2, 6.7, 98.2, 170.3, alrg, hc);  
-		   userList.add(doc1);
-		   userList.add(doc2);
-		   userList.add(nur1);
-		   userList.add(nur2);
-		   userList.add(pat2);
-		   doctorList.add(doc2);
-		   doctorList.add(doc1);
+		   String[] hc = {"He is to real"}; 
 		  int numOfDoctors = doctorList.size();
 		  
+		  Patient pat1 = new Patient("Another", "Patient", 002, 102, "06/21/99", "9726584598", 
+				   "booty@gmail.com" , "Walgreens", "anotherPat", "password", "Insure",im, per, med,
+				   hi, ef, "blaze it", 69, 192, 420, 200, alrg, hc );
+		   
+		   Patient pat2 = new Patient("Sebastian", "Diaz", 001, 293, "03/16/00", "6023915618", 
+				   "ass@gmail.com" , "CVS", "sdiazagu", "password", "insurance company",im, per, med,
+				   hi, ef, "Stay up cuzzo", 289.2, 6.7, 98.2, 170.3, alrg, hc );
+		   
+		   um.addUserToList(pat2);
+		   um.addUserToList(pat1);
+		   
+		   Doctor doc1 = new Doctor("Hannah", "Kaufman", "hjkaufma", "password", 102);
+		   Doctor doc2 = new Doctor("Audrey", "Wong", "awong24", "password", 293);
+		   Nurse nur1 = new Nurse("Jackson", "Carrion", "jtcarrio", "password", 900);
+		   Nurse nur2 = new Nurse("Dan", "Ramirez", "darami14", "password", 032);
+		   
+		   doc1.addPatient(pat2);
+		   doc2.addPatient(pat1);
+		   
+		   for(int i = 0; i < um.getUserList().size(); i++) {//add all patients to all nurses
+			   if(um.getUserList().get(i).getUserType().equals("Patient")) {
+				   nur1.addPatient((Patient)um.getUserList().get(i));
+				   nur2.addPatient((Patient)um.getUserList().get(i));
+			   }
+		   }
+		   
+		   um.addUserToList(doc1);
+		   um.addUserToList(nur1);
+		   um.addUserToList(doc2);
+		   um.addUserToList(nur2);
+		   
+		   
+		   PatientMessage msg1 = new PatientMessage("test message body","test message subject","jtcarrio");
+		   PatientMessage msg2 = new PatientMessage("test message 2 body","test message 2 subject","hjkaufma");
+		   PatientMessage msg3 = new PatientMessage("test message 3 body","test message 3 subject","awong24");
+		   nur2.addMessage(msg1);
+		   nur2.addMessage(msg2);
+		   nur2.addMessage(msg3);
+		   
+		   um.writeAllUsers();//testing with writing to file
 	   }
 
 }
+	   

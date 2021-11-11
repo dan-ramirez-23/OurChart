@@ -8,14 +8,15 @@ import javafx.scene.layout.StackPane;
 
 public class Doctor extends Employee {
 	
-	private int[] nurses;
+	private int[] nurses;//not used currently, if needed add to both constructors
 	
 	public Doctor() {
-		
+		super("", "", "", "", -1, new ArrayList<>(), "Doctor");
 	}
 
-	public Doctor(String fName, String lName, String un, String pass, int empID, ArrayList<Patient> patients, String uType) {
-		super(fName, lName, un, pass, empID, patients, "Doctor");
+	public Doctor(String fName, String lName, String un, String pass, int empID) {
+		super(fName, lName, un, pass, empID, "Doctor");
+		
 	}
 	
 	public void addPatientsToDoctor(Patient pat) {
