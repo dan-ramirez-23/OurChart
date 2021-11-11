@@ -30,7 +30,6 @@ import java.util.ResourceBundle;
 
 public class NursePage extends Pages{
 	private Scene scene;
-	private Patient pat;
 	private Nurse user = new Nurse();//temporary nurse
 	private int cnt = 0;
 	private ArrayList<Patient> patientList = new ArrayList<>();
@@ -203,7 +202,7 @@ public class NursePage extends Pages{
 			}
 		}
 		else if(patientDOB[2].length() == 4){
-			patientAge = 21 - patientBirthYear;
+			patientAge = 2021 - patientBirthYear;
 		}
 		if(patientAge > 12) {
 			weightTF.setText("" + selectedPatient.getWeight());
@@ -254,14 +253,15 @@ public class NursePage extends Pages{
 		
 		String textFromConcerns = hcTA.getText();
 		String hcLines[] = textFromConcerns.split("\\r?\\n");
-		selectedPatient.setAllergies(hcLines);
+		selectedPatient.setHealthConcerns(hcLines);
 		
-		weightTF.setText("");
+		/*weightTF.setText("");
 		heightTF.setText("");
 		bTempTF.setText("");
 		bPressTF.setText("");
 		knownAllergyTA.setText("");
 		hcTA.setText("");
+		*/
 		umgr.writeAllUsers();//write after any changes to a patient
 	}
 	
@@ -285,33 +285,46 @@ public class NursePage extends Pages{
 		String pharmacy = pharmacyTF.getText();
 		String insurCompany = insurCompanyTF.getText();
 		cnt++;
-		pat = new Patient(fName, lName, cnt, dob, email, phoneNum, pharmacy, insurCompany);
+		Patient pat = new Patient(fName, lName, cnt, dob, email, phoneNum, pharmacy, insurCompany);//moved from the top
 		newiD(pat);
 		setLoginInfo(pat);
+		addDoctor(pat);
 		assignPatient(pat);
 		umgr.addUserToList(pat);//saves user to global arraylist
 		umgr.writeAllUsers();//writes the file
 		umgr.readAllUsers();//reads all users to list once done
 	}
 	
-	public void newiD(Patient pat) {
+	public void newiD(Patient p) {
 		cnt++;
-		pat.setPatientID(cnt);
+		p.setPatientID(cnt);
 	}
-	public void setLoginInfo(Patient pat) {
-		String un = "" + pat.getFirstName() + pat.getLastName() + pat.getPatientID();
+	public void setLoginInfo(Patient p) {
+		String un = "" + p.getFirstName() + p.getLastName() + p.getPatientID();
 		String pw = "" + randomPassword();//change Password generation
 		
-		pat.setUserName(un);
-		pat.setPassword(pw);
+		p.setUserName(un);
+		p.setPassword(pw);
 		
 		usernameLabel.setText(un);
 		passwordLabel.setText(pw);
 	}
-	
-	public void assignPatient(Patient pat) {
-		userList.add(pat);
-		patientList.add(pat);
+	private void addDoctor(Patient p ) {
+		Random rand = new Random();
+		ArrayList<Doctor> dList= new ArrayList<>();
+		
+		for(int i = 0; i < umgr.getUserList().size(); i++) {
+			if(umgr.getUserList().get(i).getUserType().equals("Doctor")) {
+				dList.add((Doctor)umgr.getUserList().get(i));
+			}
+		}
+		int randDocInt = rand.nextInt(dList.size());// random number between 0 and (amount of doctors - 1) inclusive
+		
+		dList.get(randDocInt).addPatient(p);
+	}
+	public void assignPatient(Patient p) {
+		userList.add(p);
+		patientList.add(p);
 		obs.setAll(patientList);
 		lstView.setItems(obs);
 	}

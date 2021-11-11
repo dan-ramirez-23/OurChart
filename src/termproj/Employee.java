@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Employee extends User {
 	
 	private int empID;
-	private ArrayList<Patient> patients;
+	private ArrayList<Patient> patients;//I don't think nurses need this, but it's here just in case
 	
 	public Employee() {
 		
