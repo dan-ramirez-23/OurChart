@@ -20,12 +20,11 @@ public class PatientPage extends Pages {
 
 		String typeString = "Patient";// know we are looking to only display
 										// type patient
-		// System.out.println(username);
+		System.out.println(userList.size());
 
 		for (int i = 0; i < userList.size(); i++) {
 			System.out.println(userList.get(i).getUsername());
-			if (typeString.equals(userList.get(i).getUserType())
-					&& (userList.get(i).getUsername().equals(username))) {
+			if (typeString.equals(userList.get(i).getUserType()) && (userList.get(i).getUsername().equals(username))) {
 				currentUser = (Patient) userList.get(i);
 			}
 		}

@@ -38,8 +38,7 @@ public class User implements Serializable {
 		return inbox;
 	}
 
-	public User(String fName, String lName, String uType, String un,
-			String pass) {// use this constructor
+	public User(String fName, String lName, String uType, String un, String pass) {// use this constructor
 		firstName = fName;
 		lastName = lName;
 		userType = uType;
