@@ -32,13 +32,36 @@ public class UserManager {
 			ObjectInputStream oi = new ObjectInputStream(fi);
 
 			userList = (ArrayList<User>) oi.readObject();
-
+			System.out.println("Users Read From File");
+			
 			oi.close();
 			fi.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+	}
+	public void writeAllUsers() {//writes all users in file
+		try {
+			// fName = "userdata//" + usr.getUsername() + ".txt";
+			// System.out.print(fName);
+			// URL url = getClass().getResource(fName);
+			// System.out.print(url);
+			File directory = new File("userData");
+			if (!directory.exists()) {
+				directory.mkdir();
+			}
+			File empFile = new File("userdata//users.txt");
+			FileOutputStream f = new FileOutputStream(empFile);
+			ObjectOutputStream o = new ObjectOutputStream(f);
+			o.writeObject(userList);
+
+			o.close();
+			f.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// get User by username (additional methods by user type?)
@@ -76,7 +99,7 @@ public class UserManager {
 	}
 	
 	// write global list to file 
-	public void writeUserToSingleFile(User usr, ArrayList<User> ul) {//same function from PersonalFileWriter
+	public void writeUserToSingleFile(User usr) {//same function from PersonalFileWriter
 		try {
 			// fName = "userdata//" + usr.getUsername() + ".txt";
 			// System.out.print(fName);
@@ -90,8 +113,8 @@ public class UserManager {
 			FileOutputStream f = new FileOutputStream(empFile);
 			ObjectOutputStream o = new ObjectOutputStream(f);
 
-			ul.add(usr);
-			o.writeObject(ul);
+			userList.add(usr);
+			o.writeObject(userList);
 
 			o.close();
 			f.close();

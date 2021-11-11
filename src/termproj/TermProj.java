@@ -16,34 +16,35 @@ public class TermProj extends Application {
 	   private ArrayList<User> userList = new ArrayList<>();//created to make sure there are no null pointer exceptions
 	   private UserManager um = new UserManager(userList);
 
-	   public void start(Stage primaryStage) throws Exception
-	   {
-		   hardcode();
-	      stage = primaryStage;
-		  /*FXMLLoader loader = new FXMLLoader();
-		  loader.setLocation(getClass().getResource("LoginPane.fxml"));
-		  LoginPage startPage = new LoginPage();
-		  loader.setController(startPage);
-		  Parent root = loader.load();*/
-		  Parent root = FXMLLoader.load(getClass().getResource("LoginPane.fxml"));
-		  primaryStage.setTitle("Pediatric Office System");
-		  primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
-	      primaryStage.show(); // Display the stage
+	   public void start(Stage primaryStage) throws Exception {
+		   hardcode();//eventually get rid of this
+		   um.readAllUsers();//read users for sign in
+		   stage = primaryStage;
+		   /*FXMLLoader loader = new FXMLLoader();
+		   loader.setLocation(getClass().getResource("LoginPane.fxml"));
+		   LoginPage startPage = new LoginPage();
+		   loader.setController(startPage);
+		   Parent root = loader.load();*/
+		   Parent root = FXMLLoader.load(getClass().getResource("LoginPane.fxml"));
+		   primaryStage.setTitle("Pediatric Office System");
+		   primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
+		   primaryStage.show(); // Display the stage
 	   }
 
 	   
 	   public void changeScene(String fxml, String username) throws IOException {
-		   hardcode();
+		   //hardcode();
+		   um.readAllUsers();//idk why we need to read them twice, but we do
 		   FXMLLoader loader = new FXMLLoader();
 		   Pages pageController = null;
 		   if(fxml.equals("NursePane.fxml")) {
-			   pageController = new NursePage(username, userList, um);//needs to change depending on the page required
+			   pageController = new NursePage(username, um.getUserList(), um);//needs to change depending on the page required
 		   }
 		   else if (fxml.equals("DoctorPane.fxml")) {
-			   pageController = new DoctorPage(username, userList, um);
+			   pageController = new DoctorPage(username, um.getUserList(), um);
 		   }
 		   else if (fxml.equals("PatientPane.fxml")) { 
-			   pageController = new PatientPage(username, userList, um);
+			   pageController = new PatientPage(username, um.getUserList(), um);
 		   }
 		   
 		   
@@ -61,7 +62,7 @@ public class TermProj extends Application {
 	      Application.launch(args);
 	   }
 	   
-	   public void hardcode() {
+	   public void hardcode() {//commented out because file already exists
 
 		   ArrayList <Patient> allPats = new ArrayList <Patient>();
 		   ArrayList <Patient> docPats = new ArrayList <Patient>();
@@ -85,11 +86,11 @@ public class TermProj extends Application {
 		   Nurse nur1 = new Nurse("Jackson", "Carrion", "jtcarrio", "password", 900, allPats);
 		   Nurse nur2 = new Nurse("Dan", "Ramirez", "darami14", "password", 032, allPats);
 		   
-		   userList.add(doc1);
-		   userList.add(nur1);
-		   userList.add(doc2);
-		   userList.add(nur2);
-		   userList.add(pat2);
+		   um.addUserToList(doc1);
+		   um.addUserToList(nur1);
+		   um.addUserToList(doc2);
+		   um.addUserToList(nur2);
+		   um.addUserToList(pat2);
 		   
 		   PatientMessage msg1 = new PatientMessage("test message body","test message subject","jtcarrio");
 		   PatientMessage msg2 = new PatientMessage("test message 2 body","test message 2 subject","hjkaufma");
@@ -98,7 +99,7 @@ public class TermProj extends Application {
 		   nur2.addMessage(msg2);
 		   nur2.addMessage(msg3);
 		   
-		   
+		   um.writeAllUsers();//testing with writing to file
 	   }
 
 }
