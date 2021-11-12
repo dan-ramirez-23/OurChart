@@ -65,7 +65,7 @@
                               <Label layoutX="9.0" layoutY="66.0" prefHeight="47.0" prefWidth="189.0" text="Previously Prescribed Medications" />
                               <Label layoutX="223.0" layoutY="81.0" text="Patient's Health Issues"/>
                               <Label layoutX="409.0" layoutY="83.0" text="History of Immunization" />
-                              <Button fx:id="reassignButton" layoutX="199.0" layoutY="445.0" mnemonicParsing="false" text="Assign patient to another doctor" />
+                              <Button fx:id="reassignButton" layoutX="199.0" layoutY="445.0" mnemonicParsing="false" text="Assign patient to another doctor" onAction="#changeDoc"/>
                               <Label fx:id="dobLabel" layoutX="112.0" layoutY="39.0" text="_________________" underline="true" />
                               <ListView fx:id="MedsView" layoutX="15.0" layoutY="100.0" prefHeight="311.0" prefWidth="167.0" style="-fx-border-color: #0a0a0a;" />
                               <ListView fx:id="HealthView" layoutX="206.0" layoutY="100.0" prefHeight="313.0" prefWidth="167.0" style="-fx-border-color: #0a0a0a;" />

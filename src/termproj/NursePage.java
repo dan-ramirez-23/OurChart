@@ -151,6 +151,41 @@ public class NursePage extends Pages{
 		
 	}
 	
+	@FXML
+	public void changeDoc(Event e) {
+		Doctor currentDoctor = new Doctor();
+		Doctor newDoctor;
+		ArrayList<Doctor> dList = new ArrayList<>();
+		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		for(int i = 0; i < umgr.getUserList().size(); i++) {
+			if(umgr.getUserList().get(i).getUserType().equals("Doctor")) {
+				dList.add((Doctor) umgr.getUserList().get(i));
+			}
+		}
+		for(int i = 0; i < dList.size(); i++) {
+			if(dList.get(i).getID() == selectedPatient.getDoctor()) {
+				System.out.println("Doctor Found");
+				currentDoctor = dList.get(i);
+			}
+		}
+		if(dList.size() > 1) {
+			Random rand = new Random();
+			int randInt;
+			do {
+				randInt = rand.nextInt(dList.size());
+				newDoctor = dList.get(randInt);
+			}while(currentDoctor.equals(newDoctor));
+			
+			newDoctor.addPatient(selectedPatient);
+			selectedPatient.setDoctor(newDoctor.getID());
+			currentDoctor.removePatient(selectedPatient);
+			}
+		else {
+			System.out.println("Only 1 doctor");
+		}
+		umgr.writeAllUsers();
+	}
+	
 	public void setInboxView() {
 		inbox.setAll(inboxList);
 		inboxTblView.getItems().addAll(inbox);
@@ -211,21 +246,37 @@ public class NursePage extends Pages{
 		else if(patientDOB[2].length() == 4){
 			patientAge = 2021 - patientBirthYear;
 		}
-		if(patientAge > 12) {
+		if(selectedPatient.getWeight() >= 0) {
 			weightTF.setText("" + selectedPatient.getWeight());
-			heightTF.setText("" + selectedPatient.getHeight());
-			bTempTF.setText("" + selectedPatient.getBodyTemp());
-			bPressTF.setText("" + selectedPatient.getBloodPress());
 		}
 		else {
-			weightTF.setEditable(false);
-			weightTF.setStyle("-fx-background-color: Gainsboro;");
-			heightTF.setEditable(false);
-			heightTF.setStyle("-fx-background-color: Gainsboro;");
-			bTempTF.setEditable(false);
-			bTempTF.setStyle("-fx-background-color: Gainsboro;");
+			weightTF.setText("");
+		}
+		if(selectedPatient.getHeight() >= 0) {
+			heightTF.setText("" + selectedPatient.getHeight());
+		}
+		else {
+			heightTF.setText("");
+		}
+		if(selectedPatient.getBodyTemp() >= 0) {
+			bTempTF.setText("" + selectedPatient.getBodyTemp());
+		}
+		else {
+			bTempTF.setText("");
+		}
+		if(patientAge > 12) {
+			if(selectedPatient.getBloodPress() >= 0) {
+				bPressTF.setText("" + selectedPatient.getBloodPress());
+			}
+			else {
+				bPressTF.setText("");
+			}
+			bPressTF.setEditable(true);
+			bPressTF.setStyle("-fx-control-inner-background: white;");
+		}
+		else {
 			bPressTF.setEditable(false);
-			bPressTF.setStyle("-fx-background-color: Gainsboro;");
+			bPressTF.setStyle("-fx-control-inner-background: Gainsboro;");
 		}
 		
 		String tempString = "";
@@ -286,14 +337,14 @@ public class NursePage extends Pages{
 		String fName = fNameTF.getText();
 		String lName = lNameTF.getText();
 		String date = dobTF.getText();
-		String dob = (date.substring(0,2) + "/" + date.substring(2,4) + "/" + date.substring(4,8));
+		//String dob = (date.substring(0,2) + "/" + date.substring(2,4) + "/" + date.substring(4,8));
 		String email = emailTF.getText();
 		String phoneNum = phoneNumTF.getText();
 		//int phoneNum = Integer.parseInt(phoneNumTF.getText());
 		String pharmacy = pharmacyTF.getText();
 		String insurCompany = insurCompanyTF.getText();
 		cnt++;
-		Patient pat = new Patient(fName, lName, cnt, dob, email, phoneNum, pharmacy, insurCompany);//moved from the top
+		Patient pat = new Patient(fName, lName, cnt, date, email, phoneNum, pharmacy, insurCompany);//moved from the top
 		newiD(pat);
 		setLoginInfo(pat);
 		addDoctor(pat);
@@ -305,7 +356,15 @@ public class NursePage extends Pages{
 	
 	public void newiD(Patient p) {
 		cnt++;
-		p.setPatientID(cnt);
+		Random rand = new Random();
+		int randInt = rand.nextInt(9999) + 1;//4 digit id
+		for(int i = 0; i < umgr.getUserList().size(); i++) {
+			if(umgr.getUserList().get(i).getID() == randInt) {
+				randInt = rand.nextInt(9999) + 1;
+				i = -1;//restart for loop
+			}
+		}
+		p.setPatientID(randInt);
 	}
 	public void setLoginInfo(Patient p) {
 		String un = "" + p.getFirstName() + p.getLastName() + p.getPatientID();
@@ -337,6 +396,7 @@ public class NursePage extends Pages{
 		int randDocInt = rand.nextInt(dList.size());// random number between 0 and (amount of doctors - 1) inclusive
 		
 		dList.get(randDocInt).addPatient(p);
+		p.setDoctor(dList.get(randDocInt).getID());
 	}
 	
 
@@ -347,7 +407,7 @@ public class NursePage extends Pages{
 	    
 		
 	
-	public void changeDoc(ActionEvent event) throws IOException {
+	/*public void changeDoc(ActionEvent event) throws IOException {
 	       for(int i = 0;i<patientList.size();i++){
 	    	   Patient currentPatient = patientList.get(i);
 	    	   for(int r = 0; r<doctorList.size(); i++) {
@@ -362,7 +422,7 @@ public class NursePage extends Pages{
 				//	docList.add(ArrayList<Patient> pat);
 			}
 	       }		
-	}
+	}*/
 	
 	private String randomPassword() {
 		String passwordString = "";

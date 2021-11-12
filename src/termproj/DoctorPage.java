@@ -2,10 +2,12 @@ package termproj;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -73,6 +75,35 @@ public class DoctorPage extends Pages{
 		});
 		setListView();
 
+	}
+	@FXML
+	public void changeDoc(Event e) {
+		Doctor currentDoctor = user;
+		Doctor newDoctor;
+		ArrayList<Doctor> dList = new ArrayList<>();
+		Patient selectedPatient = (Patient) patientView.getSelectionModel().getSelectedItem();
+		for(int i = 0; i < umgr.getUserList().size(); i++) {
+			if(umgr.getUserList().get(i).getUserType().equals("Doctor")) {
+				dList.add((Doctor) umgr.getUserList().get(i));
+			}
+		}
+		if(dList.size() > 1) {
+			Random rand = new Random();
+			int randInt;
+			do {
+				randInt = rand.nextInt(dList.size());
+				newDoctor = dList.get(randInt);
+			}while(currentDoctor.equals(newDoctor));
+			
+			newDoctor.addPatient(selectedPatient);
+			selectedPatient.setDoctor(newDoctor.getID());
+			currentDoctor.removePatient(selectedPatient);
+			}
+		else {
+			System.out.println("Only 1 doctor");
+		}
+		umgr.writeAllUsers();
+		setListView();
 	}
 	
 	public void setListView() {
