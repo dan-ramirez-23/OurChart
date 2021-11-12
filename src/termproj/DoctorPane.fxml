@@ -60,21 +60,28 @@
                 <Tab text="Patient History">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="596.0">
-                           <children>
-                              <Label layoutX="20.0" layoutY="39.0" text="Date of Birth" />
-                              <Label layoutX="9.0" layoutY="66.0" prefHeight="47.0" prefWidth="189.0" text="Previously Prescribed Medications" />
-                              <Label layoutX="223.0" layoutY="81.0" text="Patient's Health Issues"/>
-                              <Label layoutX="409.0" layoutY="83.0" text="History of Immunization" />
-                              <Button fx:id="reassignButton" layoutX="199.0" layoutY="445.0" mnemonicParsing="false" text="Assign patient to another doctor" onAction="#changeDoc"/>
-                              <Label fx:id="dobLabel" layoutX="112.0" layoutY="39.0" text="_________________" underline="true" />
-                              <ListView fx:id="MedsView" layoutX="15.0" layoutY="100.0" prefHeight="311.0" prefWidth="167.0" style="-fx-border-color: #0a0a0a;" />
-                              <ListView fx:id="HealthView" layoutX="206.0" layoutY="100.0" prefHeight="313.0" prefWidth="167.0" style="-fx-border-color: #0a0a0a;" />
-                              <ListView fx:id="ImmunView" layoutX="397.0" layoutY="100.0" prefHeight="314.0" prefWidth="167.0" style="-fx-border-color: #0a0a0a;" />
-                              <!--<ScrollBar layoutX="164.0" layoutY="101.0" orientation="VERTICAL" prefHeight="308.0" prefWidth="17.0" />
-                              <ScrollBar layoutX="354.0" layoutY="101.0" orientation="VERTICAL" prefHeight="311.0" prefWidth="17.0" />
-                              <ScrollBar layoutX="546.0" layoutY="100.0" orientation="VERTICAL" prefHeight="313.0" prefWidth="17.0" />
-                              <CheckBox layoutX="400.0" layoutY="104.0" mnemonicParsing="false" text="Chickenpox" />
-                              <CheckBox layoutX="400.0" layoutY="132.0" mnemonicParsing="false" text="COVID-19" />-->
+                    		<children>
+                              <Label layoutX="18.0" layoutY="84.0" text="Date of Birth" />
+                              <Label fx:id="dobLabel" layoutX="100.0" layoutY="84.0" text="_______________________" />
+                              <Label layoutX="14.0" layoutY="119.0" text="Previously Prescribed Medications" />
+                              <ListView fx:id="MedsView" layoutX="30.0" layoutY="140.0" prefHeight="150.0" prefWidth="150.0" style="-fx-border-color: #0a0a0a;" />
+                              <Button fx:id="RemoveMedsButton" layoutX="75.0" layoutY="300.0" text="Remove" onAction="#removeMeds" />
+                              <TextField fx:id="EnterMedsTF" layoutX="30.0" layoutY="330.0" prefHeight="25.0" prefWidth="150.0"/>
+                              <Button fx:id="EnterMedsButton" layoutX="85.0" layoutY="360.0" text="Enter" onAction="#addMeds"/>
+                              <!--<ScrollBar layoutX="164.0" layoutY="140.0" orientation="VERTICAL" prefHeight="434.0" prefWidth="17.0" />-->
+                              <Label layoutX="200.0" layoutY="119.0" text="Patient's Health Issues" />
+                              <ListView fx:id="HealthView" layoutX="195.0" layoutY="140.0" prefHeight="150.0" prefWidth="150.0" style="-fx-border-color: #0a0a0a;" />
+                              <Button fx:id="RemoveHealthButton" layoutX="240.0" layoutY="300.0" text="Remove" onAction="#removeHealth"/>
+                              <TextField fx:id="EnterHealthTF" layoutX="195.0" layoutY="330.0" prefHeight="25.0" prefWidth="150.0"/>
+                              <Button fx:id="EnterHealthButton" layoutX="250.0" layoutY="360.0" text="Enter" onAction="#addHealth"/>
+                              <!--<ScrollBar layoutX="293.0" layoutY="140.0" orientation="VERTICAL" prefHeight="434.0" prefWidth="17.0" />-->
+                              <Label layoutX="370.0" layoutY="119.0" text="History of Immunization" />
+                              <ListView fx:id="ImmunView" layoutX="360.0" layoutY="140.0" prefHeight="150.0" prefWidth="150.0" style="-fx-border-color: #0a0a0a;" />
+                              <Button fx:id="RemoveImmunButton" layoutX="405.0" layoutY="300.0" text="Remove" onAction="#removeImmunizations"/>
+                              <TextField fx:id="EnterImmunTF" layoutX="360.0" layoutY="330.0" prefHeight="25.0" prefWidth="150.0"/>
+                              <Button fx:id="EnterImmunButton" layoutX="415.0" layoutY="360.0" text="Enter" onAction="#addImmunizations"/>
+                              <!--<ScrollBar layoutX="570.0" layoutY="140.0" orientation="VERTICAL" prefHeight="434.0" prefWidth="17.0" />-->
+                              <Button fx:id="reassignButton" layoutX="37.0" layoutY="450.0" mnemonicParsing="false" onAction="#changeDoc" prefHeight="27.0" prefWidth="342.0" text="Assign Patient to another Doctor" />
                            </children>
                         </AnchorPane>
                   </content>

@@ -47,6 +47,24 @@ public class DoctorPage extends Pages{
 	private Button reassignButton;
 	@FXML
 	private Label dobLabel;
+	@FXML
+	private Button RemoveMedsButton;
+	@FXML
+	private Button EnterMedsButton;
+	@FXML
+	private Button RemoveHealthButton;
+	@FXML
+	private Button EnterHealthButton;
+	@FXML
+	private Button RemoveImmunButton;
+	@FXML
+	private Button EnterImmunButton;
+	@FXML
+	private TextField EnterMedsTF;
+	@FXML
+	private TextField EnterHealthTF;
+	@FXML
+	private TextField EnterImmunTF;
 	
 	
 	public DoctorPage(String un, ArrayList<User> uL, UserManager um) {
@@ -155,6 +173,79 @@ public class DoctorPage extends Pages{
 		//PatientMessage msg = new PatientMessage(subj,body,senderUN,recipient);
 		MessageHandler msgHandler = new MessageHandler(subj,body,senderUN);
 		msgHandler.sendMessage();
+	}
+	
+	
+	@FXML
+	public void removeMeds(Event e) {
+		Patient selectedPatient = (Patient) patientView.getSelectionModel().getSelectedItem();
+		if(selectedPatient.getMedications().contains(MedsView.getSelectionModel().getSelectedItem())) {
+			selectedPatient.getMedications().remove(MedsView.getSelectionModel().getSelectedIndex());
+		}
+		
+		resetPatientHistoryView(selectedPatient);
+	}
+	@FXML
+	public void addMeds(Event e) {
+		Patient selectedPatient = (Patient) patientView.getSelectionModel().getSelectedItem();
+		selectedPatient.getMedications().add(EnterMedsTF.getText());
+		resetPatientHistoryView(selectedPatient);
+	}
+	@FXML
+	public void removeHealth(Event e) {
+		Patient selectedPatient = (Patient) patientView.getSelectionModel().getSelectedItem();
+		if(selectedPatient.getHealthIssues().contains(HealthView.getSelectionModel().getSelectedItem())) {
+			selectedPatient.getHealthIssues().remove(HealthView.getSelectionModel().getSelectedIndex());
+		}
+		
+		resetPatientHistoryView(selectedPatient);
+	}
+	@FXML
+	public void addHealth(Event e) {
+		Patient selectedPatient = (Patient) patientView.getSelectionModel().getSelectedItem();
+		selectedPatient.getHealthIssues().add(EnterHealthTF.getText());
+		resetPatientHistoryView(selectedPatient);
+	}
+	@FXML
+	public void removeImmunizations(Event e) {
+		Patient selectedPatient = (Patient) patientView.getSelectionModel().getSelectedItem();
+		if(selectedPatient.getImmunizations().contains(ImmunView.getSelectionModel().getSelectedItem())) {
+			selectedPatient.getImmunizations().remove(ImmunView.getSelectionModel().getSelectedIndex());
+		}
+		
+		resetPatientHistoryView(selectedPatient);
+	}
+	@FXML
+	public void addImmunizations(Event e) {
+		Patient selectedPatient = (Patient) patientView.getSelectionModel().getSelectedItem();
+		selectedPatient.getImmunizations().add(EnterImmunTF.getText());
+		resetPatientHistoryView(selectedPatient);
+	}
+	private void resetPatientHistoryView(Patient selectedPatient) {
+		ArrayList<String> tempList = new ArrayList<>();
+		for (int i = 0; i < selectedPatient.getMedications().size(); i++) {
+			tempList.add(selectedPatient.getMedications().get(i));
+		}
+		ObservableList<String> stringList = FXCollections.observableArrayList(tempList);
+		stringList.setAll(tempList);
+		MedsView.setItems(stringList);
+		
+		tempList = new ArrayList<>();
+		for (int i = 0; i < selectedPatient.getHealthIssues().size(); i++) {
+			tempList.add(selectedPatient.getHealthIssues().get(i));
+		}
+		stringList = FXCollections.observableArrayList(tempList);
+		stringList.setAll(tempList);
+		HealthView.setItems(stringList);
+		
+		tempList = new ArrayList<>();
+		for (int i = 0; i < selectedPatient.getImmunizations().size(); i++) {
+			tempList.add(selectedPatient.getImmunizations().get(i));
+		}
+		stringList = FXCollections.observableArrayList(tempList);
+		stringList.setAll(tempList);
+		ImmunView.setItems(stringList);
+		umgr.writeAllUsers();
 	}
 
 }
