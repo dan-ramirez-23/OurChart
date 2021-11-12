@@ -90,13 +90,14 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TextArea layoutX="147.0" layoutY="20.0" prefHeight="193.0" prefWidth="394.0" />
+                              <TextArea fx:id = "physExamFindings" layoutX="147.0" layoutY="20.0" prefHeight="150.0" prefWidth="394.0" />
                               <Label layoutX="9.0" layoutY="74.0" prefHeight="67.0" prefWidth="141.0" text="Physical Exam Findings:" />
                               <TextArea fx:id="prescript" layoutX="154.0" layoutY="405.0" prefHeight="27.0" prefWidth="391.0" />
                               <Label layoutX="23.0" layoutY="410.0" text="Prescriptions to send" />
                               <Button fx:id="sendScript" layoutX="326.0" layoutY="455.0" mnemonicParsing="false" onAction="#sendScript" text="Send" />
+                              <Button fx:id="sendSummary" layoutX="270.0" layoutY="360.0" mnemonicParsing="false" onAction="#sendSummary" text="Send Visit Summary" />
                               <Label layoutX="23.0" layoutY="277.0" text="Recommendations:" />
-                              <TextArea layoutX="148.0" layoutY="227.0" prefHeight="151.0" prefWidth="394.0" />
+                              <TextArea fx:id = "Recs" layoutX="148.0" layoutY="180.0" prefHeight="150.0" prefWidth="394.0" />
                            </children>
                         </AnchorPane>
                   </content>

@@ -3,27 +3,45 @@ package termproj;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 public class PatientPage extends Pages {
 	// private ArrayList<User> userList;
 
 	Patient currentUser = new Patient("", "", -1, "", "", "", "", "");
+	ArrayList<PatientMessage> summaryList = new ArrayList();
 
 	public PatientPage(String un, ArrayList<User> uL, UserManager um) {
 		super(un, uL, um);
 		System.out.println("On patient page creation, un = " + un);
 
-		String typeString = "Patient";// know we are looking to only display type patient
+		String typeString = "Patient";// know we are looking to only display
+										// type patient
 		for (int i = 0; i < userList.size(); i++) {
-			if (typeString.equals(userList.get(i).getUserType()) && (userList.get(i).getUsername().equals(username))) {
+			if (typeString.equals(userList.get(i).getUserType())
+					&& (userList.get(i).getUsername().equals(username))) {
 				currentUser = (Patient) userList.get(i);
 			}
 		}
+
+		ArrayList<PatientMessage> tempList = (ArrayList) currentUser.getInbox();
+
+		for (int i = 0; i < tempList.size(); i++) {
+			if (tempList.get(i).getSummary()) {
+				summaryList.add(tempList.get(i));
+			}
+		}
+
+		System.out.println(currentUser.getInbox().get(0).getSummary());
 
 	}
 
@@ -56,6 +74,14 @@ public class PatientPage extends Pages {
 	private TextArea MedView;
 	@FXML
 	private Button pInfoEnterButton;
+	@FXML
+	private TextArea summaryArea;
+	@FXML
+	private ObservableList<PatientMessage> OBS = FXCollections
+			.observableArrayList(summaryList);
+	@FXML
+	private ListView<PatientMessage> dateView = new ListView<PatientMessage>(
+			OBS);
 
 	@FXML
 	public void initialize() {
@@ -73,7 +99,7 @@ public class PatientPage extends Pages {
 		for (int i = 0; i < currentUser.getHealthConcerns().size(); i++) {
 			temp += "" + currentUser.getHealthConcerns().get(i) + "\n";
 		}
-		
+
 		healthHistory.setText(temp);
 
 		temp = "";
@@ -89,7 +115,7 @@ public class PatientPage extends Pages {
 		}
 
 		MedView.setText(temp);
-		
+
 		FirstNameView.setEditable(false);
 		FirstNameView.setStyle("-fx-background-color: Gainsboro;");
 		dobView.setEditable(false);
@@ -102,7 +128,36 @@ public class PatientPage extends Pages {
 		ImmuniView.setStyle("-fx-control-inner-background: Gainsboro;");
 		MedView.setEditable(false);
 		MedView.setStyle("-fx-control-inner-background: Gainsboro;");
-		
+
+		showSummaries();
+		if (summaryList.size() > 0) {
+			dateView.getSelectionModel().select(0);
+		}
+		setListView();
+
+	}
+
+	private void setListView() {
+		OBS.setAll(summaryList);
+		dateView.setItems(OBS);
+	}
+
+	private void showSummaries() {
+		dateView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				summarySelected(event);
+			}
+		});
+		setListView();
+	}
+
+	@FXML
+	public void summarySelected(MouseEvent arg0) {
+		PatientMessage selectedMessage = dateView.getSelectionModel()
+				.getSelectedItem();
+		summaryArea.setText(selectedMessage.getMessage());
+		setListView();
 	}
 
 	public void send(ActionEvent event) throws IOException {
@@ -110,7 +165,8 @@ public class PatientPage extends Pages {
 	}
 
 	public void sendMsg() {
-		Patient pat = new Patient("bill", "hicks", 27, "August 13, 1974", "bhicks.xyz", "508888888", "todd", "Blue Cross");
+		Patient pat = new Patient("bill", "hicks", 27, "August 13, 1974",
+				"bhicks.xyz", "508888888", "todd", "Blue Cross");
 		pat.setUserName("bhicks");
 		pat.setPassword("apple");
 		PersonnelFileWriter pfw = new PersonnelFileWriter();
@@ -125,11 +181,12 @@ public class PatientPage extends Pages {
 		MessageHandler msg = new MessageHandler(subj, body, senderUN);
 		msg.sendMessage();
 	}
+
 	public void enterInfo(ActionEvent event) {
 		currentUser.setPhoneNum(PhoneNumView.getText());
 		currentUser.setEmail(EmailView.getText());
 		currentUser.setPharm(PharmView.getText());
 		currentUser.setInsurer(InsurView.getText());
-		umgr.writeAllUsers();//write after changing anything
+		umgr.writeAllUsers();// write after changing anything
 	}
 }
