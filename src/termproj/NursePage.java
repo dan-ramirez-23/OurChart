@@ -120,6 +120,24 @@ public class NursePage extends Pages{
 	private ListView<String> HealthView;
 	@FXML
 	private ListView<String> ImmunView;
+	@FXML
+	private Button RemoveMedsButton;
+	@FXML
+	private Button EnterMedsButton;
+	@FXML
+	private Button RemoveHealthButton;
+	@FXML
+	private Button EnterHealthButton;
+	@FXML
+	private Button RemoveImmunButton;
+	@FXML
+	private Button EnterImmunButton;
+	@FXML
+	private TextField EnterMedsTF;
+	@FXML
+	private TextField EnterHealthTF;
+	@FXML
+	private TextField EnterImmunTF;
 	
 	@FXML
 	public void initialize() {
