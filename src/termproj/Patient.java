@@ -1,5 +1,7 @@
 package termproj;
 
+import java.util.ArrayList;
+
 public class Patient extends User {
 	// private String firstName; contained in User class
 	// private String lastName;
@@ -125,6 +127,7 @@ public class Patient extends User {
 	public void setPrescriptions(String[] P) {
 		prescriptions = P;
 	}
+	
 
 	public void setMedications(String[] Meds) {
 		medications = Meds;
@@ -258,5 +261,5 @@ public class Patient extends User {
 	public String[] getHealthConcerns() {
 		return healthConcerns;
 	}
-
+	
 }
