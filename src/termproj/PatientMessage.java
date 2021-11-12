@@ -7,21 +7,23 @@ public class PatientMessage implements Serializable {
 	private String subject;
 	private String messageBody;
 	private boolean summary;
-	private String senderID;
+	private String senderUN;
+	private String recipient;
 
-	public PatientMessage(String subj, String body, String sender) {
+	public PatientMessage(String subj, String body, String sender, String recipient) {
 		subject = subj;
 		messageBody = body;
-		senderID = sender;
+		senderUN = sender;
+		this.recipient = recipient;
 		summary = false;
 	}
 
 	public void setSenderUN(String id) {
-		senderID = id;
+		senderUN = id;
 	}
 
 	public String getSenderUN() {
-		return senderID;
+		return senderUN;
 	}
 
 	public String getSubject() {
@@ -40,10 +42,14 @@ public class PatientMessage implements Serializable {
 		return messageBody;
 	}
 
+	public String getRecipient() {
+		return recipient;
+	}
+	
 	public PatientMessage(String subj, String body, String sender, boolean s) {
 		subject = subj;
 		messageBody = body;
-		senderID = sender;
+		senderUN = sender;
 		summary = s;
 	}
 

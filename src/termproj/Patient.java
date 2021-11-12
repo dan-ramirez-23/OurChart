@@ -3,6 +3,7 @@ package termproj;
 import java.util.ArrayList;
 
 public class Patient extends User {
+	//private static final long serialVersionUID = -8878784872425734991L;
 	// private String firstName; contained in User class
 	// private String lastName;
 	private int patientID;

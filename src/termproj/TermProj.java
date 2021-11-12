@@ -22,7 +22,7 @@ public class TermProj extends Application {
 	private UserManager um = new UserManager(userList);
 
 	public void start(Stage primaryStage) throws Exception {
-		// hardcode();
+		//hardcode();
 		stage = primaryStage;
 		/*
 		 * FXMLLoader loader = new FXMLLoader();
@@ -119,12 +119,12 @@ public class TermProj extends Application {
 		um.addUserToList(doc2);
 		um.addUserToList(nur2);
 
-		PatientMessage msg1 = new PatientMessage("test message body",
-				"test message subject", "jtcarrio");
-		PatientMessage msg2 = new PatientMessage("test message 2 body",
-				"test message 2 subject", "hjkaufma");
-		PatientMessage msg3 = new PatientMessage("test message 3 body",
-				"test message 3 subject", "awong24");
+		PatientMessage msg1 = new PatientMessage("test message subject",
+				"test message body", "jtcarrio","darami14");
+		PatientMessage msg2 = new PatientMessage("test message 2 subject",
+				"test message 2 body", "hjkaufma","darami14");
+		PatientMessage msg3 = new PatientMessage("test message 3 subject",
+				"test message 3 body", "awong24","darami14");
 		nur2.addMessage(msg1);
 		nur2.addMessage(msg2);
 		nur2.addMessage(msg3);

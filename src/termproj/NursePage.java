@@ -79,6 +79,17 @@ public class NursePage extends Pages{
 	//private Button allergyButton;
 	@FXML
 	private Button enterButton;
+	@FXML
+	private TextArea messageBodyTA;
+	@FXML
+	private TextArea outgoingMessageTA;
+	@FXML
+	private TextField subjectTF;
+	@FXML
+	private Button sendMsgButton;
+	@FXML
+	private Label composeMsgLabel;
+	
 	
 	
 	@FXML
@@ -143,6 +154,7 @@ public class NursePage extends Pages{
 	public void initialize() {
 		
 		welcomeLabel.setText("Welcome " + user.getFirstName());
+		messageBodyTA.setEditable(false);
 		
 		lstView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -168,8 +180,35 @@ public class NursePage extends Pages{
 	@FXML
 	public void messageSelected(MouseEvent arg0) {
 		PatientMessage selectedMsg = inboxTblView.getSelectionModel().getSelectedItem();
+		messageBodyTA.setText(selectedMsg.getMessage());
+		//selectedMsgSenderUN = inboxTblView.getSelectionModel().getSelectedItem().getSenderUN();
 		
 	}
+	
+	public void sendMessage(ActionEvent event) throws IOException {
+		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		if(selectedPatient == null) {
+			System.out.println("null test");
+			composeMsgLabel.setText("Select a patient from left menu");
+		} else {
+			String subj = subjectTF.getText();
+			System.out.println("in the sendMsg function - subj is: " + subj);
+			String body = outgoingMessageTA.getText();
+			String senderUN = username;
+			String recipient = selectedPatient.getUsername();
+			
+
+			System.out.println("In PatientPage sending message from " + senderUN);
+			MessageHandler msg = new MessageHandler(subj, body, senderUN, recipient);
+			msg.sendMessage();
+		}
+
+		
+	}
+
+
+		
+	
 	
 	@FXML
 	public void changeDoc(Event e) {
@@ -209,15 +248,13 @@ public class NursePage extends Pages{
 	public void setInboxView() {
 		inbox.setAll(inboxList);
 		inboxTblView.getItems().addAll(inbox);
-		
+		System.out.println("inbox after adding to tblview:" + inbox.get(1).getSenderUN());
 
-		TableColumn<PatientMessage, String> senderCol = new TableColumn<>();
-		senderCol.setCellValueFactory(c-> new SimpleStringProperty(c.getValue().getSenderUN()));
+		TableColumn<PatientMessage, String> senderCol = new TableColumn<>("From:");
+		senderCol.setCellValueFactory(new PropertyValueFactory<>("senderUN"));
 		
-		TableColumn<PatientMessage, String> subjectCol = new TableColumn<>();
-		subjectCol.setCellValueFactory(c-> new SimpleStringProperty(c.getValue().getSubject()));
-		
-
+		TableColumn<PatientMessage, String> subjectCol = new TableColumn<>("Subject");
+		subjectCol.setCellValueFactory(new PropertyValueFactory<>("subject"));
 		
 		inboxTblView.getColumns().addAll(senderCol, subjectCol);
 	}
@@ -226,7 +263,9 @@ public class NursePage extends Pages{
 	@FXML
 	public void userSelected(MouseEvent arg0) {
 		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		composeMsgLabel.setText("Message to " + selectedPatient.getUsername());
 		dobLabel.setText(selectedPatient.getDOB());
+		
 		
 		ArrayList<String> tempList = new ArrayList<>();
 		for (int i = 0; i < selectedPatient.getMedications().size(); i++) {
