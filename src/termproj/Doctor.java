@@ -18,17 +18,8 @@ public class Doctor extends Employee {
 		super(fName, lName, un, pass, empID, "Doctor");
 		
 	}
-	
-	public void addPatientsToDoctor(Patient pat) {
-	   patients.add(pat);
+	public Doctor(String fName, String lName, String un, String pass, int empID, ArrayList<Patient> patients) {
+		super(fName, lName, un, pass, empID, patients, "Doctor");
+		
 	}
-	
-	public void removePatient(Patient pat) {
-		patients.remove(pat);
-	}
-	
-	public ArrayList<Patient> getDoctorPatientList() {   
-	    return patients;
-	}
-	
 }

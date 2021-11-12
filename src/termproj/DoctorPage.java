@@ -18,7 +18,6 @@ public class DoctorPage extends Pages{
 	//private String username;
 	private Doctor user = new Doctor();
 	private String patientSelected;
-	private ArrayList<User> userList = new ArrayList<User>();
 	private ArrayList<Patient> patientList = new ArrayList<>();
 	
 	

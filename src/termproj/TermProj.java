@@ -14,7 +14,7 @@ public class TermProj extends Application {
 	   private final int HEIGHT = 400;
 	   private static Stage stage;
 	   private ArrayList<User> userList = new ArrayList<>();//created to make sure there are no null pointer exceptions
-	   private ArrayList<Doctor> doctorList = new ArrayList<>();
+	   private UserManager um = new UserManager(userList);
 	   
 	   public void start(Stage primaryStage) throws Exception {
 		   hardcode();
@@ -29,7 +29,7 @@ public class TermProj extends Application {
 		  primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
 	      primaryStage.show(); // Display the stage
 	   }
-	      private UserManager um = new UserManager(userList);
+	      
 	   public void changeScene(String fxml, String username) throws IOException {
 		   //hardcode();
 		   um.readAllUsers();//idk why we need to read them twice, but we do
@@ -60,20 +60,14 @@ public class TermProj extends Application {
 	      Application.launch(args);
 	   }
 	   
-
 	   public void hardcode() {
-
-		   ArrayList <Patient> allPats = new ArrayList <Patient>();
-		   ArrayList <Patient> docPats = new ArrayList <Patient>();
-
 		   String[] im={"Chicken Pox", "COVID-19"};
 		   String[] per={"Marijuana"};
 		   String[] med={"N/A"};
 		   String[] hi={"Just a boss ass bitch"};
 		   String[] ef={"N/A"};
 		   String[] alrg={"Cats", "Broke Bitches", "Anything that isnt money"};
-		   String[] hc = {"He is to real"}; 
-		  int numOfDoctors = doctorList.size();
+		   String[] hc = {"He is to real"};
 		  
 		  Patient pat1 = new Patient("Another", "Patient", 002, 102, "06/21/99", "9726584598", 
 				   "booty@gmail.com" , "Walgreens", "anotherPat", "password", "Insure",im, per, med,
@@ -118,4 +112,3 @@ public class TermProj extends Application {
 	   }
 
 }
-	   

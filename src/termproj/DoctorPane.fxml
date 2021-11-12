@@ -9,11 +9,7 @@
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="487.0" prefWidth="181.0">
          <children>
-<<<<<<< HEAD
-            <ListView fx:id="lstView" layoutX="5.0" layoutY="62.0" prefHeight="442.0" prefWidth="188.0" style="-fx-border-color: #0a0a0a;" />
-=======
             <ListView fx:id="patientView" layoutX="5.0" layoutY="62.0" prefHeight="449.0" prefWidth="160.0" style="-fx-border-color: #0a0a0a;" />
->>>>>>> branch 'main' of git@github.com:dan-ramirez-23/CSE360Team7.git
             <Label layoutX="53.0" layoutY="42.0" text="Patient Name" />
             <!--<ScrollBar layoutX="147.0" layoutY="61.0" orientation="VERTICAL" prefHeight="449.0" prefWidth="17.0" />-->
          </children></AnchorPane>

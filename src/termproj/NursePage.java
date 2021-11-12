@@ -353,9 +353,9 @@ public class NursePage extends Pages{
 	    	   for(int r = 0; r<doctorList.size(); i++) {
 	    		   Doctor currentDoctor = doctorList.get(r);
 	    		   Doctor nextDoctor = doctorList.get((r+1) % doctorList.size());
-	    		   if(currentDoctor.getDoctorPatientList().contains(i)) {
+	    		   if(currentDoctor.getPatients().contains(i)) {
 	    			   currentDoctor.removePatient(currentPatient);
-	    			   nextDoctor.addPatientsToDoctor(currentPatient);
+	    			   nextDoctor.addPatient(currentPatient);
 	    			   
 	    	   }
 				
