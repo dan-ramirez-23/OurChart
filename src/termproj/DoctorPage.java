@@ -116,24 +116,24 @@ public class DoctorPage extends Pages{
 		dobLabel.setText(selectedPatient.getDOB());
 		
 		ArrayList<String> tempList = new ArrayList<>();
-		for (int i = 0; i < selectedPatient.getMedications().length; i++) {
-			tempList.add(selectedPatient.getMedications()[i]);
+		for (int i = 0; i < selectedPatient.getMedications().size(); i++) {
+			tempList.add(selectedPatient.getMedications().get(i));
 		}
 		ObservableList<String> stringList = FXCollections.observableArrayList(tempList);
 		stringList.setAll(tempList);
 		MedsView.setItems(stringList);
 		
 		tempList = new ArrayList<>();
-		for (int i = 0; i < selectedPatient.getHealthIssues().length; i++) {
-			tempList.add(selectedPatient.getHealthIssues()[i]);
+		for (int i = 0; i < selectedPatient.getHealthIssues().size(); i++) {
+			tempList.add(selectedPatient.getHealthIssues().get(i));
 		}
 		stringList = FXCollections.observableArrayList(tempList);
 		stringList.setAll(tempList);
 		HealthView.setItems(stringList);
 		
 		tempList = new ArrayList<>();
-		for (int i = 0; i < selectedPatient.getImmunizations().length; i++) {
-			tempList.add(selectedPatient.getImmunizations()[i]);
+		for (int i = 0; i < selectedPatient.getImmunizations().size(); i++) {
+			tempList.add(selectedPatient.getImmunizations().get(i));
 		}
 		stringList = FXCollections.observableArrayList(tempList);
 		stringList.setAll(tempList);

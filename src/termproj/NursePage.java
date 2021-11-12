@@ -227,24 +227,24 @@ public class NursePage extends Pages{
 		dobLabel.setText(selectedPatient.getDOB());
 		
 		ArrayList<String> tempList = new ArrayList<>();
-		for (int i = 0; i < selectedPatient.getMedications().length; i++) {
-			tempList.add(selectedPatient.getMedications()[i]);
+		for (int i = 0; i < selectedPatient.getMedications().size(); i++) {
+			tempList.add(selectedPatient.getMedications().get(i));
 		}
 		ObservableList<String> stringList = FXCollections.observableArrayList(tempList);
 		stringList.setAll(tempList);
 		MedsView.setItems(stringList);
 		
 		tempList = new ArrayList<>();
-		for (int i = 0; i < selectedPatient.getHealthIssues().length; i++) {
-			tempList.add(selectedPatient.getHealthIssues()[i]);
+		for (int i = 0; i < selectedPatient.getHealthIssues().size(); i++) {
+			tempList.add(selectedPatient.getHealthIssues().get(i));
 		}
 		stringList = FXCollections.observableArrayList(tempList);
 		stringList.setAll(tempList);
 		HealthView.setItems(stringList);
 		
 		tempList = new ArrayList<>();
-		for (int i = 0; i < selectedPatient.getImmunizations().length; i++) {
-			tempList.add(selectedPatient.getImmunizations()[i]);
+		for (int i = 0; i < selectedPatient.getImmunizations().size(); i++) {
+			tempList.add(selectedPatient.getImmunizations().get(i));
 		}
 		stringList = FXCollections.observableArrayList(tempList);
 		stringList.setAll(tempList);
@@ -298,13 +298,13 @@ public class NursePage extends Pages{
 		}
 		
 		String tempString = "";
-		for(int i = 0; i < selectedPatient.getAllergies().length; i++) {
-			tempString += "" + selectedPatient.getAllergies()[i] + "\n";
+		for(int i = 0; i < selectedPatient.getAllergies().size(); i++) {
+			tempString += "" + selectedPatient.getAllergies().get(i) + "\n";
 		}
 		knownAllergyTA.setText(tempString);
 		tempString = "";
-		for(int i = 0; i < selectedPatient.getHealthConcerns().length; i++) {
-			tempString += "" + selectedPatient.getHealthConcerns()[i] + "\n";
+		for(int i = 0; i < selectedPatient.getHealthConcerns().size(); i++) {
+			tempString += "" + selectedPatient.getHealthConcerns().get(i) + "\n";
 		}
 		hcTA.setText(tempString);
 	}
@@ -325,11 +325,19 @@ public class NursePage extends Pages{
 		
 		String textFromAllergies = knownAllergyTA.getText();
 		String lines[] = textFromAllergies.split("\\r?\\n");
-		selectedPatient.setAllergies(lines);
+		ArrayList<String> tempList = new ArrayList<>();
+		for(int i = 0; i < lines.length; i++) {
+			tempList.add(lines[i]);
+		}
+		selectedPatient.setAllergies(tempList);
 		
 		String textFromConcerns = hcTA.getText();
 		String hcLines[] = textFromConcerns.split("\\r?\\n");
-		selectedPatient.setHealthConcerns(hcLines);
+		ArrayList<String> tempList2 = new ArrayList<>();
+		for(int i = 0; i < hcLines.length; i++) {
+			tempList2.add(hcLines[i]);
+		}
+		selectedPatient.setHealthConcerns(tempList2);
 		
 		/*weightTF.setText("");
 		heightTF.setText("");
@@ -457,12 +465,78 @@ public class NursePage extends Pages{
 		}
 		return passwordString;
 	}
-	/*@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-	}*/
 	
-	/*public void setScene() throws IOException{
-		scene = FXMLLoader.load(getClass().getResource("NursePane.fxml"));
-	}*/
+	@FXML
+	public void removeMeds(Event e) {
+		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		if(selectedPatient.getMedications().contains(MedsView.getSelectionModel().getSelectedItem())) {
+			selectedPatient.getMedications().remove(MedsView.getSelectionModel().getSelectedIndex());
+		}
+		
+		resetPatientHistoryView(selectedPatient);
+	}
+	@FXML
+	public void addMeds(Event e) {
+		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		selectedPatient.getMedications().add(EnterMedsTF.getText());
+		resetPatientHistoryView(selectedPatient);
+	}
+	@FXML
+	public void removeHealth(Event e) {
+		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		if(selectedPatient.getHealthIssues().contains(HealthView.getSelectionModel().getSelectedItem())) {
+			selectedPatient.getHealthIssues().remove(HealthView.getSelectionModel().getSelectedIndex());
+		}
+		
+		resetPatientHistoryView(selectedPatient);
+	}
+	@FXML
+	public void addHealth(Event e) {
+		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		selectedPatient.getHealthIssues().add(EnterHealthTF.getText());
+		resetPatientHistoryView(selectedPatient);
+	}
+	@FXML
+	public void removeImmunizations(Event e) {
+		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		if(selectedPatient.getImmunizations().contains(ImmunView.getSelectionModel().getSelectedItem())) {
+			selectedPatient.getImmunizations().remove(ImmunView.getSelectionModel().getSelectedIndex());
+		}
+		
+		resetPatientHistoryView(selectedPatient);
+	}
+	@FXML
+	public void addImmunizations(Event e) {
+		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		selectedPatient.getImmunizations().add(EnterImmunTF.getText());
+		resetPatientHistoryView(selectedPatient);
+	}
+	
+	private void resetPatientHistoryView(Patient selectedPatient) {
+		ArrayList<String> tempList = new ArrayList<>();
+		for (int i = 0; i < selectedPatient.getMedications().size(); i++) {
+			tempList.add(selectedPatient.getMedications().get(i));
+		}
+		ObservableList<String> stringList = FXCollections.observableArrayList(tempList);
+		stringList.setAll(tempList);
+		MedsView.setItems(stringList);
+		
+		tempList = new ArrayList<>();
+		for (int i = 0; i < selectedPatient.getHealthIssues().size(); i++) {
+			tempList.add(selectedPatient.getHealthIssues().get(i));
+		}
+		stringList = FXCollections.observableArrayList(tempList);
+		stringList.setAll(tempList);
+		HealthView.setItems(stringList);
+		
+		tempList = new ArrayList<>();
+		for (int i = 0; i < selectedPatient.getImmunizations().size(); i++) {
+			tempList.add(selectedPatient.getImmunizations().get(i));
+		}
+		stringList = FXCollections.observableArrayList(tempList);
+		stringList.setAll(tempList);
+		ImmunView.setItems(stringList);
+		umgr.writeAllUsers();
+	}
+	
 }
