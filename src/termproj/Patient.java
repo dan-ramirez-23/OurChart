@@ -148,6 +148,7 @@ public class Patient extends User {
 	public void setPrescriptions(ArrayList<String> P) {
 		prescriptions = P;
 	}
+	
 
 	public void setMedications(ArrayList<String> Meds) {
 		medications = Meds;
@@ -281,5 +282,5 @@ public class Patient extends User {
 	public ArrayList<String> getHealthConcerns() {
 		return healthConcerns;
 	}
-
+	
 }

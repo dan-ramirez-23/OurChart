@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
@@ -28,6 +29,8 @@ public class DoctorPage extends Pages{
 	@FXML
 	private ListView<Patient> patientView = new ListView<>(obs);
 	
+	@FXML 
+	private Button sendScript;
 	@FXML
 	private Label welcomeLabel;
 	@FXML
@@ -36,7 +39,8 @@ public class DoctorPage extends Pages{
 	private TextField messageBody;
 	@FXML
 	private TextField subject;
-	
+	@FXML
+	private TextArea prescript;
 	@FXML
 	private ListView<String> MedsView;
 	@FXML
@@ -71,13 +75,17 @@ public class DoctorPage extends Pages{
 		super(un, uL, um);
 		//find Doctor by username
 		String ut = "Doctor";
-		for(int i = 0; i < userList.size(); i++) {
-			if(ut.equals(userList.get(i).getUserType()) && (userList.get(i).getUsername().equals(username))) {
-				System.out.println(userList.get(i));
-				user = (Doctor) userList.get(i);
+		for(int i = 0; i < super.userList.size(); i++) {
+			UserManager testUM = new UserManager(uL);
+			System.out.println("Hannah user type:" + testUM.readUserFromList(super.username).getUserType());
+			
+			if(ut.equals(super.userList.get(i).getUserType()) && (super.userList.get(i).getUsername().equals(super.username))) {
+				System.out.println(super.userList.get(i));
+				user = (Doctor) super.userList.get(i);
 			}
 		}
 		patientList = user.getPatients();
+		System.out.print(patientList);
 	}
 	
 	
@@ -159,6 +167,32 @@ public class DoctorPage extends Pages{
 		
 	}
 	
+	public void sendScript(ActionEvent event) throws IOException {
+		sendPrescriptions();
+		
+	}
+	
+	public void sendPrescriptions() {
+		Patient selectedPatient = (Patient) patientView.getSelectionModel().getSelectedItem();
+		String newprescription = prescript.getText();
+		int l = (selectedPatient.getPrescriptions().length + 1);
+		String[] newPrescriptions = new String[l];
+		
+		for(int i = 0; i < selectedPatient.getPrescriptions().length; i++){
+		   newPrescriptions[i] = selectedPatient.getPrescriptions()[i];
+		}
+		newPrescriptions[selectedPatient.getPrescriptions().length] = newprescription;
+		selectedPatient.setPrescriptions(newPrescriptions);
+		
+	String subj = ("New Prescription " + newprescription);
+	String body = ("Hello " + selectedPatient.getFirstName() + " your prescription " + newprescription 
+			+ " has been sent to your pharmacy " + selectedPatient.getPharmacy() + " and will be ready soon");
+	String[] recipient = {patientSelected};
+	String senderUN = selectedPatient.getUsername();
+	MessageHandler msgHandler = new MessageHandler(subj,body,senderUN);
+	msgHandler.sendMessage();
+		
+	}
 	public void send(ActionEvent event) throws IOException {
 		sendMsg();
 	}
