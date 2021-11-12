@@ -7,7 +7,7 @@ import java.util.List;
 public class Employee extends User {
 	
 	private int empID;
-	protected ArrayList<Patient> patients;
+	private ArrayList<Patient> patients;
 	
 	public Employee() {
 		
@@ -39,6 +39,14 @@ public class Employee extends User {
 
 	public void addPatient(Patient p) {
 		patients.add(p);
+	}
+	public void removePatient(Patient p) {
+		for(int i = 0; i < patients.size(); i++) {
+			if(p.equals(patients.get(i))) {
+				patients.remove(i);
+				break;
+			}
+		}
 	}
 	
 }

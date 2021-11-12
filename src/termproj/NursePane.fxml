@@ -71,13 +71,22 @@
                               <Label layoutX="18.0" layoutY="84.0" text="Date of Birth" />
                               <Label fx:id="dobLabel" layoutX="100.0" layoutY="84.0" text="_______________________" />
                               <Label layoutX="14.0" layoutY="119.0" text="Previously Prescribed Medications" />
-                              <ListView fx:id="MedsView" layoutX="30.0" layoutY="140.0" prefHeight="300.0" prefWidth="150.0" style="-fx-border-color: #0a0a0a;" />
+                              <ListView fx:id="MedsView" layoutX="30.0" layoutY="140.0" prefHeight="150.0" prefWidth="150.0" style="-fx-border-color: #0a0a0a;" />
+                              <Button fx:id="RemoveMedsButton" layoutX="75.0" layoutY="300.0" text="Remove" onAction="#removeMeds" />
+                              <TextField fx:id="EnterMedsTF" layoutX="30.0" layoutY="330.0" prefHeight="25.0" prefWidth="150.0"/>
+                              <Button fx:id="EnterMedsButton" layoutX="85.0" layoutY="360.0" text="Enter" onAction="#addMeds"/>
                               <!--<ScrollBar layoutX="164.0" layoutY="140.0" orientation="VERTICAL" prefHeight="434.0" prefWidth="17.0" />-->
                               <Label layoutX="200.0" layoutY="119.0" text="Patient's Health Issues" />
-                              <ListView fx:id="HealthView" layoutX="195.0" layoutY="140.0" prefHeight="300.0" prefWidth="150.0" style="-fx-border-color: #0a0a0a;" />
+                              <ListView fx:id="HealthView" layoutX="195.0" layoutY="140.0" prefHeight="150.0" prefWidth="150.0" style="-fx-border-color: #0a0a0a;" />
+                              <Button fx:id="RemoveHealthButton" layoutX="240.0" layoutY="300.0" text="Remove" onAction="#removeHealth"/>
+                              <TextField fx:id="EnterHealthTF" layoutX="195.0" layoutY="330.0" prefHeight="25.0" prefWidth="150.0"/>
+                              <Button fx:id="EnterHealthButton" layoutX="250.0" layoutY="360.0" text="Enter" onAction="#addHealth"/>
                               <!--<ScrollBar layoutX="293.0" layoutY="140.0" orientation="VERTICAL" prefHeight="434.0" prefWidth="17.0" />-->
                               <Label layoutX="370.0" layoutY="119.0" text="History of Immunization" />
-                              <ListView fx:id="ImmunView" layoutX="360.0" layoutY="140.0" prefHeight="300.0" prefWidth="150.0" style="-fx-border-color: #0a0a0a;" />
+                              <ListView fx:id="ImmunView" layoutX="360.0" layoutY="140.0" prefHeight="150.0" prefWidth="150.0" style="-fx-border-color: #0a0a0a;" />
+                              <Button fx:id="RemoveImmunButton" layoutX="405.0" layoutY="300.0" text="Remove" onAction="#removeImmunizations"/>
+                              <TextField fx:id="EnterImmunTF" layoutX="360.0" layoutY="330.0" prefHeight="25.0" prefWidth="150.0"/>
+                              <Button fx:id="EnterImmunButton" layoutX="415.0" layoutY="360.0" text="Enter" onAction="#addImmunizations"/>
                               <!--<ScrollBar layoutX="570.0" layoutY="140.0" orientation="VERTICAL" prefHeight="434.0" prefWidth="17.0" />-->
                               <Button fx:id="changeDoctor" layoutX="37.0" layoutY="450.0" mnemonicParsing="false" onAction="#changeDoc" prefHeight="27.0" prefWidth="342.0" text="Assign Patient to another Doctor" />
                            </children>

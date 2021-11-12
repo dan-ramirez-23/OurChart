@@ -120,6 +120,24 @@ public class NursePage extends Pages{
 	private ListView<String> HealthView;
 	@FXML
 	private ListView<String> ImmunView;
+	@FXML
+	private Button RemoveMedsButton;
+	@FXML
+	private Button EnterMedsButton;
+	@FXML
+	private Button RemoveHealthButton;
+	@FXML
+	private Button EnterHealthButton;
+	@FXML
+	private Button RemoveImmunButton;
+	@FXML
+	private Button EnterImmunButton;
+	@FXML
+	private TextField EnterMedsTF;
+	@FXML
+	private TextField EnterHealthTF;
+	@FXML
+	private TextField EnterImmunTF;
 	
 	@FXML
 	public void initialize() {
@@ -141,6 +159,8 @@ public class NursePage extends Pages{
 				messageSelected(event);
 			}
 		});
+		lstView.getSelectionModel().select(0);
+		userSelected(null);
 		setInboxView();
 	}
 	
@@ -149,6 +169,41 @@ public class NursePage extends Pages{
 	public void messageSelected(MouseEvent arg0) {
 		PatientMessage selectedMsg = inboxTblView.getSelectionModel().getSelectedItem();
 		
+	}
+	
+	@FXML
+	public void changeDoc(Event e) {
+		Doctor currentDoctor = new Doctor();
+		Doctor newDoctor;
+		ArrayList<Doctor> dList = new ArrayList<>();
+		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		for(int i = 0; i < umgr.getUserList().size(); i++) {
+			if(umgr.getUserList().get(i).getUserType().equals("Doctor")) {
+				dList.add((Doctor) umgr.getUserList().get(i));
+			}
+		}
+		for(int i = 0; i < dList.size(); i++) {
+			if(dList.get(i).getID() == selectedPatient.getDoctor()) {
+				System.out.println("Doctor Found");
+				currentDoctor = dList.get(i);
+			}
+		}
+		if(dList.size() > 1) {
+			Random rand = new Random();
+			int randInt;
+			do {
+				randInt = rand.nextInt(dList.size());
+				newDoctor = dList.get(randInt);
+			}while(currentDoctor.equals(newDoctor));
+			
+			newDoctor.addPatient(selectedPatient);
+			selectedPatient.setDoctor(newDoctor.getID());
+			currentDoctor.removePatient(selectedPatient);
+			}
+		else {
+			System.out.println("Only 1 doctor");
+		}
+		umgr.writeAllUsers();
 	}
 	
 	public void setInboxView() {
@@ -174,24 +229,24 @@ public class NursePage extends Pages{
 		dobLabel.setText(selectedPatient.getDOB());
 		
 		ArrayList<String> tempList = new ArrayList<>();
-		for (int i = 0; i < selectedPatient.getMedications().length; i++) {
-			tempList.add(selectedPatient.getMedications()[i]);
+		for (int i = 0; i < selectedPatient.getMedications().size(); i++) {
+			tempList.add(selectedPatient.getMedications().get(i));
 		}
 		ObservableList<String> stringList = FXCollections.observableArrayList(tempList);
 		stringList.setAll(tempList);
 		MedsView.setItems(stringList);
 		
 		tempList = new ArrayList<>();
-		for (int i = 0; i < selectedPatient.getHealthIssues().length; i++) {
-			tempList.add(selectedPatient.getHealthIssues()[i]);
+		for (int i = 0; i < selectedPatient.getHealthIssues().size(); i++) {
+			tempList.add(selectedPatient.getHealthIssues().get(i));
 		}
 		stringList = FXCollections.observableArrayList(tempList);
 		stringList.setAll(tempList);
 		HealthView.setItems(stringList);
 		
 		tempList = new ArrayList<>();
-		for (int i = 0; i < selectedPatient.getImmunizations().length; i++) {
-			tempList.add(selectedPatient.getImmunizations()[i]);
+		for (int i = 0; i < selectedPatient.getImmunizations().size(); i++) {
+			tempList.add(selectedPatient.getImmunizations().get(i));
 		}
 		stringList = FXCollections.observableArrayList(tempList);
 		stringList.setAll(tempList);
@@ -211,31 +266,47 @@ public class NursePage extends Pages{
 		else if(patientDOB[2].length() == 4){
 			patientAge = 2021 - patientBirthYear;
 		}
-		if(patientAge > 12) {
+		if(selectedPatient.getWeight() >= 0) {
 			weightTF.setText("" + selectedPatient.getWeight());
-			heightTF.setText("" + selectedPatient.getHeight());
-			bTempTF.setText("" + selectedPatient.getBodyTemp());
-			bPressTF.setText("" + selectedPatient.getBloodPress());
 		}
 		else {
-			weightTF.setEditable(false);
-			weightTF.setStyle("-fx-background-color: Gainsboro;");
-			heightTF.setEditable(false);
-			heightTF.setStyle("-fx-background-color: Gainsboro;");
-			bTempTF.setEditable(false);
-			bTempTF.setStyle("-fx-background-color: Gainsboro;");
+			weightTF.setText("");
+		}
+		if(selectedPatient.getHeight() >= 0) {
+			heightTF.setText("" + selectedPatient.getHeight());
+		}
+		else {
+			heightTF.setText("");
+		}
+		if(selectedPatient.getBodyTemp() >= 0) {
+			bTempTF.setText("" + selectedPatient.getBodyTemp());
+		}
+		else {
+			bTempTF.setText("");
+		}
+		if(patientAge > 12) {
+			if(selectedPatient.getBloodPress() >= 0) {
+				bPressTF.setText("" + selectedPatient.getBloodPress());
+			}
+			else {
+				bPressTF.setText("");
+			}
+			bPressTF.setEditable(true);
+			bPressTF.setStyle("-fx-control-inner-background: white;");
+		}
+		else {
 			bPressTF.setEditable(false);
-			bPressTF.setStyle("-fx-background-color: Gainsboro;");
+			bPressTF.setStyle("-fx-control-inner-background: Gainsboro;");
 		}
 		
 		String tempString = "";
-		for(int i = 0; i < selectedPatient.getAllergies().length; i++) {
-			tempString += "" + selectedPatient.getAllergies()[i] + "\n";
+		for(int i = 0; i < selectedPatient.getAllergies().size(); i++) {
+			tempString += "" + selectedPatient.getAllergies().get(i) + "\n";
 		}
 		knownAllergyTA.setText(tempString);
 		tempString = "";
-		for(int i = 0; i < selectedPatient.getHealthConcerns().length; i++) {
-			tempString += "" + selectedPatient.getHealthConcerns()[i] + "\n";
+		for(int i = 0; i < selectedPatient.getHealthConcerns().size(); i++) {
+			tempString += "" + selectedPatient.getHealthConcerns().get(i) + "\n";
 		}
 		hcTA.setText(tempString);
 	}
@@ -256,11 +327,19 @@ public class NursePage extends Pages{
 		
 		String textFromAllergies = knownAllergyTA.getText();
 		String lines[] = textFromAllergies.split("\\r?\\n");
-		selectedPatient.setAllergies(lines);
+		ArrayList<String> tempList = new ArrayList<>();
+		for(int i = 0; i < lines.length; i++) {
+			tempList.add(lines[i]);
+		}
+		selectedPatient.setAllergies(tempList);
 		
 		String textFromConcerns = hcTA.getText();
 		String hcLines[] = textFromConcerns.split("\\r?\\n");
-		selectedPatient.setHealthConcerns(hcLines);
+		ArrayList<String> tempList2 = new ArrayList<>();
+		for(int i = 0; i < hcLines.length; i++) {
+			tempList2.add(hcLines[i]);
+		}
+		selectedPatient.setHealthConcerns(tempList2);
 		
 		/*weightTF.setText("");
 		heightTF.setText("");
@@ -286,14 +365,14 @@ public class NursePage extends Pages{
 		String fName = fNameTF.getText();
 		String lName = lNameTF.getText();
 		String date = dobTF.getText();
-		String dob = (date.substring(0,2) + "/" + date.substring(2,4) + "/" + date.substring(4,8));
+		//String dob = (date.substring(0,2) + "/" + date.substring(2,4) + "/" + date.substring(4,8));
 		String email = emailTF.getText();
 		String phoneNum = phoneNumTF.getText();
 		//int phoneNum = Integer.parseInt(phoneNumTF.getText());
 		String pharmacy = pharmacyTF.getText();
 		String insurCompany = insurCompanyTF.getText();
 		cnt++;
-		Patient pat = new Patient(fName, lName, cnt, dob, email, phoneNum, pharmacy, insurCompany);//moved from the top
+		Patient pat = new Patient(fName, lName, cnt, date, email, phoneNum, pharmacy, insurCompany);//moved from the top
 		newiD(pat);
 		setLoginInfo(pat);
 		addDoctor(pat);
@@ -305,7 +384,15 @@ public class NursePage extends Pages{
 	
 	public void newiD(Patient p) {
 		cnt++;
-		p.setPatientID(cnt);
+		Random rand = new Random();
+		int randInt = rand.nextInt(9999) + 1;//4 digit id
+		for(int i = 0; i < umgr.getUserList().size(); i++) {
+			if(umgr.getUserList().get(i).getID() == randInt) {
+				randInt = rand.nextInt(9999) + 1;
+				i = -1;//restart for loop
+			}
+		}
+		p.setPatientID(randInt);
 	}
 	public void setLoginInfo(Patient p) {
 		String un = "" + p.getFirstName() + p.getLastName() + p.getPatientID();
@@ -337,6 +424,7 @@ public class NursePage extends Pages{
 		int randDocInt = rand.nextInt(dList.size());// random number between 0 and (amount of doctors - 1) inclusive
 		
 		dList.get(randDocInt).addPatient(p);
+		p.setDoctor(dList.get(randDocInt).getID());
 	}
 	
 
@@ -347,22 +435,22 @@ public class NursePage extends Pages{
 	    
 		
 	
-	public void changeDoc(ActionEvent event) throws IOException {
+	/*public void changeDoc(ActionEvent event) throws IOException {
 	       for(int i = 0;i<patientList.size();i++){
 	    	   Patient currentPatient = patientList.get(i);
 	    	   for(int r = 0; r<doctorList.size(); i++) {
 	    		   Doctor currentDoctor = doctorList.get(r);
 	    		   Doctor nextDoctor = doctorList.get((r+1) % doctorList.size());
-	    		   if(currentDoctor.getDoctorPatientList().contains(i)) {
+	    		   if(currentDoctor.getPatients().contains(i)) {
 	    			   currentDoctor.removePatient(currentPatient);
-	    			   nextDoctor.addPatientsToDoctor(currentPatient);
+	    			   nextDoctor.addPatient(currentPatient);
 	    			   
 	    	   }
 				
 				//	docList.add(ArrayList<Patient> pat);
 			}
 	       }		
-	}
+	}*/
 	
 	private String randomPassword() {
 		String passwordString = "";
@@ -379,12 +467,78 @@ public class NursePage extends Pages{
 		}
 		return passwordString;
 	}
-	/*@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-	}*/
 	
-	/*public void setScene() throws IOException{
-		scene = FXMLLoader.load(getClass().getResource("NursePane.fxml"));
-	}*/
+	@FXML
+	public void removeMeds(Event e) {
+		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		if(selectedPatient.getMedications().contains(MedsView.getSelectionModel().getSelectedItem())) {
+			selectedPatient.getMedications().remove(MedsView.getSelectionModel().getSelectedIndex());
+		}
+		
+		resetPatientHistoryView(selectedPatient);
+	}
+	@FXML
+	public void addMeds(Event e) {
+		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		selectedPatient.getMedications().add(EnterMedsTF.getText());
+		resetPatientHistoryView(selectedPatient);
+	}
+	@FXML
+	public void removeHealth(Event e) {
+		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		if(selectedPatient.getHealthIssues().contains(HealthView.getSelectionModel().getSelectedItem())) {
+			selectedPatient.getHealthIssues().remove(HealthView.getSelectionModel().getSelectedIndex());
+		}
+		
+		resetPatientHistoryView(selectedPatient);
+	}
+	@FXML
+	public void addHealth(Event e) {
+		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		selectedPatient.getHealthIssues().add(EnterHealthTF.getText());
+		resetPatientHistoryView(selectedPatient);
+	}
+	@FXML
+	public void removeImmunizations(Event e) {
+		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		if(selectedPatient.getImmunizations().contains(ImmunView.getSelectionModel().getSelectedItem())) {
+			selectedPatient.getImmunizations().remove(ImmunView.getSelectionModel().getSelectedIndex());
+		}
+		
+		resetPatientHistoryView(selectedPatient);
+	}
+	@FXML
+	public void addImmunizations(Event e) {
+		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		selectedPatient.getImmunizations().add(EnterImmunTF.getText());
+		resetPatientHistoryView(selectedPatient);
+	}
+	
+	private void resetPatientHistoryView(Patient selectedPatient) {
+		ArrayList<String> tempList = new ArrayList<>();
+		for (int i = 0; i < selectedPatient.getMedications().size(); i++) {
+			tempList.add(selectedPatient.getMedications().get(i));
+		}
+		ObservableList<String> stringList = FXCollections.observableArrayList(tempList);
+		stringList.setAll(tempList);
+		MedsView.setItems(stringList);
+		
+		tempList = new ArrayList<>();
+		for (int i = 0; i < selectedPatient.getHealthIssues().size(); i++) {
+			tempList.add(selectedPatient.getHealthIssues().get(i));
+		}
+		stringList = FXCollections.observableArrayList(tempList);
+		stringList.setAll(tempList);
+		HealthView.setItems(stringList);
+		
+		tempList = new ArrayList<>();
+		for (int i = 0; i < selectedPatient.getImmunizations().size(); i++) {
+			tempList.add(selectedPatient.getImmunizations().get(i));
+		}
+		stringList = FXCollections.observableArrayList(tempList);
+		stringList.setAll(tempList);
+		ImmunView.setItems(stringList);
+		umgr.writeAllUsers();
+	}
+	
 }

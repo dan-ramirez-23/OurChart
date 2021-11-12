@@ -70,22 +70,22 @@ public class PatientPage extends Pages {
 
 		String temp = "";
 
-		for (int i = 0; i < currentUser.getHealthConcerns().length; i++) {
-			temp += "" + currentUser.getHealthConcerns()[i] + "\n";
+		for (int i = 0; i < currentUser.getHealthConcerns().size(); i++) {
+			temp += "" + currentUser.getHealthConcerns().get(i) + "\n";
 		}
 		
 		healthHistory.setText(temp);
 
 		temp = "";
-		for (int i = 0; i < currentUser.getImmunizations().length; i++) {
-			temp += "" + currentUser.getImmunizations()[i] + "\n";
+		for (int i = 0; i < currentUser.getImmunizations().size(); i++) {
+			temp += "" + currentUser.getImmunizations().get(i) + "\n";
 		}
 
 		ImmuniView.setText(temp);
 
 		temp = "";
-		for (int i = 0; i < currentUser.getMedications().length; i++) {
-			temp += "" + currentUser.getMedications()[i] + "\n";
+		for (int i = 0; i < currentUser.getMedications().size(); i++) {
+			temp += "" + currentUser.getMedications().get(i) + "\n";
 		}
 
 		MedView.setText(temp);

@@ -1,5 +1,7 @@
 package termproj;
 
+import java.util.ArrayList;
+
 public class Patient extends User {
 	// private String firstName; contained in User class
 	// private String lastName;
@@ -10,18 +12,18 @@ public class Patient extends User {
 	private String email;
 	private String pharmacy;
 	private String insurer;
-	private String[] healthIssues;
-	private String[] examFindings;
+	private ArrayList<String> healthIssues;
+	private ArrayList<String> examFindings;
 	private String recommendations;
 	private double weight;
 	private double height;
 	private double bodyTemp;
 	private double bloodPressure;
-	private String[] allergies;
-	private String[] healthConcerns;
-	private String[] immunizations;
-	private String[] prescriptions;
-	private String[] medications;
+	private ArrayList<String> allergies;
+	private ArrayList<String> healthConcerns;
+	private ArrayList<String> immunizations;
+	private ArrayList<String> prescriptions;
+	private ArrayList<String> medications;
 	// private PatientMessage[] inbox;
 
 	
@@ -42,25 +44,25 @@ public class Patient extends User {
 		email = em;
 		pharmacy = pharm;
 		insurer = ins;
-		immunizations = new String[1];
-		immunizations[0] = "";
-		prescriptions = new String[1];
-		immunizations[0] = "";
-		medications = new String[1];
-		medications[0] = "";
-		healthIssues = new String[1];
-		healthIssues[0] = "";
-		examFindings = new String[1];
-		examFindings[0] = "";
+		immunizations = new ArrayList<>();
+		immunizations.add("");
+		prescriptions = new ArrayList<>();
+		immunizations.add("");
+		medications = new ArrayList<>();
+		medications.add("");
+		healthIssues = new ArrayList<>();
+		healthIssues.add("");
+		examFindings = new ArrayList<>();
+		examFindings.add("");
 		recommendations = "";
 		weight = -1;
 		height = -1;
 		bodyTemp = -1;
 		bloodPressure = -1;
-		allergies = new String[1];
-		allergies[0] = "";
-		healthConcerns = new String[1];
-		healthConcerns[0] = "";
+		allergies = new ArrayList<>();
+		allergies.add("");
+		healthConcerns = new ArrayList<>();
+		healthConcerns.add("");
 	
 	}
 
@@ -77,18 +79,39 @@ public class Patient extends User {
 		email = em;
 		pharmacy = pharm;
 		insurer = ins;
-		immunizations = imm;
-		prescriptions = pres;
-		medications = meds;
-		healthIssues = hi;
-		examFindings = ef;
+		immunizations = new ArrayList<>();
+		for(int i = 0; i < imm.length; i++) {
+			immunizations.add(imm[i]);
+		}
+		prescriptions = new ArrayList<>();
+		for(int i = 0; i < pres.length; i++) {
+			prescriptions.add(pres[i]);
+		}
+		medications = new ArrayList<>();
+		for(int i = 0; i < meds.length; i++) {
+			medications.add(meds[i]);
+		}
+		healthIssues = new ArrayList<>();
+		for(int i = 0; i < hi.length; i++) {
+			healthIssues.add(hi[i]);
+		}
+		examFindings = new ArrayList<>();
+		for(int i = 0; i < ef.length; i++) {
+			examFindings.add(ef[i]);
+		}
 		recommendations = rec;
 		weight = w;
 		height = h;
 		bodyTemp = bt;
 		bloodPressure = bp;
-		allergies = aller;
-		healthConcerns = hc;
+		allergies = new ArrayList<>();
+		for(int i = 0; i < aller.length; i++) {
+			allergies.add(aller[i]);
+		}
+		healthConcerns = new ArrayList<>();
+		for(int i = 0; i < hc.length; i++) {
+			healthConcerns.add(hc[i]);
+		}
 
 	}
 
@@ -118,23 +141,24 @@ public class Patient extends User {
 		insurer = Insurer;
 	}
 
-	public void setImmunizations(String[] immun) {
+	public void setImmunizations(ArrayList<String> immun) {
 		immunizations = immun;
 	}
 
-	public void setPrescriptions(String[] P) {
+	public void setPrescriptions(ArrayList<String> P) {
 		prescriptions = P;
 	}
+	
 
-	public void setMedications(String[] Meds) {
+	public void setMedications(ArrayList<String> Meds) {
 		medications = Meds;
 	}
 
-	public void setHealthIssues(String[] hi) {
+	public void setHealthIssues(ArrayList<String> hi) {
 		healthIssues = hi;
 	}
 
-	public void setExamFindings(String[] ef) {
+	public void setExamFindings(ArrayList<String> ef) {
 		examFindings = ef;
 	}
 
@@ -158,11 +182,11 @@ public class Patient extends User {
 		bloodPressure = bp;
 	}
 
-	public void setAllergies(String[] aller) {
+	public void setAllergies(ArrayList<String> aller) {
 		allergies = aller;
 	}
 
-	public void setHealthConcerns(String[] hc) {
+	public void setHealthConcerns(ArrayList<String> hc) {
 		healthConcerns = hc;
 	}
 
@@ -211,23 +235,23 @@ public class Patient extends User {
 		return insurer;
 	}
 
-	public String[] getImmunizations() {
+	public ArrayList<String> getImmunizations() {
 		return immunizations;
 	}
 
-	public String[] getPrescriptions() {
+	public ArrayList<String> getPrescriptions() {
 		return prescriptions;
 	}
 
-	public String[] getMedications() {
+	public ArrayList<String> getMedications() {
 		return medications;
 	}
 
-	public String[] getHealthIssues() {
+	public ArrayList<String> getHealthIssues() {
 		return healthIssues;
 	}
 
-	public String[] getExamFindings() {
+	public ArrayList<String> getExamFindings() {
 		return examFindings;
 	}
 
@@ -251,12 +275,12 @@ public class Patient extends User {
 		return bloodPressure;
 	}
 
-	public String[] getAllergies() {
+	public ArrayList<String> getAllergies() {
 		return allergies;
 	}
 
-	public String[] getHealthConcerns() {
+	public ArrayList<String> getHealthConcerns() {
 		return healthConcerns;
 	}
-
+	
 }
