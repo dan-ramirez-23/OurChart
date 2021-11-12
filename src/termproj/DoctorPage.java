@@ -321,8 +321,7 @@ public class DoctorPage extends Pages {
 	@FXML
 	public void sendSummary(Event e) {
 		String temp = "";
-		temp += physExamFindings.getText() + "\n";
-		temp += Recs.getText();
+		temp += "Physical Exam Findings:\n" + physExamFindings.getText() + "\n\nDoctor's Recommendations:\n" + Recs.getText();
 		PatientMessage summary = new PatientMessage("", temp, "", true);
 		Patient selectedPatient = (Patient) patientView.getSelectionModel()
 				.getSelectedItem();

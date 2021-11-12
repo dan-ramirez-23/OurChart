@@ -22,7 +22,7 @@ public class TermProj extends Application {
 	private UserManager um = new UserManager(userList);
 
 	public void start(Stage primaryStage) throws Exception {
-		// hardcode();
+		hardcode();
 		stage = primaryStage;
 		/*
 		 * FXMLLoader loader = new FXMLLoader();

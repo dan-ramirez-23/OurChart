@@ -133,6 +133,7 @@ public class PatientPage extends Pages {
 		if (summaryList.size() > 0) {
 			dateView.getSelectionModel().select(0);
 		}
+		summarySelected(null);
 		setListView();
 
 	}
@@ -156,8 +157,9 @@ public class PatientPage extends Pages {
 	public void summarySelected(MouseEvent arg0) {
 		PatientMessage selectedMessage = dateView.getSelectionModel()
 				.getSelectedItem();
-		summaryArea.setText(selectedMessage.getMessage());
-		setListView();
+		if(selectedMessage != null) {
+			summaryArea.setText(selectedMessage.getMessage());
+		}
 	}
 
 	public void send(ActionEvent event) throws IOException {
