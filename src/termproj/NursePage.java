@@ -159,6 +159,8 @@ public class NursePage extends Pages{
 				messageSelected(event);
 			}
 		});
+		lstView.getSelectionModel().select(0);
+		userSelected(null);
 		setInboxView();
 	}
 	

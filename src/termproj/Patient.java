@@ -45,24 +45,24 @@ public class Patient extends User {
 		pharmacy = pharm;
 		insurer = ins;
 		immunizations = new ArrayList<>();
-		immunizations.set(0, "");
+		immunizations.add("");
 		prescriptions = new ArrayList<>();
-		immunizations.set(0, "");
+		immunizations.add("");
 		medications = new ArrayList<>();
-		medications.set(0, "");
+		medications.add("");
 		healthIssues = new ArrayList<>();
-		healthIssues.set(0, "");
+		healthIssues.add("");
 		examFindings = new ArrayList<>();
-		examFindings.set(0, "");
+		examFindings.add("");
 		recommendations = "";
 		weight = -1;
 		height = -1;
 		bodyTemp = -1;
 		bloodPressure = -1;
 		allergies = new ArrayList<>();
-		allergies.set(0, "");
+		allergies.add("");
 		healthConcerns = new ArrayList<>();
-		healthConcerns.set(0, "");
+		healthConcerns.add("");
 	
 	}
 

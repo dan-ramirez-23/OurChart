@@ -99,6 +99,8 @@ public class DoctorPage extends Pages{
 				userSelected(event);
 			}
 		});
+		patientView.getSelectionModel().select(0);
+		userSelected(null);
 		setListView();
 
 	}
@@ -178,20 +180,20 @@ public class DoctorPage extends Pages{
 		int l = (selectedPatient.getPrescriptions().size() + 1);
 		ArrayList<String> newPrescriptions = new ArrayList<>();
 		
-		for(int i = 0; i < selectedPatient.getPrescriptions().size(); i++){
-		   newPrescriptions.set(i, selectedPatient.getPrescriptions().get(i));
-		}
-		newPrescriptions.set(selectedPatient.getPrescriptions().size(), newprescription);
+		/*for(int i = 0; i < selectedPatient.getPrescriptions().size(); i++){
+		   newPrescriptions.add(selectedPatient.getPrescriptions().get(i));
+		}*/
+		newPrescriptions.add(newprescription);
 		selectedPatient.setPrescriptions(newPrescriptions);
-		
-	String subj = ("New Prescription " + newprescription);
+		//waiting for MessageHandler to be implemented
+	/*String subj = ("New Prescription " + newprescription);
 	String body = ("Hello " + selectedPatient.getFirstName() + " your prescription " + newprescription 
 			+ " has been sent to your pharmacy " + selectedPatient.getPharmacy() + " and will be ready soon");
 	String[] recipient = {patientSelected};
 	String senderUN = selectedPatient.getUsername();
 	MessageHandler msgHandler = new MessageHandler(subj,body,senderUN);
-	msgHandler.sendMessage();
-		
+	msgHandler.sendMessage();*/
+		umgr.writeAllUsers();//needed to save all changes
 	}
 	public void send(ActionEvent event) throws IOException {
 		sendMsg();
