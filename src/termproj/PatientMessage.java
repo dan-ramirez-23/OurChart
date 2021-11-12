@@ -1,6 +1,8 @@
 package termproj;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class PatientMessage implements Serializable {
 
@@ -9,6 +11,8 @@ public class PatientMessage implements Serializable {
 	private boolean summary;
 	private String senderUN;
 	private String recipient;
+	private String dateSent;
+
 
 	public PatientMessage(String subj, String body, String sender, String recipient) {
 		subject = subj;
@@ -16,8 +20,21 @@ public class PatientMessage implements Serializable {
 		senderUN = sender;
 		this.recipient = recipient;
 		summary = false;
+		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy 'at' hh:mm:ss aa z");
+		Date date = new Date(System.currentTimeMillis());
+		dateSent = formatter.format(date);
 	}
 
+	public PatientMessage(String subj, String body, String sender, boolean s, String recipient) {
+		subject = subj;
+		messageBody = body;
+		senderUN = sender;
+		this.recipient = recipient;
+		summary = s;
+		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy 'at' hh:mm:ss aa z");
+		Date date = new Date(System.currentTimeMillis());
+		dateSent = formatter.format(date);
+	}
 	public void setSenderUN(String id) {
 		senderUN = id;
 	}
@@ -46,12 +63,12 @@ public class PatientMessage implements Serializable {
 		return recipient;
 	}
 	
-	public PatientMessage(String subj, String body, String sender, boolean s) {
-		subject = subj;
-		messageBody = body;
-		senderUN = sender;
-		summary = s;
+
+	public String toString() {
+		return dateSent;
+
 	}
+	
 
 	/*
 	 * public void setSubject(String subj) { subject = subj; } public String
