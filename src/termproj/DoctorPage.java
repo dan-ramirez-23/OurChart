@@ -76,12 +76,12 @@ public class DoctorPage extends Pages{
 		//find Doctor by username
 		String ut = "Doctor";
 		for(int i = 0; i < super.userList.size(); i++) {
-			UserManager testUM = new UserManager(uL);
-			System.out.println("Hannah user type:" + testUM.readUserFromList(super.username).getUserType());
+			//UserManager testUM = new UserManager(uL);
+			//System.out.println("Hannah user type:" + testUM.readUserFromList(super.username).getUserType());
 			
-			if(ut.equals(super.userList.get(i).getUserType()) && (super.userList.get(i).getUsername().equals(super.username))) {
-				System.out.println(super.userList.get(i));
-				user = (Doctor) super.userList.get(i);
+			if(ut.equals(userList.get(i).getUserType()) && (userList.get(i).getUsername().equals(username))) {
+				System.out.println(userList.get(i));
+				user = (Doctor) userList.get(i);
 			}
 		}
 		patientList = user.getPatients();
@@ -175,13 +175,13 @@ public class DoctorPage extends Pages{
 	public void sendPrescriptions() {
 		Patient selectedPatient = (Patient) patientView.getSelectionModel().getSelectedItem();
 		String newprescription = prescript.getText();
-		int l = (selectedPatient.getPrescriptions().length + 1);
-		String[] newPrescriptions = new String[l];
+		int l = (selectedPatient.getPrescriptions().size() + 1);
+		ArrayList<String> newPrescriptions = new ArrayList<>();
 		
-		for(int i = 0; i < selectedPatient.getPrescriptions().length; i++){
-		   newPrescriptions[i] = selectedPatient.getPrescriptions()[i];
+		for(int i = 0; i < selectedPatient.getPrescriptions().size(); i++){
+		   newPrescriptions.set(i, selectedPatient.getPrescriptions().get(i));
 		}
-		newPrescriptions[selectedPatient.getPrescriptions().length] = newprescription;
+		newPrescriptions.set(selectedPatient.getPrescriptions().size(), newprescription);
 		selectedPatient.setPrescriptions(newPrescriptions);
 		
 	String subj = ("New Prescription " + newprescription);
