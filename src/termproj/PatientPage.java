@@ -185,10 +185,13 @@ public class PatientPage extends Pages {
 	
 	@FXML
 	public void logOut(ActionEvent e) throws IOException {
+		System.out.println("Audrey inbox before logout:" + umgr.readUserFromList("awong24").getInbox());
 		umgr.writeAllUsers();
 		Parent root = FXMLLoader.load(getClass().getResource("LoginPane.fxml"));
 		Stage stage = (Stage) scenePane.getScene().getWindow();
 		stage.setScene(new Scene(root, 550, 400));
+		umgr.readAllUsers();
+		System.out.println("Audrey inbox after logout: " + umgr.readUserFromList("awong24").getInbox());
 	}
 
 	private void setListView() {
@@ -233,13 +236,16 @@ public class PatientPage extends Pages {
 	@FXML
 	public void messageSelected(MouseEvent arg0) {
 		PatientMessage selectedMsg = inboxTblView.getSelectionModel().getSelectedItem();
-		messageBodyTA.setText(selectedMsg.getMessage());
-		//selectedMsgSenderUN = inboxTblView.getSelectionModel().getSelectedItem().getSenderUN();
+		
+		if(selectedMsg != null) {
+			messageBodyTA.setText(selectedMsg.getMessage());
+		}
 		
 	}
 	
 	public void sendMessage(ActionEvent event) throws IOException {
 		int docID = currentUser.getDoctor();
+		System.out.println("docID is: " + docID);
 		User myDoc = umgr.getEmployee(docID);
 		String subj = subjectTF.getText();
 		System.out.println("in the sendMsg function - subj is: " + subj);
@@ -250,8 +256,9 @@ public class PatientPage extends Pages {
 
 		System.out.println("In PatientPage sending message from " + senderUN);
 		MessageHandler msg = new MessageHandler(subj, body, senderUN, recipient);
-		msg.sendMessage();
-		
+		msg.sendMessage(true);
+		//msg.copyNurses();
+		umgr.readAllUsers();
 
 		
 	}

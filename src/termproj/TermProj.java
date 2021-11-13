@@ -77,12 +77,12 @@ public class TermProj extends Application {
 		String[] hc = { "He is to real" };
 		int numOfDoctors = doctorList.size();
 
-		Patient pat1 = new Patient("Another", "Patient", 002, 102, "06/21/99",
+		Patient pat1 = new Patient("Another", "Patient", 002, 293, "06/21/99",
 				"9726584598", "booty@gmail.com", "Walgreens", "anotherPat",
 				"password", "Insure", im, per, med, hi, ef, "blaze it", 69, 192,
 				420, 200, alrg, hc);
 
-		Patient pat2 = new Patient("Sebastian", "Diaz", 001, 293, "03/16/00",
+		Patient pat2 = new Patient("Sebastian", "Diaz", 001, 102, "03/16/00",
 				"6023915618", "ass@gmail.com", "CVS", "sdiazagu", "password",
 				"insurance company", im, per, med, hi, ef, "Stay up cuzzo",
 				289.2, 6.7, 98.2, 170.3, alrg, hc);

@@ -52,6 +52,8 @@ public class User implements Serializable {
 			} 
 		}
 		
+		System.out.println(messages);
+		
 		return messages;
 	}
 

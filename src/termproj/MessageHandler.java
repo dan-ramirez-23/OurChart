@@ -11,7 +11,6 @@ public class MessageHandler {
 	
 	public void sendMessage() {
 
-		// for each recipient:
 		UserManager umgr = new UserManager();
 		umgr.readAllUsers();
 		
@@ -20,13 +19,57 @@ public class MessageHandler {
 		int recipientIndex = umgr.readUserIndex(recipientUN);
 		umgr.getUserList().get(recipientIndex).addMessage(msg);
 		umgr.writeAllUsers();
-			
-
-
-			
-		
+		System.out.println("Recipient inbox after sendMessage:" + umgr.getUserList().get(recipientIndex).getInbox());
 	}
 	
+	
+	
+	public void sendMessage(boolean copyNurses) {
+
+		UserManager umgr = new UserManager();
+		umgr.readAllUsers();
+		
+
+		String recipientUN = msg.getRecipient();
+		System.out.println("recipient in sendMessage in MessageHandler: " + recipientUN);
+		int recipientIndex = umgr.readUserIndex(recipientUN);
+		umgr.getUserList().get(recipientIndex).addMessage(msg);
+		
+		
+		for(User usr : umgr.getUserList()) {
+			if(usr.getUserType().equals("Nurse")) {
+				System.out.println("copying message to " + usr.getUsername());
+				usr.addMessage(msg);
+			}
+		}
+		
+		System.out.println("Recipient inbox after sendMessage:" + umgr.getUserList().get(recipientIndex).getInbox());
+		
+		
+		umgr.writeAllUsers();
+
+	}
+	
+	
+	
+	public void copyNurses() {
+		UserManager umgr = new UserManager();
+		umgr.readAllUsers();
+		
+		for(User usr : umgr.getUserList()) {
+			if(usr.getUserType().equals("Nurse")) {
+				System.out.println("copying message to " + usr.getUsername());
+				usr.addMessage(msg);
+			}
+		}
+		
+
+		String recipientUN = msg.getRecipient();
+		int recipientIndex = umgr.readUserIndex(recipientUN);
+		umgr.getUserList().get(recipientIndex).addMessage(msg);
+		umgr.writeAllUsers();
+	}
+ 	
 	
 	public PatientMessage[] loadMessages(String userType, int userID) {
 		return null;

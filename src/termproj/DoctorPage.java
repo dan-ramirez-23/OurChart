@@ -162,9 +162,9 @@ public class DoctorPage extends Pages {
 	@FXML
 	public void messageSelected(MouseEvent arg0) {
 		PatientMessage selectedMsg = inboxTblView.getSelectionModel().getSelectedItem();
-		messageBodyTA.setText(selectedMsg.getMessage());
-		//selectedMsgSenderUN = inboxTblView.getSelectionModel().getSelectedItem().getSenderUN();
-		
+		if(selectedMsg != null) {
+			messageBodyTA.setText(selectedMsg.getMessage());
+		}
 	}
 	
 	public void sendMessage(ActionEvent event) throws IOException {
@@ -183,6 +183,8 @@ public class DoctorPage extends Pages {
 			System.out.println("In PatientPage sending message from " + senderUN);
 			MessageHandler msg = new MessageHandler(subj, body, senderUN, recipient);
 			msg.sendMessage();
+			umgr.readAllUsers();
+
 		}
 
 		
@@ -195,6 +197,7 @@ public class DoctorPage extends Pages {
 		Parent root = FXMLLoader.load(getClass().getResource("LoginPane.fxml"));
 		Stage stage = (Stage) scenePane.getScene().getWindow();
 		stage.setScene(new Scene(root, 550, 400));
+		umgr.readAllUsers();
 	}
 	
 
