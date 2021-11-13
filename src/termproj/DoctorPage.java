@@ -394,7 +394,7 @@ public class DoctorPage extends Pages {
 	public void sendSummary(Event e) {
 		String temp = "";
 		temp += "Physical Exam Findings:\n" + physExamFindings.getText() + "\n\nDoctor's Recommendations:\n" + Recs.getText();
-		PatientMessage summary = new PatientMessage("", temp, "", true);
+		PatientMessage summary = new PatientMessage("", temp, "", true, "");
 		Patient selectedPatient = (Patient) patientView.getSelectionModel()
 				.getSelectedItem();
 		selectedPatient.getInbox().add(summary);
