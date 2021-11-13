@@ -121,7 +121,16 @@ public class PatientPage extends Pages {
 	public void initialize() {
 
 		welcomeLabel.setText("Welcome " + currentUser.getFirstName());
+		inboxTblView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		messageBodyTA.setEditable(false);
+		messageBodyTA.setWrapText(true);
+		outgoingMessageTA.setWrapText(true);
+		healthHistory.setWrapText(true);
+		ImmuniView.setWrapText(true);
+		MedView.setWrapText(true);
+		summaryArea.setWrapText(true);
+		
+		
 		inboxTblView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {

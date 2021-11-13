@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
@@ -18,6 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -158,12 +160,17 @@ public class NursePage extends Pages{
 	private TextField EnterHealthTF;
 	@FXML
 	private TextField EnterImmunTF;
+	@FXML
+	private Button sendEmailBtn;
 	
 	@FXML
 	public void initialize() {
 		
 		welcomeLabel.setText("Welcome " + user.getFirstName());
 		messageBodyTA.setEditable(false);
+		inboxTblView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		messageBodyTA.setWrapText(true);
+		outgoingMessageTA.setWrapText(true);
 		
 		lstView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -215,6 +222,19 @@ public class NursePage extends Pages{
 		}
 
 		
+	}
+	
+	
+	@FXML
+	public void sendEmail() {
+		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Email Confirmation");
+		alert.setHeaderText("Email sent!");
+		alert.setContentText("Your message was sent to " + selectedPatient.getFirstName() + " "
+				+ selectedPatient.getLastName() + " at " + selectedPatient.getEmail());
+
+		alert.showAndWait();
 	}
 	
 	

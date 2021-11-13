@@ -14,6 +14,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -95,6 +97,8 @@ public class DoctorPage extends Pages {
 	private TextArea Recs;
 	@FXML
 	private SplitPane scenePane;
+	@FXML
+	private Button sendEmailBtn;
 
 	public DoctorPage(String un, ArrayList<User> uL, UserManager um) {
 		super(un, uL, um);
@@ -120,6 +124,12 @@ public class DoctorPage extends Pages {
 	@FXML
 	public void initialize() {
 		welcomeLabel.setText("Welcome " + user.getFirstName());
+		inboxTblView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		messageBodyTA.setWrapText(true);
+		outgoingMessageTA.setWrapText(true);
+		physExamFindings.setWrapText(true);
+		Recs.setWrapText(true);
+		
 		setListView();
 		patientView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -141,6 +151,21 @@ public class DoctorPage extends Pages {
 		});
 		setInboxView();
 
+	}
+	
+	
+
+	
+	@FXML
+	public void sendEmail() {
+		Patient selectedPatient = (Patient) patientView.getSelectionModel().getSelectedItem();
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Email Confirmation");
+		alert.setHeaderText("Email sent!");
+		alert.setContentText("Your message was sent to " + selectedPatient.getFirstName() + " "
+				+ selectedPatient.getLastName() + " at " + selectedPatient.getEmail());
+
+		alert.showAndWait();
 	}
 	
 	
@@ -298,6 +323,16 @@ public class DoctorPage extends Pages {
 		 selectedPatient.getInbox().add(msgHandler);
 		 
 		umgr.writeAllUsers();// needed to save all changes
+		
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Prescription Confirmation");
+		alert.setHeaderText("Prescription sent!");
+		alert.setContentText("Your prescription for " + newprescription + " was sent to " + selectedPatient.getFirstName() + " "
+				+ selectedPatient.getLastName() + " for pickup at " + selectedPatient.getPharmacy());
+
+		alert.showAndWait();
+		
+		
 	}
 
 
