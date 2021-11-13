@@ -9,15 +9,18 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -42,13 +45,14 @@ public class NursePage extends Pages{
 	FileChooser fileChooser = new FileChooser();
 	private ArrayList<Patient> patientList = new ArrayList<>();
 	private List<PatientMessage> inboxList = new ArrayList<>();
+	//Stage stage;
 	//private ArrayList<User> userList = new ArrayList<User>();
 	
 	public NursePage(String un, ArrayList<User> uL, UserManager um) {
 		super(un, uL, um);
 		//UserManager umgr = new UserManager(uL); umgr moved to pages class, will be created in termproj
 		user = (Nurse) umgr.readUserFromList(un);
-		inboxList = user.getInbox();
+		inboxList = user.getInbox(true);
 		
 		String typeString = "Patient";//know we are looking to only display type patient
 		for(int i = 0; i < userList.size(); i++) {
@@ -58,6 +62,7 @@ public class NursePage extends Pages{
 			}
 		}
 	}
+	
 	
 	@FXML
 	private TextField weightTF;
@@ -89,6 +94,10 @@ public class NursePage extends Pages{
 	private Button sendMsgButton;
 	@FXML
 	private Label composeMsgLabel;
+	@FXML
+	private Button logOutButton;
+	@FXML
+	private SplitPane scenePane;
 	
 	
 	
@@ -205,6 +214,15 @@ public class NursePage extends Pages{
 
 		
 	}
+	
+	
+	@FXML
+	public void logOut(ActionEvent e) throws IOException {
+		umgr.writeAllUsers();
+		Parent root = FXMLLoader.load(getClass().getResource("LoginPane.fxml"));
+		Stage stage = (Stage) scenePane.getScene().getWindow();
+		stage.setScene(new Scene(root, 550, 400));
+	}
 
 
 		
@@ -264,92 +282,96 @@ public class NursePage extends Pages{
 	@FXML
 	public void userSelected(MouseEvent arg0) {
 		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
-		composeMsgLabel.setText("Message to " + selectedPatient.getUsername());
-		dobLabel.setText(selectedPatient.getDOB());
-		
-		
-		ArrayList<String> tempList = new ArrayList<>();
-		for (int i = 0; i < selectedPatient.getMedications().size(); i++) {
-			tempList.add(selectedPatient.getMedications().get(i));
-		}
-		ObservableList<String> stringList = FXCollections.observableArrayList(tempList);
-		stringList.setAll(tempList);
-		MedsView.setItems(stringList);
-		
-		tempList = new ArrayList<>();
-		for (int i = 0; i < selectedPatient.getHealthIssues().size(); i++) {
-			tempList.add(selectedPatient.getHealthIssues().get(i));
-		}
-		stringList = FXCollections.observableArrayList(tempList);
-		stringList.setAll(tempList);
-		HealthView.setItems(stringList);
-		
-		tempList = new ArrayList<>();
-		for (int i = 0; i < selectedPatient.getImmunizations().size(); i++) {
-			tempList.add(selectedPatient.getImmunizations().get(i));
-		}
-		stringList = FXCollections.observableArrayList(tempList);
-		stringList.setAll(tempList);
-		ImmunView.setItems(stringList);
-		
-		String [] patientDOB = selectedPatient.getDOB().split("-|/");
-		int patientBirthYear = Integer.parseInt(patientDOB[2]);
-		double patientAge = 0;
-		if(patientDOB[2].length() == 2) {
-			if(patientBirthYear <= 21) {
-				patientAge = 21 - patientBirthYear;
+		if(selectedPatient != null) {
+			composeMsgLabel.setText("Message to " + selectedPatient.getUsername());
+			dobLabel.setText(selectedPatient.getDOB());
+			
+			
+			ArrayList<String> tempList = new ArrayList<>();
+			for (int i = 0; i < selectedPatient.getMedications().size(); i++) {
+				tempList.add(selectedPatient.getMedications().get(i));
+			}
+			ObservableList<String> stringList = FXCollections.observableArrayList(tempList);
+			stringList.setAll(tempList);
+			MedsView.setItems(stringList);
+			
+			tempList = new ArrayList<>();
+			for (int i = 0; i < selectedPatient.getHealthIssues().size(); i++) {
+				tempList.add(selectedPatient.getHealthIssues().get(i));
+			}
+			stringList = FXCollections.observableArrayList(tempList);
+			stringList.setAll(tempList);
+			HealthView.setItems(stringList);
+			
+			tempList = new ArrayList<>();
+			for (int i = 0; i < selectedPatient.getImmunizations().size(); i++) {
+				tempList.add(selectedPatient.getImmunizations().get(i));
+			}
+			stringList = FXCollections.observableArrayList(tempList);
+			stringList.setAll(tempList);
+			ImmunView.setItems(stringList);
+			
+			String [] patientDOB = selectedPatient.getDOB().split("-|/");
+			int patientBirthYear = Integer.parseInt(patientDOB[2]);
+			double patientAge = 0;
+			if(patientDOB[2].length() == 2) {
+				if(patientBirthYear <= 21) {
+					patientAge = 21 - patientBirthYear;
+				}
+				else {
+					patientAge = 100 - patientBirthYear + 21;
+				}
+			}
+			else if(patientDOB[2].length() == 4){
+				patientAge = 2021 - patientBirthYear;
+			}
+			if(selectedPatient.getWeight() >= 0) {
+				weightTF.setText("" + selectedPatient.getWeight());
 			}
 			else {
-				patientAge = 100 - patientBirthYear + 21;
+				weightTF.setText("");
 			}
-		}
-		else if(patientDOB[2].length() == 4){
-			patientAge = 2021 - patientBirthYear;
-		}
-		if(selectedPatient.getWeight() >= 0) {
-			weightTF.setText("" + selectedPatient.getWeight());
-		}
-		else {
-			weightTF.setText("");
-		}
-		if(selectedPatient.getHeight() >= 0) {
-			heightTF.setText("" + selectedPatient.getHeight());
-		}
-		else {
-			heightTF.setText("");
-		}
-		if(selectedPatient.getBodyTemp() >= 0) {
-			bTempTF.setText("" + selectedPatient.getBodyTemp());
-		}
-		else {
-			bTempTF.setText("");
-		}
-		if(patientAge > 12) {
-			if(selectedPatient.getBloodPress() >= 0) {
-				bPressTF.setText("" + selectedPatient.getBloodPress());
+			if(selectedPatient.getHeight() >= 0) {
+				heightTF.setText("" + selectedPatient.getHeight());
 			}
 			else {
+				heightTF.setText("");
+			}
+			if(selectedPatient.getBodyTemp() >= 0) {
+				bTempTF.setText("" + selectedPatient.getBodyTemp());
+			}
+			else {
+				bTempTF.setText("");
+			}
+			if(patientAge > 12) {
+				if(selectedPatient.getBloodPress() >= 0) {
+					bPressTF.setText("" + selectedPatient.getBloodPress());
+				}
+				else {
+					bPressTF.setText("");
+				}
+				bPressTF.setEditable(true);
+				bPressTF.setStyle("-fx-control-inner-background: white;");
+			}
+			else {
+				bPressTF.setEditable(false);
+				bPressTF.setStyle("-fx-control-inner-background: Gainsboro;");
 				bPressTF.setText("");
 			}
-			bPressTF.setEditable(true);
-			bPressTF.setStyle("-fx-control-inner-background: white;");
-		}
-		else {
-			bPressTF.setEditable(false);
-			bPressTF.setStyle("-fx-control-inner-background: Gainsboro;");
-			bPressTF.setText("");
+			
+			String tempString = "";
+			for(int i = 0; i < selectedPatient.getAllergies().size(); i++) {
+				tempString += "" + selectedPatient.getAllergies().get(i) + "\n";
+			}
+			knownAllergyTA.setText(tempString);
+			tempString = "";
+			for(int i = 0; i < selectedPatient.getHealthConcerns().size(); i++) {
+				tempString += "" + selectedPatient.getHealthConcerns().get(i) + "\n";
+			}
+			hcTA.setText(tempString);
 		}
 		
-		String tempString = "";
-		for(int i = 0; i < selectedPatient.getAllergies().size(); i++) {
-			tempString += "" + selectedPatient.getAllergies().get(i) + "\n";
-		}
-		knownAllergyTA.setText(tempString);
-		tempString = "";
-		for(int i = 0; i < selectedPatient.getHealthConcerns().size(); i++) {
-			tempString += "" + selectedPatient.getHealthConcerns().get(i) + "\n";
-		}
-		hcTA.setText(tempString);
+		
 	}
 	
 	public void setListView() {

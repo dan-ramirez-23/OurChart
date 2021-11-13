@@ -9,15 +9,21 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class PatientPage extends Pages {
 	// private ArrayList<User> userList;
@@ -30,7 +36,7 @@ public class PatientPage extends Pages {
 		super(un, uL, um);
 		
 		currentUser = (Patient) umgr.readUserFromList(un);
-		inboxList = currentUser.getInbox();
+		inboxList = currentUser.getInbox(true);
 		
 
 
@@ -56,7 +62,8 @@ public class PatientPage extends Pages {
 	}
 
 	
-	
+	@FXML
+	private TabPane scenePane;
 	@FXML
 	private Label welcomeLabel;
 	@FXML
@@ -176,7 +183,13 @@ public class PatientPage extends Pages {
 
 	}
 	
-	
+	@FXML
+	public void logOut(ActionEvent e) throws IOException {
+		umgr.writeAllUsers();
+		Parent root = FXMLLoader.load(getClass().getResource("LoginPane.fxml"));
+		Stage stage = (Stage) scenePane.getScene().getWindow();
+		stage.setScene(new Scene(root, 550, 400));
+	}
 
 	private void setListView() {
 		OBS.setAll(summaryList);

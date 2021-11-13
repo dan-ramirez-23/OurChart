@@ -11,8 +11,8 @@ import javafx.stage.Stage;
 
 public class TermProj extends Application {
 
-	private final int WIDTH = 550;
-	private final int HEIGHT = 400;
+	private static final int WIDTH = 550;
+	private static final int HEIGHT = 400;
 	private static Stage stage;
 	private ArrayList<User> userList = new ArrayList<>();// created to make sure
 															// there are no null
@@ -35,6 +35,7 @@ public class TermProj extends Application {
 		primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
 		primaryStage.show(); // Display the stage
 	}
+	
 
 	public void changeScene(String fxml, String username) throws IOException {
 		// hardcode();
@@ -42,14 +43,7 @@ public class TermProj extends Application {
 		FXMLLoader loader = new FXMLLoader();
 		Pages pageController = null;
 		if (fxml.equals("NursePane.fxml")) {
-			pageController = new NursePage(username, um.getUserList(), um);// needs
-																			// to
-																			// change
-																			// depending
-																			// on
-																			// the
-																			// page
-																			// required
+			pageController = new NursePage(username, um.getUserList(), um);
 		} else if (fxml.equals("DoctorPane.fxml")) {
 			pageController = new DoctorPage(username, um.getUserList(), um);
 		} else if (fxml.equals("PatientPane.fxml")) {

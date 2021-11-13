@@ -41,6 +41,19 @@ public class User implements Serializable {
 	public List<PatientMessage> getInbox() {
 		return inbox;
 	}
+	
+	public List<PatientMessage> getInbox(boolean omitSummaries) {
+		
+		List<PatientMessage> messages = new ArrayList<PatientMessage>();
+		
+		for(PatientMessage msg : inbox) {
+			if(!msg.getSummary()) {
+				messages.add(msg);
+			} 
+		}
+		
+		return messages;
+	}
 
 	public User(String fName, String lName, String uType, String un, String pass, int identifictationNumber) {// use this constructor
 		firstName = fName;
