@@ -1,0 +1,6 @@
+testDoctor,test123,Doctor
+awong24,password,Doctor
+hjkaufma,password,Doctor
+darami14,password,Doctor 
+jtcarrio,password,Doctor
+sdiazagu,password,Doctor
