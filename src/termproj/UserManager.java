@@ -79,6 +79,34 @@ public class UserManager {
 
 	}
 	
+	
+	public int readUserIndex(String un) {//modified from PersonalFileReader
+		for(int i = 0; i < userList.size(); i++) {
+			if(un.equals(userList.get(i).username)) {
+				User usr = userList.get(i);
+				System.out.println(usr.toString());
+				return i;
+			}
+		}
+		return -1;
+
+	}
+	
+	
+	public User getEmployee(int empID) {//modified from PersonalFileReader
+		for(int i = 0; i < userList.size(); i++) {
+			if(userList.get(i).getUserType().equals("Doctor") || userList.get(i).getUserType().equals("Nurse")) {
+				Employee usr = (Employee) userList.get(i);
+				//System.out.println(usr.toString());
+				if(usr.getEmpID() == empID) {
+					return usr;
+				}
+			} 
+		}
+		return null;
+
+	}
+	
 	// add new User to global list
 	public void addUserToList(User u) {
 		int flag = 0;

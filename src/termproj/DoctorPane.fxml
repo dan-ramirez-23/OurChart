@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.23447401774397972" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.23447401774397972" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="487.0" prefWidth="181.0">
          <children>
@@ -21,10 +29,10 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Button layoutX="291.0" layoutY="454.0" mnemonicParsing="false" text="Send via patient portal" />
+                              <Button fx:id="sendMsgButton" layoutX="291.0" layoutY="454.0" mnemonicParsing="false" onAction="#sendMessage" text="Send via patient portal" />
                               <Label layoutX="33.0" layoutY="432.0" text="In case of emergency: (Phone Number)" />
-                              <Label layoutX="369.0" layoutY="247.0" text="Response to patient:" />
-                              <TextArea layoutX="278.0" layoutY="298.0" prefHeight="145.0" prefWidth="298.0" />
+                              <Label fx:id="composeMsgLabel" layoutX="369.0" layoutY="247.0" text="Response to patient:" />
+                              <TextArea fx:id="outgoingMessageTA" layoutX="278.0" layoutY="298.0" prefHeight="145.0" prefWidth="298.0" />
                               <Label layoutX="74.0" layoutY="58.0" text="Patient Messages">
                                  <font>
                                     <Font name="Times New Roman Bold" size="16.0" />
@@ -35,24 +43,15 @@
                                     <Font name="Times New Roman Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <TextArea layoutX="276.0" layoutY="91.0" prefHeight="149.0" prefWidth="296.0" />
+                              <TextArea fx:id="messageBodyTA" layoutX="276.0" layoutY="91.0" prefHeight="149.0" prefWidth="296.0" />
                               <Button layoutX="458.0" layoutY="454.0" mnemonicParsing="false" text="Send via email" />
                               <ScrollBar layoutX="555.0" layoutY="91.0" orientation="VERTICAL" prefHeight="147.0" prefWidth="17.0" />
                               <ScrollBar layoutX="558.0" layoutY="298.0" orientation="VERTICAL" prefHeight="144.0" prefWidth="17.0" />
-                              <SplitPane dividerPositions="0.5" layoutX="33.0" layoutY="109.0" prefHeight="306.0" prefWidth="204.0">
-                                <items>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                       <children>
-                                          <ScrollBar layoutX="83.0" orientation="VERTICAL" prefHeight="307.0" prefWidth="17.0" />
-                                       </children>
-                                    </AnchorPane>
-                                </items>
-                              </SplitPane>
                               <Label layoutX="50.0" layoutY="88.0" text="Patient Name" />
                               <Label layoutX="374.0" layoutY="69.0" text="Patient's Message:" />
                               <Label layoutX="315.0" layoutY="275.0" text="Subject:" />
-                              <TextField layoutX="368.0" layoutY="267.0" />
+                              <TextField fx:id="subjectTF" layoutX="368.0" layoutY="267.0" />
+                              <TableView fx:id="inboxTblView" layoutX="33.0" layoutY="105.0" prefHeight="310.0" prefWidth="200.0" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -65,21 +64,21 @@
                               <Label fx:id="dobLabel" layoutX="100.0" layoutY="84.0" text="_______________________" />
                               <Label layoutX="14.0" layoutY="119.0" text="Previously Prescribed Medications" />
                               <ListView fx:id="MedsView" layoutX="30.0" layoutY="140.0" prefHeight="150.0" prefWidth="150.0" style="-fx-border-color: #0a0a0a;" />
-                              <Button fx:id="RemoveMedsButton" layoutX="75.0" layoutY="300.0" text="Remove" onAction="#removeMeds" />
-                              <TextField fx:id="EnterMedsTF" layoutX="30.0" layoutY="330.0" prefHeight="25.0" prefWidth="150.0"/>
-                              <Button fx:id="EnterMedsButton" layoutX="85.0" layoutY="360.0" text="Enter" onAction="#addMeds"/>
+                              <Button fx:id="RemoveMedsButton" layoutX="75.0" layoutY="300.0" onAction="#removeMeds" text="Remove" />
+                              <TextField fx:id="EnterMedsTF" layoutX="30.0" layoutY="330.0" prefHeight="25.0" prefWidth="150.0" />
+                              <Button fx:id="EnterMedsButton" layoutX="85.0" layoutY="360.0" onAction="#addMeds" text="Enter" />
                               <!--<ScrollBar layoutX="164.0" layoutY="140.0" orientation="VERTICAL" prefHeight="434.0" prefWidth="17.0" />-->
                               <Label layoutX="200.0" layoutY="119.0" text="Patient's Health Issues" />
                               <ListView fx:id="HealthView" layoutX="195.0" layoutY="140.0" prefHeight="150.0" prefWidth="150.0" style="-fx-border-color: #0a0a0a;" />
-                              <Button fx:id="RemoveHealthButton" layoutX="240.0" layoutY="300.0" text="Remove" onAction="#removeHealth"/>
-                              <TextField fx:id="EnterHealthTF" layoutX="195.0" layoutY="330.0" prefHeight="25.0" prefWidth="150.0"/>
-                              <Button fx:id="EnterHealthButton" layoutX="250.0" layoutY="360.0" text="Enter" onAction="#addHealth"/>
+                              <Button fx:id="RemoveHealthButton" layoutX="240.0" layoutY="300.0" onAction="#removeHealth" text="Remove" />
+                              <TextField fx:id="EnterHealthTF" layoutX="195.0" layoutY="330.0" prefHeight="25.0" prefWidth="150.0" />
+                              <Button fx:id="EnterHealthButton" layoutX="250.0" layoutY="360.0" onAction="#addHealth" text="Enter" />
                               <!--<ScrollBar layoutX="293.0" layoutY="140.0" orientation="VERTICAL" prefHeight="434.0" prefWidth="17.0" />-->
                               <Label layoutX="370.0" layoutY="119.0" text="History of Immunization" />
                               <ListView fx:id="ImmunView" layoutX="360.0" layoutY="140.0" prefHeight="150.0" prefWidth="150.0" style="-fx-border-color: #0a0a0a;" />
-                              <Button fx:id="RemoveImmunButton" layoutX="405.0" layoutY="300.0" text="Remove" onAction="#removeImmunizations"/>
-                              <TextField fx:id="EnterImmunTF" layoutX="360.0" layoutY="330.0" prefHeight="25.0" prefWidth="150.0"/>
-                              <Button fx:id="EnterImmunButton" layoutX="415.0" layoutY="360.0" text="Enter" onAction="#addImmunizations"/>
+                              <Button fx:id="RemoveImmunButton" layoutX="405.0" layoutY="300.0" onAction="#removeImmunizations" text="Remove" />
+                              <TextField fx:id="EnterImmunTF" layoutX="360.0" layoutY="330.0" prefHeight="25.0" prefWidth="150.0" />
+                              <Button fx:id="EnterImmunButton" layoutX="415.0" layoutY="360.0" onAction="#addImmunizations" text="Enter" />
                               <!--<ScrollBar layoutX="570.0" layoutY="140.0" orientation="VERTICAL" prefHeight="434.0" prefWidth="17.0" />-->
                               <Button fx:id="reassignButton" layoutX="37.0" layoutY="450.0" mnemonicParsing="false" onAction="#changeDoc" prefHeight="27.0" prefWidth="342.0" text="Assign Patient to another Doctor" />
                            </children>
@@ -90,14 +89,14 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TextArea fx:id = "physExamFindings" layoutX="147.0" layoutY="20.0" prefHeight="150.0" prefWidth="394.0" />
+                              <TextArea fx:id="physExamFindings" layoutX="147.0" layoutY="20.0" prefHeight="150.0" prefWidth="394.0" />
                               <Label layoutX="9.0" layoutY="74.0" prefHeight="67.0" prefWidth="141.0" text="Physical Exam Findings:" />
                               <TextArea fx:id="prescript" layoutX="154.0" layoutY="405.0" prefHeight="27.0" prefWidth="391.0" />
                               <Label layoutX="23.0" layoutY="410.0" text="Prescriptions to send" />
                               <Button fx:id="sendScript" layoutX="326.0" layoutY="455.0" mnemonicParsing="false" onAction="#sendScript" text="Send" />
                               <Button fx:id="sendSummary" layoutX="270.0" layoutY="360.0" mnemonicParsing="false" onAction="#sendSummary" text="Send Visit Summary" />
                               <Label layoutX="23.0" layoutY="277.0" text="Recommendations:" />
-                              <TextArea fx:id = "Recs" layoutX="148.0" layoutY="180.0" prefHeight="150.0" prefWidth="394.0" />
+                              <TextArea fx:id="Recs" layoutX="148.0" layoutY="180.0" prefHeight="150.0" prefWidth="394.0" />
                            </children>
                         </AnchorPane>
                   </content>

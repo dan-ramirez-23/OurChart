@@ -3,34 +3,23 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollBar?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
 
   <tabs>
     <Tab text="Home">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <SplitPane dividerPositions="0.47151898734177217" layoutX="38.0" layoutY="105.0" prefHeight="160.0" prefWidth="318.0">
-                    <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="194.0" prefWidth="201.0">
-                           <children>                            
-                           </children>
-                        </AnchorPane>
-                    </items>
-                  </SplitPane>
-                  <Label layoutX="18.0" layoutY="275.0" text="Send a message to your physician" />
-                  <TextField fx:id="messageBody" layoutX="25.0" layoutY="306.0" prefHeight="107.0" prefWidth="420.0" />
-                  <Button fx:id="sendMsgButton" layoutX="495.0" layoutY="382.0" mnemonicParsing="false" onAction="#send" prefHeight="27.0" prefWidth="89.0" text="Send" />
+                  <Label fx:id="composeMsgLabel" layoutX="18.0" layoutY="275.0" text="Send a message to your physician" />
+                  <Button fx:id="sendMsgButton" layoutX="495.0" layoutY="382.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="27.0" prefWidth="89.0" text="Send" />
                   <Label layoutX="105.0" layoutY="63.0" text="Messages from Physician">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
@@ -38,15 +27,17 @@
                   </Label>
                   <Label layoutX="251.0" layoutY="88.0" text="Subject" />
                   <Label layoutX="73.0" layoutY="85.0" text="Nurse/Doctor" />
-                  <TextArea layoutX="400.0" layoutY="67.0" prefHeight="200.0" prefWidth="200.0" />
+                  <TextArea fx:id="messageBodyTA" layoutX="400.0" layoutY="67.0" prefHeight="200.0" prefWidth="200.0" />
                   <Label layoutX="473.0" layoutY="41.0" text="Message" />
-                  <Label layoutX="37.0" layoutY="18.0" text="Welcome (Patient's Name)">
+                  <Label fx:id="welcomeLabel" layoutX="37.0" layoutY="18.0" text="Welcome (Patient's Name)">
                      <font>
                         <Font name="Times New Roman" size="24.0" />
                      </font>
                   </Label>
                   <Label layoutX="519.0" layoutY="280.0" text="Subject" />
-                  <TextField fx:id="subject" layoutX="460.0" layoutY="306.0" />
+                  <TextField fx:id="subjectTF" layoutX="460.0" layoutY="306.0" />
+                  <TableView fx:id="inboxTblView" layoutX="56.0" layoutY="105.0" prefHeight="148.0" prefWidth="293.0" />
+                  <TextArea fx:id="outgoingMessageTA" layoutX="23.0" layoutY="306.0" prefHeight="158.0" prefWidth="378.0" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -60,21 +51,21 @@
                   <Label layoutX="67.0" layoutY="147.0" text="Date of Birth" />
                   <Label layoutX="465.0" layoutY="277.0" text="Medications you've had" />
                   <Label layoutX="84.0" layoutY="259.0" prefHeight="17.0" prefWidth="48.0" text="Email" />
-                  <TextField fx:id = "dobView" layoutX="183.0" layoutY="142.0" />
-                  <TextField fx:id = "PhoneNumView" layoutX="183.0" layoutY="196.0" />
-                  <TextField fx:id = "PharmView" layoutX="441.0" layoutY="50.0" />
-                  <TextField fx:id = "InsurView" layoutX="441.0" layoutY="131.0" />
+                  <TextField fx:id="dobView" layoutX="183.0" layoutY="142.0" />
+                  <TextField fx:id="PhoneNumView" layoutX="183.0" layoutY="196.0" />
+                  <TextField fx:id="PharmView" layoutX="441.0" layoutY="50.0" />
+                  <TextField fx:id="InsurView" layoutX="441.0" layoutY="131.0" />
                   <Label layoutX="451.0" layoutY="169.0" text="Immunizations you've had" />
-                  <TextField fx:id = "EmailView" layoutX="185.0" layoutY="254.0" />
+                  <TextField fx:id="EmailView" layoutX="185.0" layoutY="254.0" />
                   <Label layoutX="58.0" layoutY="47.0" text="Patient First Name" />
                   <Label layoutX="58.0" layoutY="95.0" text="Patient Last Name" />
-                  <TextField fx:id = "FirstNameView" layoutX="183.0" layoutY="42.0" />
-                  <TextField fx:id = "LastNameView" layoutX="183.0" layoutY="90.0" />
-                  <TextArea fx:id = "MedView" layoutX="446.0" layoutY="298.0" prefHeight="117.0" prefWidth="161.0" />
-                  <TextArea fx:id = "ImmuniView" layoutX="442.0" layoutY="191.0" prefHeight="82.0" prefWidth="168.0" />
+                  <TextField fx:id="FirstNameView" layoutX="183.0" layoutY="42.0" />
+                  <TextField fx:id="LastNameView" layoutX="183.0" layoutY="90.0" />
+                  <TextArea fx:id="MedView" layoutX="446.0" layoutY="298.0" prefHeight="117.0" prefWidth="161.0" />
+                  <TextArea fx:id="ImmuniView" layoutX="442.0" layoutY="191.0" prefHeight="82.0" prefWidth="168.0" />
                   <Label layoutX="223.0" layoutY="298.0" text="Health History" />
-                  <TextArea fx:id = "healthHistory" layoutX="179.0" layoutY="315.0" prefHeight="101.0" prefWidth="166.0" />
-                  <Button fx:id= "pInfoEnterButton" layoutX="370.0" layoutY="400.0" text="Enter" onAction="#enterInfo"/>
+                  <TextArea fx:id="healthHistory" layoutX="179.0" layoutY="315.0" prefHeight="101.0" prefWidth="166.0" />
+                  <Button fx:id="pInfoEnterButton" layoutX="370.0" layoutY="400.0" onAction="#enterInfo" text="Enter" />
                </children>
             </AnchorPane>
         </content>
@@ -83,10 +74,10 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <ListView fx:id = "dateView" onMouseClicked = "#summarySelected" layoutX="23.0" layoutY="52.0" prefHeight="263.0" prefWidth="200.0" />
+                  <ListView fx:id="dateView" layoutX="23.0" layoutY="52.0" onMouseClicked="#summarySelected" prefHeight="263.0" prefWidth="200.0" />
                   <Label layoutX="81.0" layoutY="26.0" text="Date of Visit" />
                   <Label layoutX="364.0" layoutY="26.0" text="Patient Summary" />
-                  <TextArea fx:id = "summaryArea" layoutX="288.0" layoutY="52.0" prefHeight="200.0" prefWidth="245.0" />
+                  <TextArea fx:id="summaryArea" layoutX="288.0" layoutY="52.0" prefHeight="200.0" prefWidth="245.0" />
                </children>
             </AnchorPane>
         </content>

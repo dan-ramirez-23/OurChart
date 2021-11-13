@@ -2,6 +2,7 @@ package termproj;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,9 +10,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 public class PatientPage extends Pages {
@@ -19,10 +24,15 @@ public class PatientPage extends Pages {
 
 	Patient currentUser = new Patient("", "", -1, "", "", "", "", "");
 	ArrayList<PatientMessage> summaryList = new ArrayList();
+	private List<PatientMessage> inboxList = new ArrayList<>();
 
 	public PatientPage(String un, ArrayList<User> uL, UserManager um) {
 		super(un, uL, um);
-		System.out.println("On patient page creation, un = " + un);
+		
+		currentUser = (Patient) umgr.readUserFromList(un);
+		inboxList = currentUser.getInbox();
+		
+
 
 		String typeString = "Patient";// know we are looking to only display
 										// type patient
@@ -41,16 +51,33 @@ public class PatientPage extends Pages {
 			}
 		}
 
-		System.out.println(currentUser.getInbox().get(0).getSummary());
+		//System.out.println(currentUser.getInbox().get(0).getSummary());
 
 	}
 
+	
+	
+	@FXML
+	private Label welcomeLabel;
+	@FXML
+	private Button enterButton;
+	@FXML
+	private TextArea messageBodyTA;
+	@FXML
+	private TextArea outgoingMessageTA;
+	@FXML
+	private TextField subjectTF;
+	@FXML
+	private Label composeMsgLabel;
 	@FXML
 	private Button sendMsgButton;
 	@FXML
-	private TextField messageBody;
+	private ObservableList<PatientMessage> inbox = FXCollections.observableArrayList(inboxList);
 	@FXML
-	private TextField subject;
+	private TableView<PatientMessage> inboxTblView = new TableView<PatientMessage>(inbox);
+	
+
+
 	@FXML
 	private TextField PhoneNumView;
 	@FXML
@@ -86,6 +113,17 @@ public class PatientPage extends Pages {
 	@FXML
 	public void initialize() {
 
+		welcomeLabel.setText("Welcome " + currentUser.getFirstName());
+		messageBodyTA.setEditable(false);
+		inboxTblView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				messageSelected(event);
+			}
+		});
+		setInboxView();
+		
+		
 		PhoneNumView.setText(currentUser.getPhoneNum());
 		PharmView.setText(currentUser.getPharmacy());
 		InsurView.setText(currentUser.getInsurer());
@@ -137,12 +175,29 @@ public class PatientPage extends Pages {
 		setListView();
 
 	}
+	
+	
 
 	private void setListView() {
 		OBS.setAll(summaryList);
 		dateView.setItems(OBS);
 	}
 
+	public void setInboxView() {
+		inbox.setAll(inboxList);
+		inboxTblView.getItems().addAll(inbox);
+		
+
+		TableColumn<PatientMessage, String> senderCol = new TableColumn<>("From:");
+		senderCol.setCellValueFactory(new PropertyValueFactory<>("senderUN"));
+		
+		TableColumn<PatientMessage, String> subjectCol = new TableColumn<>("Subject");
+		subjectCol.setCellValueFactory(new PropertyValueFactory<>("subject"));
+		
+		inboxTblView.getColumns().addAll(senderCol, subjectCol);
+	}
+	
+	
 	private void showSummaries() {
 		dateView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -162,27 +217,36 @@ public class PatientPage extends Pages {
 		}
 	}
 
-	public void send(ActionEvent event) throws IOException {
-		sendMsg();
+	@FXML
+	public void messageSelected(MouseEvent arg0) {
+		PatientMessage selectedMsg = inboxTblView.getSelectionModel().getSelectedItem();
+		messageBodyTA.setText(selectedMsg.getMessage());
+		//selectedMsgSenderUN = inboxTblView.getSelectionModel().getSelectedItem().getSenderUN();
+		
 	}
-
-	public void sendMsg() {
-		Patient pat = new Patient("bill", "hicks", 27, "August 13, 1974",
-				"bhicks.xyz", "508888888", "todd", "Blue Cross");
-		pat.setUserName("bhicks");
-		pat.setPassword("apple");
-		PersonnelFileWriter pfw = new PersonnelFileWriter();
-		pfw.writeUser(pat);
-
-		String subj = subject.getText();
+	
+	public void sendMessage(ActionEvent event) throws IOException {
+		int docID = currentUser.getDoctor();
+		User myDoc = umgr.getEmployee(docID);
+		String subj = subjectTF.getText();
 		System.out.println("in the sendMsg function - subj is: " + subj);
-		String body = messageBody.getText();
+		String body = outgoingMessageTA.getText();
 		String senderUN = username;
+		String recipient = myDoc.getUsername();
+		
 
 		System.out.println("In PatientPage sending message from " + senderUN);
-		MessageHandler msg = new MessageHandler(subj, body, senderUN);
+		MessageHandler msg = new MessageHandler(subj, body, senderUN, recipient);
 		msg.sendMessage();
+		
+
+		
 	}
+	
+	
+	
+
+	
 
 	public void enterInfo(ActionEvent event) {
 		currentUser.setPhoneNum(PhoneNumView.getText());
