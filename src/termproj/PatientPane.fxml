@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
 
   <tabs>
     <Tab text="Home">
@@ -51,8 +51,8 @@
                   <Label layoutX="67.0" layoutY="147.0" text="Date of Birth" />
                   <Label layoutX="465.0" layoutY="277.0" text="Medications you've had" />
                   <Label layoutX="84.0" layoutY="259.0" prefHeight="17.0" prefWidth="48.0" text="Email" />
-                  <TextField fx:id="dobView" layoutX="183.0" layoutY="142.0" />
-                  <TextField fx:id="PhoneNumView" layoutX="183.0" layoutY="196.0" />
+                  <TextField fx:id="dobView" layoutX="183.0" layoutY="142.0" promptText="MM/DD/YYYY" />
+                  <TextField fx:id="PhoneNumView" layoutX="183.0" layoutY="196.0" promptText="(###) ###-####" />
                   <TextField fx:id="PharmView" layoutX="441.0" layoutY="50.0" />
                   <TextField fx:id="InsurView" layoutX="441.0" layoutY="131.0" />
                   <Label layoutX="451.0" layoutY="169.0" text="Immunizations you've had" />

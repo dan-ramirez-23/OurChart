@@ -243,12 +243,13 @@ public class NursePage extends Pages{
 			System.out.println("Only 1 doctor");
 		}
 		umgr.writeAllUsers();
+		
 	}
 	
 	public void setInboxView() {
 		inbox.setAll(inboxList);
 		inboxTblView.getItems().addAll(inbox);
-		System.out.println("inbox after adding to tblview:" + inbox.get(1).getSenderUN());
+		//System.out.println("inbox after adding to tblview:" + inbox.get(1).getSenderUN());
 
 		TableColumn<PatientMessage, String> senderCol = new TableColumn<>("From:");
 		senderCol.setCellValueFactory(new PropertyValueFactory<>("senderUN"));
@@ -336,6 +337,7 @@ public class NursePage extends Pages{
 		else {
 			bPressTF.setEditable(false);
 			bPressTF.setStyle("-fx-control-inner-background: Gainsboro;");
+			bPressTF.setText("");
 		}
 		
 		String tempString = "";

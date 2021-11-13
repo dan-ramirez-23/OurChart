@@ -100,7 +100,7 @@
                               <Label layoutX="89.0" layoutY="158.0" text="Body Temperature" />
                               <TextField fx:id="weightTF" layoutX="206.0" layoutY="72.0" promptText="lbs" />
                               <TextField fx:id="heightTF" layoutX="206.0" layoutY="112.0" promptText="cm" />
-                              <TextField fx:id="bTempTF" layoutX="206.0" layoutY="153.0" />
+                              <TextField fx:id="bTempTF" layoutX="206.0" layoutY="153.0" promptText="°F" />
                               <Label layoutX="28.0" layoutY="40.0" text="If patient is over 12 years old enter:" />
                               <TextField fx:id="bPressTF" layoutX="206.0" layoutY="195.0" />
                               <Label layoutX="99.0" layoutY="200.0" text="Blood Pressure" />
@@ -127,7 +127,7 @@
                               <Label layoutX="48.0" layoutY="299.0" text="Insurance Company" />
                               <Label layoutX="56.0" layoutY="341.0" text="Immunizations" />
                               <Label layoutX="62.0" layoutY="385.0" text="Medications" />
-                              <TextField fx:id="phoneNumTF" layoutX="173.0" layoutY="210.0" promptText="(###) ###-###" />
+                              <TextField fx:id="phoneNumTF" layoutX="173.0" layoutY="210.0" promptText="(###) ###-####" />
                               <TextField fx:id="pharmacyTF" layoutX="173.0" layoutY="248.0" />
                               <TextField fx:id="insurCompanyTF" layoutX="173.0" layoutY="294.0" />
                               <TextField fx:id="immunizationTF" layoutX="173.0" layoutY="337.0" />
