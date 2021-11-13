@@ -204,6 +204,7 @@ public class NursePage extends Pages{
 			System.out.println("Only 1 doctor");
 		}
 		umgr.writeAllUsers();
+		
 	}
 	
 	public void setInboxView() {
@@ -297,6 +298,7 @@ public class NursePage extends Pages{
 		else {
 			bPressTF.setEditable(false);
 			bPressTF.setStyle("-fx-control-inner-background: Gainsboro;");
+			bPressTF.setText("");
 		}
 		
 		String tempString = "";

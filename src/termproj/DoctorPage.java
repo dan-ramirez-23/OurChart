@@ -116,8 +116,7 @@ public class DoctorPage extends Pages {
 		Doctor currentDoctor = user;
 		Doctor newDoctor;
 		ArrayList<Doctor> dList = new ArrayList<>();
-		Patient selectedPatient = (Patient) patientView.getSelectionModel()
-				.getSelectedItem();
+		Patient selectedPatient = (Patient) patientView.getSelectionModel().getSelectedItem();
 		for (int i = 0; i < umgr.getUserList().size(); i++) {
 			if (umgr.getUserList().get(i).getUserType().equals("Doctor")) {
 				dList.add((Doctor) umgr.getUserList().get(i));
