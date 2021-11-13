@@ -268,15 +268,14 @@ public class DoctorPage extends Pages {
 		newPrescriptions.add(newprescription);
 		selectedPatient.setPrescriptions(newPrescriptions);
 		// waiting for MessageHandler to be implemented
-		/*
-		 * String subj = ("New Prescription " + newprescription); String body =
-		 * ("Hello " + selectedPatient.getFirstName() + " your prescription " +
-		 * newprescription + " has been sent to your pharmacy " +
-		 * selectedPatient.getPharmacy() + " and will be ready soon"); String[]
-		 * recipient = {patientSelected}; String senderUN =
-		 * selectedPatient.getUsername(); MessageHandler msgHandler = new
-		 * MessageHandler(subj,body,senderUN); msgHandler.sendMessage();
-		 */
+		
+		 String subj = ("New Prescription " + newprescription);
+		 String body = ("Hello " + selectedPatient.getFirstName() + " your prescription " + newprescription + " has been sent to your pharmacy " + selectedPatient.getPharmacy() + " and will be ready soon");
+		 String recipient = selectedPatient.getUsername();
+		 String senderUN = selectedPatient.getUsername();
+		 PatientMessage msgHandler = new PatientMessage(subj,body,senderUN, recipient);
+		 selectedPatient.getInbox().add(msgHandler);
+		 
 		umgr.writeAllUsers();// needed to save all changes
 	}
 
