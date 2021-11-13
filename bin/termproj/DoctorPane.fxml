@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane dividerPositions="0.23447401774397972" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="487.0" prefWidth="181.0">
+         <children>
+            <ListView layoutX="5.0" layoutY="62.0" prefHeight="449.0" prefWidth="160.0" style="-fx-border-color: #0a0a0a;" />
+            <Label layoutX="53.0" layoutY="42.0" text="Patient Name" />
+            <!--<ScrollBar layoutX="147.0" layoutY="61.0" orientation="VERTICAL" prefHeight="449.0" prefWidth="17.0" />-->
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="540.0" prefWidth="569.0">
+         <children>
+            <TabPane layoutX="-3.0" layoutY="-1.0" prefHeight="527.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                  <Tab text="Home">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Button layoutX="291.0" layoutY="454.0" mnemonicParsing="false" text="Send via patient portal" />
+                              <Label layoutX="33.0" layoutY="432.0" text="In case of emergency: (Phone Number)" />
+                              <Label layoutX="369.0" layoutY="247.0" text="Response to patient:" />
+                              <TextArea layoutX="278.0" layoutY="298.0" prefHeight="145.0" prefWidth="298.0" />
+                              <Label layoutX="74.0" layoutY="58.0" text="Patient Messages">
+                                 <font>
+                                    <Font name="Times New Roman Bold" size="16.0" />
+                                 </font></Label>
+                              <Label layoutX="165.0" layoutY="88.0" text="Subject" />
+                              <Label layoutX="166.0" layoutY="14.0" text="Welcome (Doctor's Name)">
+                                 <font>
+                                    <Font name="Times New Roman Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <TextArea layoutX="276.0" layoutY="91.0" prefHeight="149.0" prefWidth="296.0" />
+                              <Button layoutX="458.0" layoutY="454.0" mnemonicParsing="false" text="Send via email" />
+                              <ScrollBar layoutX="555.0" layoutY="91.0" orientation="VERTICAL" prefHeight="147.0" prefWidth="17.0" />
+                              <ScrollBar layoutX="558.0" layoutY="298.0" orientation="VERTICAL" prefHeight="144.0" prefWidth="17.0" />
+                              <SplitPane dividerPositions="0.5" layoutX="33.0" layoutY="109.0" prefHeight="306.0" prefWidth="204.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                       <children>
+                                          <ScrollBar layoutX="83.0" orientation="VERTICAL" prefHeight="307.0" prefWidth="17.0" />
+                                       </children>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
+                              <Label layoutX="50.0" layoutY="88.0" text="Patient Name" />
+                              <Label layoutX="374.0" layoutY="69.0" text="Patient's Message:" />
+                              <Label layoutX="315.0" layoutY="275.0" text="Subject:" />
+                              <TextField layoutX="368.0" layoutY="267.0" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                <Tab text="Patient History">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="494.0" prefWidth="596.0">
+                           <children>
+                              <Label layoutX="20.0" layoutY="39.0" text="Date of Birth" />
+                              <Label layoutX="9.0" layoutY="66.0" prefHeight="47.0" prefWidth="189.0" text="Previously Prescribed Medications" />
+                              <Label layoutX="223.0" layoutY="81.0" text="Patient's Health Issues"/>
+                              <Label layoutX="409.0" layoutY="83.0" text="History of Immunization" />
+                              <Button layoutX="199.0" layoutY="445.0" mnemonicParsing="false" text="Assign patient to another doctor" />
+                              <Label layoutX="112.0" layoutY="39.0" text="_________________" underline="true" />
+                              <ListView layoutX="15.0" layoutY="100.0" prefHeight="311.0" prefWidth="167.0" style="-fx-border-color: #0a0a0a;" />
+                              <ListView layoutX="206.0" layoutY="99.0" prefHeight="313.0" prefWidth="167.0" style="-fx-border-color: #0a0a0a;" />
+                              <ListView layoutX="397.0" layoutY="101.0" prefHeight="314.0" prefWidth="167.0" style="-fx-border-color: #0a0a0a;" />
+                              <!--<ScrollBar layoutX="164.0" layoutY="101.0" orientation="VERTICAL" prefHeight="308.0" prefWidth="17.0" />
+                              <ScrollBar layoutX="354.0" layoutY="101.0" orientation="VERTICAL" prefHeight="311.0" prefWidth="17.0" />
+                              <ScrollBar layoutX="546.0" layoutY="100.0" orientation="VERTICAL" prefHeight="313.0" prefWidth="17.0" />
+                              <CheckBox layoutX="400.0" layoutY="104.0" mnemonicParsing="false" text="Chickenpox" />
+                              <CheckBox layoutX="400.0" layoutY="132.0" mnemonicParsing="false" text="COVID-19" />-->
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Patient Visit">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TextField layoutX="147.0" layoutY="20.0" prefHeight="193.0" prefWidth="394.0" />
+                              <Label layoutX="9.0" layoutY="74.0" prefHeight="67.0" prefWidth="141.0" text="Physical Exam Findings:" />
+                              <TextField layoutX="154.0" layoutY="405.0" prefHeight="27.0" prefWidth="391.0" />
+                              <Label layoutX="23.0" layoutY="410.0" text="Prescriptions to send" />
+                              <Button layoutX="326.0" layoutY="441.0" mnemonicParsing="false" text="Send" />
+                              <Label layoutX="23.0" layoutY="277.0" text="Recommendations:" />
+                              <TextArea layoutX="148.0" layoutY="227.0" prefHeight="151.0" prefWidth="394.0" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children></AnchorPane>
+  </items>
+</SplitPane>

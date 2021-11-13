@@ -249,7 +249,7 @@ public class NursePage extends Pages{
 	public void setInboxView() {
 		inbox.setAll(inboxList);
 		inboxTblView.getItems().addAll(inbox);
-		System.out.println("inbox after adding to tblview:" + inbox.get(1).getSenderUN());
+		//System.out.println("inbox after adding to tblview:" + inbox.get(1).getSenderUN());
 
 		TableColumn<PatientMessage, String> senderCol = new TableColumn<>("From:");
 		senderCol.setCellValueFactory(new PropertyValueFactory<>("senderUN"));
