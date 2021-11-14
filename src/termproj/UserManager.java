@@ -128,6 +128,9 @@ public class UserManager {
 		return userList;
 	}
 	
+	
+
+	
 	// write global list to file 
 	/*public void writeUserToSingleFile(User usr) {//use writeAllUsers()
 		try {

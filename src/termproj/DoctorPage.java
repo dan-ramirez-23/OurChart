@@ -11,15 +11,22 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class DoctorPage extends Pages {
 	// private String username;
@@ -88,6 +95,10 @@ public class DoctorPage extends Pages {
 	private Button sendSummary;
 	@FXML
 	private TextArea Recs;
+	@FXML
+	private SplitPane scenePane;
+	@FXML
+	private Button sendEmailBtn;
 
 	public DoctorPage(String un, ArrayList<User> uL, UserManager um) {
 		super(un, uL, um);
@@ -107,12 +118,18 @@ public class DoctorPage extends Pages {
 		patientList = user.getPatients();
 		System.out.print(patientList);
 		
-		inboxList = user.getInbox();
+		inboxList = user.getInbox(true);
 	}
 
 	@FXML
 	public void initialize() {
 		welcomeLabel.setText("Welcome " + user.getFirstName());
+		inboxTblView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		messageBodyTA.setWrapText(true);
+		outgoingMessageTA.setWrapText(true);
+		physExamFindings.setWrapText(true);
+		Recs.setWrapText(true);
+		
 		setListView();
 		patientView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -137,6 +154,21 @@ public class DoctorPage extends Pages {
 	}
 	
 	
+
+	
+	@FXML
+	public void sendEmail() {
+		Patient selectedPatient = (Patient) patientView.getSelectionModel().getSelectedItem();
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Email Confirmation");
+		alert.setHeaderText("Email sent!");
+		alert.setContentText("Your message was sent to " + selectedPatient.getFirstName() + " "
+				+ selectedPatient.getLastName() + " at " + selectedPatient.getEmail());
+
+		alert.showAndWait();
+	}
+	
+	
 	public void setInboxView() {
 		inbox.setAll(inboxList);
 		inboxTblView.getItems().addAll(inbox);
@@ -155,9 +187,9 @@ public class DoctorPage extends Pages {
 	@FXML
 	public void messageSelected(MouseEvent arg0) {
 		PatientMessage selectedMsg = inboxTblView.getSelectionModel().getSelectedItem();
-		messageBodyTA.setText(selectedMsg.getMessage());
-		//selectedMsgSenderUN = inboxTblView.getSelectionModel().getSelectedItem().getSenderUN();
-		
+		if(selectedMsg != null) {
+			messageBodyTA.setText(selectedMsg.getMessage());
+		}
 	}
 	
 	public void sendMessage(ActionEvent event) throws IOException {
@@ -176,11 +208,22 @@ public class DoctorPage extends Pages {
 			System.out.println("In PatientPage sending message from " + senderUN);
 			MessageHandler msg = new MessageHandler(subj, body, senderUN, recipient);
 			msg.sendMessage();
+			umgr.readAllUsers();
+
 		}
 
 		
 	}
 
+	
+	@FXML
+	public void logOut(ActionEvent e) throws IOException {
+		umgr.writeAllUsers();
+		Parent root = FXMLLoader.load(getClass().getResource("LoginPane.fxml"));
+		Stage stage = (Stage) scenePane.getScene().getWindow();
+		stage.setScene(new Scene(root, 550, 400));
+		umgr.readAllUsers();
+	}
 	
 
 	@FXML
@@ -219,33 +262,36 @@ public class DoctorPage extends Pages {
 
 	public void userSelected(MouseEvent arg0) {
 		Patient selectedPatient = (Patient) patientView.getSelectionModel().getSelectedItem();
-		composeMsgLabel.setText("Message to " + selectedPatient.getUsername());
-		dobLabel.setText(selectedPatient.getDOB());
+		
+		if(selectedPatient != null) {
+			composeMsgLabel.setText("Message to " + selectedPatient.getUsername());
+			dobLabel.setText(selectedPatient.getDOB());
 
-		ArrayList<String> tempList = new ArrayList<>();
-		for (int i = 0; i < selectedPatient.getMedications().size(); i++) {
-			tempList.add(selectedPatient.getMedications().get(i));
-		}
-		ObservableList<String> stringList = FXCollections
-				.observableArrayList(tempList);
-		stringList.setAll(tempList);
-		MedsView.setItems(stringList);
+			ArrayList<String> tempList = new ArrayList<>();
+			for (int i = 0; i < selectedPatient.getMedications().size(); i++) {
+				tempList.add(selectedPatient.getMedications().get(i));
+			}
+			ObservableList<String> stringList = FXCollections
+					.observableArrayList(tempList);
+			stringList.setAll(tempList);
+			MedsView.setItems(stringList);
 
-		tempList = new ArrayList<>();
-		for (int i = 0; i < selectedPatient.getHealthIssues().size(); i++) {
-			tempList.add(selectedPatient.getHealthIssues().get(i));
-		}
-		stringList = FXCollections.observableArrayList(tempList);
-		stringList.setAll(tempList);
-		HealthView.setItems(stringList);
+			tempList = new ArrayList<>();
+			for (int i = 0; i < selectedPatient.getHealthIssues().size(); i++) {
+				tempList.add(selectedPatient.getHealthIssues().get(i));
+			}
+			stringList = FXCollections.observableArrayList(tempList);
+			stringList.setAll(tempList);
+			HealthView.setItems(stringList);
 
-		tempList = new ArrayList<>();
-		for (int i = 0; i < selectedPatient.getImmunizations().size(); i++) {
-			tempList.add(selectedPatient.getImmunizations().get(i));
+			tempList = new ArrayList<>();
+			for (int i = 0; i < selectedPatient.getImmunizations().size(); i++) {
+				tempList.add(selectedPatient.getImmunizations().get(i));
+			}
+			stringList = FXCollections.observableArrayList(tempList);
+			stringList.setAll(tempList);
+			ImmunView.setItems(stringList);
 		}
-		stringList = FXCollections.observableArrayList(tempList);
-		stringList.setAll(tempList);
-		ImmunView.setItems(stringList);
 
 	}
 
@@ -268,35 +314,27 @@ public class DoctorPage extends Pages {
 		newPrescriptions.add(newprescription);
 		selectedPatient.setPrescriptions(newPrescriptions);
 		// waiting for MessageHandler to be implemented
-		/*
-		 * String subj = ("New Prescription " + newprescription); String body =
-		 * ("Hello " + selectedPatient.getFirstName() + " your prescription " +
-		 * newprescription + " has been sent to your pharmacy " +
-		 * selectedPatient.getPharmacy() + " and will be ready soon"); String[]
-		 * recipient = {patientSelected}; String senderUN =
-		 * selectedPatient.getUsername(); MessageHandler msgHandler = new
-		 * MessageHandler(subj,body,senderUN); msgHandler.sendMessage();
-		 */
+		
+		 String subj = ("New Prescription " + newprescription);
+		 String body = ("Hello " + selectedPatient.getFirstName() + " your prescription " + newprescription + " has been sent to your pharmacy " + selectedPatient.getPharmacy() + " and will be ready soon");
+		 String recipient = selectedPatient.getUsername();
+		 String senderUN = selectedPatient.getUsername();
+		 PatientMessage msgHandler = new PatientMessage(subj,body,senderUN, recipient);
+		 selectedPatient.getInbox().add(msgHandler);
+		 
 		umgr.writeAllUsers();// needed to save all changes
+		
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Prescription Confirmation");
+		alert.setHeaderText("Prescription sent!");
+		alert.setContentText("Your prescription for " + newprescription + " was sent to " + selectedPatient.getFirstName() + " "
+				+ selectedPatient.getLastName() + " for pickup at " + selectedPatient.getPharmacy());
+
+		alert.showAndWait();
+		
+		
 	}
 
-	public void send(ActionEvent event) throws IOException {
-		sendMsg();
-	}
-
-	public void sendMsg() {
-		String subj = subjectTF.getText();
-		String body = messageBodyTA.getText();
-		String senderUN = username;
-		PersonnelFileReader reader = new PersonnelFileReader(username);
-		Doctor sender = (Doctor) reader.readUser();// changed readEmployee to
-													// readUser
-		String[] recipient = { patientSelected };
-		// PatientMessage msg = new
-		// PatientMessage(subj,body,senderUN,recipient);
-		MessageHandler msgHandler = new MessageHandler(subj, body, senderUN, senderUN);
-		msgHandler.sendMessage();
-	}
 
 	@FXML
 	public void removeMeds(Event e) {

@@ -9,15 +9,21 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class PatientPage extends Pages {
 	// private ArrayList<User> userList;
@@ -30,7 +36,7 @@ public class PatientPage extends Pages {
 		super(un, uL, um);
 		
 		currentUser = (Patient) umgr.readUserFromList(un);
-		inboxList = currentUser.getInbox();
+		inboxList = currentUser.getInbox(true);
 		
 
 
@@ -56,7 +62,8 @@ public class PatientPage extends Pages {
 	}
 
 	
-	
+	@FXML
+	private TabPane scenePane;
 	@FXML
 	private Label welcomeLabel;
 	@FXML
@@ -114,7 +121,16 @@ public class PatientPage extends Pages {
 	public void initialize() {
 
 		welcomeLabel.setText("Welcome " + currentUser.getFirstName());
+		inboxTblView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		messageBodyTA.setEditable(false);
+		messageBodyTA.setWrapText(true);
+		outgoingMessageTA.setWrapText(true);
+		healthHistory.setWrapText(true);
+		ImmuniView.setWrapText(true);
+		MedView.setWrapText(true);
+		summaryArea.setWrapText(true);
+		
+		
 		inboxTblView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -176,7 +192,16 @@ public class PatientPage extends Pages {
 
 	}
 	
-	
+	@FXML
+	public void logOut(ActionEvent e) throws IOException {
+		System.out.println("Audrey inbox before logout:" + umgr.readUserFromList("awong24").getInbox());
+		umgr.writeAllUsers();
+		Parent root = FXMLLoader.load(getClass().getResource("LoginPane.fxml"));
+		Stage stage = (Stage) scenePane.getScene().getWindow();
+		stage.setScene(new Scene(root, 550, 400));
+		umgr.readAllUsers();
+		System.out.println("Audrey inbox after logout: " + umgr.readUserFromList("awong24").getInbox());
+	}
 
 	private void setListView() {
 		OBS.setAll(summaryList);
@@ -220,13 +245,16 @@ public class PatientPage extends Pages {
 	@FXML
 	public void messageSelected(MouseEvent arg0) {
 		PatientMessage selectedMsg = inboxTblView.getSelectionModel().getSelectedItem();
-		messageBodyTA.setText(selectedMsg.getMessage());
-		//selectedMsgSenderUN = inboxTblView.getSelectionModel().getSelectedItem().getSenderUN();
+		
+		if(selectedMsg != null) {
+			messageBodyTA.setText(selectedMsg.getMessage());
+		}
 		
 	}
 	
 	public void sendMessage(ActionEvent event) throws IOException {
 		int docID = currentUser.getDoctor();
+		System.out.println("docID is: " + docID);
 		User myDoc = umgr.getEmployee(docID);
 		String subj = subjectTF.getText();
 		System.out.println("in the sendMsg function - subj is: " + subj);
@@ -237,8 +265,9 @@ public class PatientPage extends Pages {
 
 		System.out.println("In PatientPage sending message from " + senderUN);
 		MessageHandler msg = new MessageHandler(subj, body, senderUN, recipient);
-		msg.sendMessage();
-		
+		msg.sendMessage(true);
+		//msg.copyNurses();
+		umgr.readAllUsers();
 
 		
 	}

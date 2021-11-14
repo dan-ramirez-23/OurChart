@@ -11,8 +11,8 @@ import javafx.stage.Stage;
 
 public class TermProj extends Application {
 
-	private final int WIDTH = 550;
-	private final int HEIGHT = 400;
+	private static final int WIDTH = 550;
+	private static final int HEIGHT = 400;
 	private static Stage stage;
 	private ArrayList<User> userList = new ArrayList<>();// created to make sure
 															// there are no null
@@ -35,6 +35,7 @@ public class TermProj extends Application {
 		primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
 		primaryStage.show(); // Display the stage
 	}
+	
 
 	public void changeScene(String fxml, String username) throws IOException {
 		// hardcode();
@@ -42,14 +43,7 @@ public class TermProj extends Application {
 		FXMLLoader loader = new FXMLLoader();
 		Pages pageController = null;
 		if (fxml.equals("NursePane.fxml")) {
-			pageController = new NursePage(username, um.getUserList(), um);// needs
-																			// to
-																			// change
-																			// depending
-																			// on
-																			// the
-																			// page
-																			// required
+			pageController = new NursePage(username, um.getUserList(), um);
 		} else if (fxml.equals("DoctorPane.fxml")) {
 			pageController = new DoctorPage(username, um.getUserList(), um);
 		} else if (fxml.equals("PatientPane.fxml")) {
@@ -83,12 +77,12 @@ public class TermProj extends Application {
 		String[] hc = { "He is to real" };
 		int numOfDoctors = doctorList.size();
 
-		Patient pat1 = new Patient("Another", "Patient", 002, 102, "06/21/99",
+		Patient pat1 = new Patient("Another", "Patient", 002, 293, "06/21/99",
 				"9726584598", "booty@gmail.com", "Walgreens", "anotherPat",
 				"password", "Insure", im, per, med, hi, ef, "blaze it", 69, 192,
 				420, 200, alrg, hc);
 
-		Patient pat2 = new Patient("Sebastian", "Diaz", 001, 293, "03/16/00",
+		Patient pat2 = new Patient("Sebastian", "Diaz", 001, 102, "03/16/00",
 				"6023915618", "ass@gmail.com", "CVS", "sdiazagu", "password",
 				"insurance company", im, per, med, hi, ef, "Stay up cuzzo",
 				289.2, 6.7, 98.2, 170.3, alrg, hc);

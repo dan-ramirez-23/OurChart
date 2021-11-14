@@ -13,12 +13,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.23447401774397972" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane fx:id="scenePane" dividerPositions="0.23447401774397972" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="487.0" prefWidth="181.0">
          <children>
-            <ListView fx:id="patientView" layoutX="5.0" layoutY="62.0" prefHeight="449.0" prefWidth="160.0" style="-fx-border-color: #0a0a0a;" />
-            <Label layoutX="53.0" layoutY="42.0" text="Patient Name" />
+            <ListView fx:id="patientView" layoutX="18.0" layoutY="44.0" prefHeight="449.0" prefWidth="160.0" style="-fx-border-color: #0a0a0a;" />
+            <Label layoutX="56.0" layoutY="21.0" text="Patient Name" />
+            <Button fx:id="logOutButton" layoutX="65.0" layoutY="506.0" mnemonicParsing="false" onAction="#logOut" text="Log out" />
             <!--<ScrollBar layoutX="147.0" layoutY="61.0" orientation="VERTICAL" prefHeight="449.0" prefWidth="17.0" />-->
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="540.0" prefWidth="569.0">
@@ -37,21 +38,19 @@
                                  <font>
                                     <Font name="Times New Roman Bold" size="16.0" />
                                  </font></Label>
-                              <Label layoutX="165.0" layoutY="88.0" text="Subject" />
                               <Label fx:id="welcomeLabel" layoutX="166.0" layoutY="14.0" text="Welcome (Doctor's Name)">
                                  <font>
                                     <Font name="Times New Roman Bold" size="24.0" />
                                  </font>
                               </Label>
                               <TextArea fx:id="messageBodyTA" layoutX="276.0" layoutY="91.0" prefHeight="149.0" prefWidth="296.0" />
-                              <Button layoutX="458.0" layoutY="454.0" mnemonicParsing="false" text="Send via email" />
+                              <Button fx:id="sendEmailBtn" layoutX="458.0" layoutY="454.0" mnemonicParsing="false" onAction="#sendEmail" text="Send via email" />
                               <ScrollBar layoutX="555.0" layoutY="91.0" orientation="VERTICAL" prefHeight="147.0" prefWidth="17.0" />
                               <ScrollBar layoutX="558.0" layoutY="298.0" orientation="VERTICAL" prefHeight="144.0" prefWidth="17.0" />
-                              <Label layoutX="50.0" layoutY="88.0" text="Patient Name" />
                               <Label layoutX="374.0" layoutY="69.0" text="Patient's Message:" />
                               <Label layoutX="315.0" layoutY="275.0" text="Subject:" />
                               <TextField fx:id="subjectTF" layoutX="368.0" layoutY="267.0" />
-                              <TableView fx:id="inboxTblView" layoutX="33.0" layoutY="105.0" prefHeight="310.0" prefWidth="200.0" />
+                              <TableView fx:id="inboxTblView" layoutX="33.0" layoutY="87.0" prefHeight="328.0" prefWidth="200.0" />
                            </children>
                         </AnchorPane>
                     </content>
