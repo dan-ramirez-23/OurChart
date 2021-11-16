@@ -19,7 +19,7 @@ public class Patient extends User {
 	private double weight;
 	private double height;
 	private double bodyTemp;
-	private double bloodPressure;
+	private String bloodPressure;
 	private ArrayList<String> allergies;
 	private ArrayList<String> healthConcerns;
 	private ArrayList<String> immunizations;
@@ -59,7 +59,7 @@ public class Patient extends User {
 		weight = -1;
 		height = -1;
 		bodyTemp = -1;
-		bloodPressure = -1;
+		bloodPressure = "";
 		allergies = new ArrayList<>();
 		allergies.add("");
 		healthConcerns = new ArrayList<>();
@@ -70,7 +70,7 @@ public class Patient extends User {
 	public Patient(String fName, String lName, int id, int doc, String date,
 			String pNum, String em, String pharm, String un, String pass, String ins, String[] imm, String[] pres, 
 			String[] meds, String[] hi, String[] ef, String rec, double w, double h, 
-			double bt, double bp, String[] aller, String[] hc) {
+			double bt, String bp, String[] aller, String[] hc) {
 
 		super(fName, lName, "Patient", un, pass, id);
 		patientID = id;
@@ -179,7 +179,7 @@ public class Patient extends User {
 		bodyTemp = bt;
 	}
 
-	public void setBloodPress(double bp) {
+	public void setBloodPress(String bp) {
 		bloodPressure = bp;
 	}
 
@@ -272,7 +272,7 @@ public class Patient extends User {
 		return bodyTemp;
 	}
 
-	public double getBloodPress() {
+	public String getBloodPress() {
 		return bloodPressure;
 	}
 

@@ -367,7 +367,7 @@ public class NursePage extends Pages{
 				bTempTF.setText("");
 			}
 			if(patientAge > 12) {
-				if(selectedPatient.getBloodPress() >= 0) {
+				if(selectedPatient.getBloodPress() != null) {
 					bPressTF.setText("" + selectedPatient.getBloodPress());
 				}
 				else {
@@ -409,7 +409,7 @@ public class NursePage extends Pages{
 		selectedPatient.setWeight(Double.parseDouble(weightTF.getText()));
 		selectedPatient.setHeight(Double.parseDouble(heightTF.getText()));
 		selectedPatient.setBodyTemp(Double.parseDouble(bTempTF.getText()));
-		selectedPatient.setBloodPress(Double.parseDouble(bPressTF.getText()));
+		selectedPatient.setBloodPress(bPressTF.getText());
 		
 		String textFromAllergies = knownAllergyTA.getText();
 		String lines[] = textFromAllergies.split("\\r?\\n");

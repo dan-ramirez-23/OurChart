@@ -38,7 +38,7 @@ public class TermProj extends Application {
 	
 
 	public void changeScene(String fxml, String username) throws IOException {
-		// hardcode();
+		//hardcode();
 		um.readAllUsers();// idk why we need to read them twice, but we do
 		FXMLLoader loader = new FXMLLoader();
 		Pages pageController = null;
@@ -68,37 +68,61 @@ public class TermProj extends Application {
 		ArrayList<Patient> allPats = new ArrayList<Patient>();
 		ArrayList<Patient> docPats = new ArrayList<Patient>();
 
-		String[] im = { "Chicken Pox", "COVID-19" };
-		String[] per = { "Marijuana" };
+		String[] im1 = { "Chicken Pox", "COVID-19", "HPV", "Rotavirus", "Polio" };
+		String[] im2 = { "Chicken Pox", "HPV", "Rotavirus", "Polio" };
+		String[] per1 = { "Atorvastatin", "Metformin" };
+		String[] per2 = { "Insulin" };
+		String[] per = { "N/A" };
+		String[] med1 = { "Atorvastatin", "Metformin", "Niacin" };
+		String[] med2 = { "Insulin" };
 		String[] med = { "N/A" };
-		String[] hi = { "Just a boss ass bitch" };
-		String[] ef = { "N/A" };
-		String[] alrg = { "Cats", "Broke Bitches", "Anything that isnt money" };
-		String[] hc = { "He is to real" };
+		String[] hi1 = { "High cholesterol", "High blood pressure" };
+		String[] hi2 = { "Type 2 Diabetes" };
+		String[] hi = { "N/A" };
+		String[] ef1 = { "LDL: 193", "HDL: 45", "Triglycerides: 435" };
+		String[] ef1_5 = { "LDL: 133", "HDL: 95", "Triglycerides: 82" };
+		String[] ef2 = { "A1C Level: 7.1%" };
+		String[] ef3 = { "LDL: 198", "HDL: 37", "Triglycerides: 482", "A1C: 5.3%" };
+		String[] alrg = { "N/A" };
+		String[] alrg1 = { "Latex", "Tree Nuts" };
+		String[] hc2 = { "N/A" };
+		String[] hc1 = { "Weight", "High blood-pressure", "High cholestorol", "Diet", "Use of Alcohol" };
 		int numOfDoctors = doctorList.size();
 
-		Patient pat1 = new Patient("Another", "Patient", 002, 293, "06/21/99",
-				"9726584598", "booty@gmail.com", "Walgreens", "anotherPat",
-				"password", "Insure", im, per, med, hi, ef, "blaze it", 69, 192,
-				420, 200, alrg, hc);
+		Patient pat1 = new Patient("Anthony", "Freaks", 002, 293, "06/21/99",
+				"(972)658-4598", "HxH@gmail.com", "Walgreens", "afreaks",
+				"password", "United Health", im1, per2, med2, hi2, ef2, "Stay aware of your sugar levels", 150.33, 6.2,
+				98.9, "120/80", alrg, hc2);
+		
+		Patient pat3 = new Patient("Bob", "Ross", 003, 102, "03/01/99",
+				"(602)652-2598", "ASU@gmail.com", "Walgreens", "bross","password", "United Health",
+				im1, per, med, hi, ef1_5, "Overall Very healthy!", 173.53, 6.4,
+				97.9, "123/79", alrg, hc2);
 
-		Patient pat2 = new Patient("Sebastian", "Diaz", 001, 102, "03/16/00",
-				"6023915618", "ass@gmail.com", "CVS", "sdiazagu", "password",
-				"insurance company", im, per, med, hi, ef, "Stay up cuzzo",
-				289.2, 6.7, 98.2, 170.3, alrg, hc);
+		Patient pat2 = new Patient("Troy", "Diaz", 001, 102, "03/16/00",
+				"(602)391-5618", "Tray.Diaz@gmail.com", "CVS", "tdiaz", "password",
+				"Blue Cross Blue Shield", im2, per1, med1, hi1, ef3, "Continue to get physical activity & eat healthy",
+				230.2, 5.9, 98.2, "148/93", alrg1, hc1);
+		
+		Patient pat4 = new Patient("Sidney", "Wall", 004, 293, "12/31/01",
+				"(602)481-2186", "Sideney.Wall@gmail.com", "CVS", "swall", "password",
+				"Blue Cross Blue Shield", im1, per1, med1, hi1, ef1, "Continue to get physical activity & eat healthy",
+				109.12, 5.3, 98.4, "148/93", alrg1, hc1);
 
 		um.addUserToList(pat2);
 		um.addUserToList(pat1);
-
-		Doctor doc1 = new Doctor("Hannah", "Kaufman", "hjkaufma", "password",
-				102);
+		um.addUserToList(pat3);
+		um.addUserToList(pat4);
+		Doctor doc1 = new Doctor("Hannah", "Kaufman", "hjkaufma", "password",102);
 		Doctor doc2 = new Doctor("Audrey", "Wong", "awong24", "password", 293);
-		Nurse nur1 = new Nurse("Jackson", "Carrion", "jtcarrio", "password",
-				900);
+		Nurse nur1 = new Nurse("Jackson", "Carrion", "jtcarrio", "password",900);
 		Nurse nur2 = new Nurse("Dan", "Ramirez", "darami14", "password", 032);
+		Nurse nur3 = new Nurse("Sebastian", "Diaz", "sdiazgu", "password", 669);
 
 		doc1.addPatient(pat2);
 		doc2.addPatient(pat1);
+		doc1.addPatient(pat3);
+		doc2.addPatient(pat4);
 
 		for (int i = 0; i < um.getUserList().size(); i++) {// add all patients
 															// to all nurses
@@ -112,6 +136,7 @@ public class TermProj extends Application {
 		um.addUserToList(nur1);
 		um.addUserToList(doc2);
 		um.addUserToList(nur2);
+		um.addUserToList(nur3);
 
 		PatientMessage msg1 = new PatientMessage("test message subject",
 				"test message body", "jtcarrio","darami14");
