@@ -204,17 +204,13 @@ public class NursePage extends Pages{
 	public void sendMessage(ActionEvent event) throws IOException {
 		Patient selectedPatient = (Patient) lstView.getSelectionModel().getSelectedItem();
 		if(selectedPatient == null) {
-			System.out.println("null test");
 			composeMsgLabel.setText("Select a patient from left menu");
 		} else {
 			String subj = subjectTF.getText();
-			System.out.println("in the sendMsg function - subj is: " + subj);
 			String body = outgoingMessageTA.getText();
 			String senderUN = username;
 			String recipient = selectedPatient.getUsername();
 			
-
-			System.out.println("In PatientPage sending message from " + senderUN);
 			MessageHandler msg = new MessageHandler(subj, body, senderUN, recipient);
 			msg.sendMessage();
 			umgr.readAllUsers();

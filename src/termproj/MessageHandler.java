@@ -19,7 +19,6 @@ public class MessageHandler {
 		int recipientIndex = umgr.readUserIndex(recipientUN);
 		umgr.getUserList().get(recipientIndex).addMessage(msg);
 		umgr.writeAllUsers();
-		System.out.println("Recipient inbox after sendMessage:" + umgr.getUserList().get(recipientIndex).getInbox());
 	}
 	
 	
@@ -31,19 +30,15 @@ public class MessageHandler {
 		
 
 		String recipientUN = msg.getRecipient();
-		System.out.println("recipient in sendMessage in MessageHandler: " + recipientUN);
 		int recipientIndex = umgr.readUserIndex(recipientUN);
 		umgr.getUserList().get(recipientIndex).addMessage(msg);
 		
 		
 		for(User usr : umgr.getUserList()) {
 			if(usr.getUserType().equals("Nurse")) {
-				System.out.println("copying message to " + usr.getUsername());
 				usr.addMessage(msg);
 			}
 		}
-		
-		System.out.println("Recipient inbox after sendMessage:" + umgr.getUserList().get(recipientIndex).getInbox());
 		
 		
 		umgr.writeAllUsers();

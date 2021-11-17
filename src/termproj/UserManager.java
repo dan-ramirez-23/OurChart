@@ -71,7 +71,6 @@ public class UserManager {
 		for(int i = 0; i < userList.size(); i++) {
 			if(un.equals(userList.get(i).username)) {
 				User usr = userList.get(i);
-				System.out.println(usr.toString());
 				return usr;
 			}
 		}

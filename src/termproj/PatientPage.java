@@ -194,13 +194,11 @@ public class PatientPage extends Pages {
 	
 	@FXML
 	public void logOut(ActionEvent e) throws IOException {
-		System.out.println("Audrey inbox before logout:" + umgr.readUserFromList("awong24").getInbox());
 		umgr.writeAllUsers();
 		Parent root = FXMLLoader.load(getClass().getResource("LoginPane.fxml"));
 		Stage stage = (Stage) scenePane.getScene().getWindow();
 		stage.setScene(new Scene(root, 550, 400));
 		umgr.readAllUsers();
-		System.out.println("Audrey inbox after logout: " + umgr.readUserFromList("awong24").getInbox());
 	}
 
 	private void setListView() {
@@ -254,16 +252,12 @@ public class PatientPage extends Pages {
 	
 	public void sendMessage(ActionEvent event) throws IOException {
 		int docID = currentUser.getDoctor();
-		System.out.println("docID is: " + docID);
 		User myDoc = umgr.getEmployee(docID);
 		String subj = subjectTF.getText();
-		System.out.println("in the sendMsg function - subj is: " + subj);
 		String body = outgoingMessageTA.getText();
 		String senderUN = username;
 		String recipient = myDoc.getUsername();
 		
-
-		System.out.println("In PatientPage sending message from " + senderUN);
 		MessageHandler msg = new MessageHandler(subj, body, senderUN, recipient);
 		msg.sendMessage(true);
 		//msg.copyNurses();
