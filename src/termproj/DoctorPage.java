@@ -41,6 +41,9 @@ public class DoctorPage extends Pages {
 	@FXML
 	private ListView<Patient> patientView = new ListView<>(obs);
 
+	
+	@FXML
+	private Label phoneNumLabel;
 	@FXML
 	private Button sendScript;
 	@FXML
@@ -258,7 +261,8 @@ public class DoctorPage extends Pages {
 		if(selectedPatient != null) {
 			composeMsgLabel.setText("Message to " + selectedPatient.getUsername());
 			dobLabel.setText(selectedPatient.getDOB());
-
+			phoneNumLabel.setText("In case of emergency: " + selectedPatient.getPhoneNum());
+			
 			ArrayList<String> tempList = new ArrayList<>();
 			for (int i = 0; i < selectedPatient.getMedications().size(); i++) {
 				tempList.add(selectedPatient.getMedications().get(i));

@@ -67,6 +67,8 @@ public class NursePage extends Pages{
 	
 	
 	@FXML
+	private Label phoneNumLabel;
+	@FXML
 	private TextField weightTF;
 	@FXML
 	private ObservableList<Patient> obs = FXCollections.observableArrayList(patientList);
@@ -304,6 +306,7 @@ public class NursePage extends Pages{
 		if(selectedPatient != null) {
 			composeMsgLabel.setText("Message to " + selectedPatient.getUsername());
 			dobLabel.setText(selectedPatient.getDOB());
+			phoneNumLabel.setText("In case of emergency: " + selectedPatient.getPhoneNum());
 			
 			
 			ArrayList<String> tempList = new ArrayList<>();

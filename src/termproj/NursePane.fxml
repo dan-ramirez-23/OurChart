@@ -33,7 +33,7 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <Button fx:id="sendMsgButton" layoutX="291.0" layoutY="454.0" mnemonicParsing="false" onAction="#sendMessage" text="Send via patient portal" />
-                              <Label layoutX="33.0" layoutY="432.0" text="In case of emergency: (Phone Number)" />
+                              <Label fx:id="phoneNumLabel" layoutX="33.0" layoutY="432.0" text="In case of emergency: (Phone Number)" />
                               <Label fx:id="composeMsgLabel" layoutX="369.0" layoutY="247.0" text="Response to patient:" />
                               <TextArea fx:id="outgoingMessageTA" layoutX="278.0" layoutY="298.0" prefHeight="145.0" prefWidth="298.0" />
                               <Label layoutX="74.0" layoutY="58.0" text="Patient Messages">
